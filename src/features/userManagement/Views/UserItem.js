@@ -47,9 +47,9 @@ export default function UserItem({ detailedUser, index }) {
                 <TableCell align="center">
                     {name}
                 </TableCell>
-                <TableCell align="center">
+                {/* <TableCell align="center">
                     {sessionName}
-                </TableCell>
+                </TableCell> */}
                 <TableCell align="center">
                     {score}
                 </TableCell>

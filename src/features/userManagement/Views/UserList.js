@@ -19,7 +19,7 @@ import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import LastPageIcon from '@material-ui/icons/LastPage';
 import TableHead from '@material-ui/core/TableHead';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchUserRequest,changeSession } from '../UserSlice';
+import { fetchUserRequest, changeSession } from '../UserSlice';
 import UserItem from './UserItem';
 
 const useStyles1 = makeStyles((theme) => ({
@@ -103,7 +103,7 @@ export default function CustomPaginationActionsTable() {
     const currentSessionID = useSelector(state => state.user.currentSessionID);
     let listUsers = useSelector(state => state.user.listUsers);
 
-    listUsers = listUsers.slice(0,rowsPerPage);
+    listUsers = listUsers.slice(0, rowsPerPage);
 
     useEffect(() => {
         dispatch(fetchUserRequest({ page: page, pageSize: rowsPerPage !== -1 ? rowsPerPage : totalUsers, sessionID: currentSessionID }));
@@ -126,11 +126,11 @@ export default function CustomPaginationActionsTable() {
                 <TableHead>
                     <TableRow>
                         <TableCell style={{ width: '5%' }} align="center" ></TableCell>
-                        <TableCell style={{ width: '20%' }} align="center">Mã dự thi</TableCell>
-                        <TableCell style={{ width: '25%' }} align="center">Tên thí sinh (tên đội)</TableCell>
-                        <TableCell style={{ width: '15%' }} align="center">
+                        <TableCell style={{ width: '25%' }} align="center">Mã dự thi</TableCell>
+                        <TableCell style={{ width: '35%' }} align="center">Tên thí sinh (tên đội)</TableCell>
+                        {/* <TableCell style={{ width: '15%' }} align="center">
 Tên ca thi
-                        </TableCell>
+                        </TableCell> */}
                         <TableCell style={{ width: '15%' }} align="center">Điểm</TableCell>
                         <TableCell style={{ width: '15%' }} align="center">Thời gian</TableCell>
                         <TableCell style={{ width: '5%' }} align="center"></TableCell>

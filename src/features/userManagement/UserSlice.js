@@ -34,15 +34,15 @@ export const fetchUserRequest = createAsyncThunk(
 export const createUserRequest = createAsyncThunk(
     'user/createUserStatus',
     async (userInfo, thunkApi) => {
-        const { dispatch,getState } = thunkApi;
+        const { dispatch, getState } = thunkApi;
         try {
             dispatch(startLoading());
             const currentSessionId = getState().user.currentSessionID;
-            userInfo ={...userInfo,sessionID:currentSessionId};
+            userInfo = { ...userInfo, sessionID: currentSessionId };
 
             //transfer schema
-            const {sessionID,code,name} = userInfo;
-            const newUser = {sessionId:sessionID,fullName:name,code:code};
+            const { sessionID, code, name, universityId } = userInfo;
+            const newUser = { sessionId: sessionID, fullName: name, code: code, universityId: universityId };
 
             const response = await userApi.pushNewUser(newUser);
             dispatch(stopLoading());
@@ -71,11 +71,12 @@ export const updateUserRequest = createAsyncThunk(
             dispatch(startLoading());
 
             //transfer schema
-            const {id,name} = userInfo;
-            const newUser = {fullName:name};
+            const { id, name } = userInfo;
+            console.log(id);
+            const newUser = { fullName: name };
 
 
-            const response = await userApi.patchUserInfo(newUser,id);
+            const response = await userApi.patchUserInfo(newUser, id);
             dispatch(stopLoading());
 
             switch (response.status) {
@@ -164,18 +165,18 @@ export const userSlice = createSlice({
             const response_data = action.payload;
             if (response_data === null) return;
             let { rows, count } = response_data;
-            
-            let users = rows.map(element=>{
-                const {code,fullName,id,score,time} = element;
+
+            let users = rows.map(element => {
+                const { code, fullName, id, score, time } = element;
                 return {
-                    id:id,
-                    code:code,
-                    name:fullName,
-                    score:score,
-                    time:time
+                    id: id,
+                    code: code,
+                    name: fullName,
+                    score: score,
+                    time: time
                 }
-             })
-            
+            })
+
             state.totalUsers = count;
             state.listUsers = [...users];
         },
@@ -195,7 +196,7 @@ export const userSlice = createSlice({
                 ...state.listUsers,
             ]
             state.listUsers = newListUsers;
-            state.totalUsers= state.totalUsers + 1;
+            state.totalUsers = state.totalUsers + 1;
         },
         [updateUserRequest.fulfilled]: (state, action) => {
             const response_data = action.payload;
@@ -223,7 +224,7 @@ export const userSlice = createSlice({
             const newListUsers = state.listUsers.filter((user) => user.id !== user_id);
 
             state.listUsers = newListUsers;
-            state.totalUsers= state.totalUsers - 1;
+            state.totalUsers = state.totalUsers - 1;
 
         }
     }

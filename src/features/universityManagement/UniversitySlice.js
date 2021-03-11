@@ -11,7 +11,6 @@ export const fetchUniversityRequest = createAsyncThunk(
         try {
             dispatch(startLoading());
             let response = await universityApi.getUniversityData();
-console.log("load");
             dispatch(stopLoading());
             switch (response.status) {
                 case 200:
@@ -40,10 +39,10 @@ export const createUniversityRequest = createAsyncThunk(
             dispatch(startLoading());
 
             //transfer schema
-            // const {university_name,question,total_score} = universityInfo;
-            // const newUniversity ={name:university_name,totalQuestionUserMustDo:question,maxScore:total_score};
+            const { university_name } = universityInfo;
+            const newUniversity = { name: university_name };
 
-            const response = await universityApi.pushNewUniversity(universityInfo);
+            const response = await universityApi.pushNewUniversity(newUniversity);
             dispatch(stopLoading());
             switch (response.status) {
                 case 200:
@@ -69,11 +68,11 @@ export const updateUniversityRequest = createAsyncThunk(
         try {
             dispatch(startLoading());
 
-             //transfer schema
-            const {id,university_name,question,total_score} = universityInfo;
-            const newUniversity ={name:university_name,totalQuestionUserMustDo:question,maxScore:total_score};
+            //transfer schema
+            const { id, university_name } = universityInfo;
+            const newUniversity = { name: university_name };
 
-            const response = await universityApi.patchUniversityInfo(universityInfo,id);
+            const response = await universityApi.patchUniversityInfo(newUniversity, id);
             dispatch(stopLoading());
 
             switch (response.status) {
@@ -160,22 +159,19 @@ export const universitySlice = createSlice({
             console.log(response_data);
             if (response_data === null) return;
 
-            let universitys = response_data;
+            // let universitys = response_data;
 
-            //chuyển đổi schema
-            // let universitys = response_data.rows.map((element)=>{
-            //     const {id,name,maxScore,totalQuestionUserMustDo,countQuestion} =  element;
-            //     return {
-            //         id:id,
-            //         university_name:name,
-            //         question: totalQuestionUserMustDo,
-            //         total_score:maxScore,
-            //         available_question:countQuestion
-            //     }    
-            // }
-            // )
+            // chuyển đổi schema
+            let universities = response_data.rows.map((element) => {
+                const { id, name } = element;
+                return {
+                    id: id,
+                    university_name: name,
+                }
+            }
+            )
 
-            state.listUniversitys = [...universitys];
+            state.listUniversitys = [...universities];
 
         },
         [createUniversityRequest.fulfilled]: (state, action) => {
