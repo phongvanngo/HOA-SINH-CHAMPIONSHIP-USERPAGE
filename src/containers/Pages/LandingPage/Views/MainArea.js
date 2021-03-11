@@ -1,6 +1,6 @@
 import React, { lazy } from 'react';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
-import { UserDashboardRoutes } from './../../../../routes.const';
+import { LandingPageRoutes } from './../../../../routes.const';
 
 
 const Homepage = lazy(() => import('./Homepage/Homepage'));
@@ -11,7 +11,7 @@ const ContactPage = lazy(() => import('./Contact/Contact'));
 
 export default function MainArea() {
     const match = useRouteMatch();
-    const { HOMEPAGE, LEADERBOARD, TEST, USER_LOGIN, CONTACT, USER } = UserDashboardRoutes;
+    const { HOMEPAGE, LEADERBOARD, TEST, USER_LOGIN, CONTACT, USER } = LandingPageRoutes;
     return (
         <div>
             <Switch>

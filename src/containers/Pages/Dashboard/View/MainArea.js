@@ -6,13 +6,13 @@ const ExamManagement = lazy(() => import('./../../../../features/examManagement/
 const QuestionManagement = lazy(() => import('./../../../../features/questionManagement/QuestionManagement'));
 const UserManagement = lazy(() => import('./../../../../features/userManagement/UserManagement'));
 const ContestSessionManagement = lazy(() => import('../../../../features/ContestSessionManagement/SessionManagement'));
-const UniversityManagement = lazy (()=> import('./../../../../features/universityManagement/UniversityManagment'));
+const UniversityManagement = lazy(() => import('./../../../../features/universityManagement/UniversityManagment'));
 
 const NotFound = lazy(() => import('./../../../Pages/NotFound/NotFound'));
 
 export default function MainArea() {
     const match = useRouteMatch();
-    const { EXAM_MANAGEMENT, COMPETITION_MANAGEMENT, USER_MANAGEMENT, QUESTION_MANAGEMENT,UNIVERSITY_MANAGEMENT } = DashboardRoutes;
+    const { EXAM_MANAGEMENT, COMPETITION_MANAGEMENT, USER_MANAGEMENT, QUESTION_MANAGEMENT, UNIVERSITY_MANAGEMENT } = DashboardRoutes;
     return (
         <React.Fragment>
             <Switch>

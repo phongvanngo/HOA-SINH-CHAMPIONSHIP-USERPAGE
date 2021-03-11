@@ -1,12 +1,5 @@
-export const DashboardRoutes = {
-    COMPETITION_MANAGEMENT: "/Dashboard/quan-ly-ca-thi",
-    EXAM_MANAGEMENT: "/Dashboard/quan-ly-de-thi",
-    USER_MANAGEMENT: "/Dashboard/quan-ly-thi-sinh",
-    QUESTION_MANAGEMENT: "/Dashboard/quan-ly-cau-hoi",
-    UNIVERSITY_MANAGEMENT: "/Dashboard/quan-ly-truong-dai-hoc"
-}
-export const UserDashboardRoutes = {
-    HOMEPAGE: "/Home",
+export const LandingPageRoutes = {
+    HOMEPAGE: "/trang-chu",
     LEADERBOARD: "/bang-xep-hang",
     TEST: "/Test",
     USER_LOGIN: "/dang-nhap",
@@ -15,7 +8,15 @@ export const UserDashboardRoutes = {
 }
 
 export const PublicRoutes = {
-    DASHBOARD: "/Dashboard",
-    SIGN_IN: "/SignIn",
+    ADMIN_DASHBOARD: "/admin-dashboard",
+    ADMIN_SIGNIN: "/SignIn",
     LANDINGPAGE: "/",
+    USER_DASHBOARD: "/user"
+}
+export const DashboardRoutes = {
+    COMPETITION_MANAGEMENT: `${PublicRoutes.ADMIN_DASHBOARD}/quan-ly-ca-thi`,
+    EXAM_MANAGEMENT: `${PublicRoutes.ADMIN_DASHBOARD}/quan-ly-de-thi`,
+    USER_MANAGEMENT: `${PublicRoutes.ADMIN_DASHBOARD}/quan-ly-thi-sinh`,
+    QUESTION_MANAGEMENT: `${PublicRoutes.ADMIN_DASHBOARD}/quan-ly-cau-hoi`,
+    UNIVERSITY_MANAGEMENT: `${PublicRoutes.ADMIN_DASHBOARD}/quan-ly-truong-hoc`,
 }

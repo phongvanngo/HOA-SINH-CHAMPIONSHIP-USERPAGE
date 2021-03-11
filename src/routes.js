@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { PublicRoutes } from './routes.const';
 
 const Dashboard = lazy(() => import('./containers/Pages/Dashboard/Dashboard'));
-const SignIn = lazy(() => import('./containers/Pages/SignIn/SignIn'));
+const AdminSignIn = lazy(() => import('./containers/Pages/AdminSignIn/AdminSignIn'));
 const NotFound = lazy(() => import('./containers/Pages/NotFound/NotFound'));
 const UserDashboard = lazy(() => import('./containers/Pages/UserDashboard/UserDashboard'));
 const LandingPage = lazy(() => import('./containers/Pages/LandingPage/LandingPage'));
@@ -15,7 +15,7 @@ function PrivateRoute({ children, ...rest }) {
     return (
         <Redirect
             to={{
-                pathname: PublicRoutes.SIGN_IN,
+                pathname: PublicRoutes.ADMIN_SIGNIN,
                 state: { from: location },
             }}
         />
@@ -28,10 +28,10 @@ export default function AppRoutes() {
             <Router>
                 <Switch>
                     {/* <Redirect exact from="/" to={PublicRoutes.USER_DASHBOARD} /> */}
-                    <PrivateRoute path={PublicRoutes.DASHBOARD}>
+                    <PrivateRoute path={PublicRoutes.ADMIN_DASHBOARD}>
                         <Dashboard />
                     </PrivateRoute>
-                    <Route path={PublicRoutes.SIGN_IN} component={SignIn} exact={true} />
+                    <Route path={PublicRoutes.ADMIN_SIGNIN} component={AdminSignIn} exact={true} />
                     <Route path={PublicRoutes.LANDINGPAGE} component={LandingPage} exact={false} />
                     <Route component={NotFound} />
                 </Switch>

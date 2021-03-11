@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import MainArea from './MainArea';
-import { UserDashboardRoutes } from '../../../../routes.const';
+import { LandingPageRoutes } from '../../../../routes.const';
 export default function LandingpageView() {
 
-    const { HOMEPAGE, LEADERBOARD, CONTACT, USER_LOGIN } = UserDashboardRoutes;
+    const { HOMEPAGE, LEADERBOARD, CONTACT, USER_LOGIN } = LandingPageRoutes;
 
     const handleClickDotButton = (e) => {
         var menu = document.querySelector('.menu');
