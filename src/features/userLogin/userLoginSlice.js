@@ -1,15 +1,15 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import loginApi from './loginApi';
+import userLoginApi from './userLoginApi';
 import { notify } from './../../common/component/Notifier/notifierSlice';
 import { startLoading, stopLoading } from './../../common/component/PageLoader/loadingSlice';
 
-export const loginRequest = createAsyncThunk(
-    'admin/loginRequestStatus',
-    async (loginInfo, thunkApi) => {
+export const userLoginRequest = createAsyncThunk(
+    'user/userLoginRequestStatus',
+    async (userLoginInfo, thunkApi) => {
         const { dispatch } = thunkApi;
         dispatch(startLoading());
         try {
-            const response = await loginApi.sendLoginInfo(loginInfo);
+            const response = await userLoginApi.sendLoginInfo(userLoginInfo);
             switch (response.status) {
                 case 200:
                     dispatch(notify({ message: "Đăng nhập thành công", options: { variant: 'success' } }));
@@ -30,35 +30,35 @@ export const loginRequest = createAsyncThunk(
     }
 )
 
-export const loginSlice = createSlice({
-    name: 'login',
+export const userLoginSlice = createSlice({
+    name: 'userLogin',
     initialState: {
-        isLoggedIn: false,
+        hasLoggedIn: false,
         idToken: null
     },
 
     reducers: {
-        loginAgain: state => {
-            state.isLoggedIn = true;
+        userLoginAgain: state => {
+            state.hasLoggedIn = true;
         },
 
         logout: state => {
             window.localStorage.removeItem('id_token');
-            state.isLoggedIn = false;
+            state.hasLoggedIn = false;
         },
     },
 
     extraReducers: {
-        [loginRequest.fulfilled]: (state, action) => {
+        [userLoginRequest.fulfilled]: (state, action) => {
             const data = action.payload;
             console.log(data);
             if (data === null) return;
             localStorage.setItem("id_token", data.token);
-            state.isLoggedIn = true;
+            state.hasLoggedIn = true;
         }
     }
 })
 
-export const { loginAgain, logout } = loginSlice.actions;
+export const { userLoginAgain, logout } = userLoginSlice.actions;
 
-export default loginSlice.reducer;
+export default userLoginSlice.reducer;

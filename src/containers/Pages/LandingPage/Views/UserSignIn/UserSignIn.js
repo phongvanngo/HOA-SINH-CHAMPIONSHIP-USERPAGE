@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import UserLogin from './../../../../../features/userLogin/UserLogin';
 
 export default function UserSignIn() {
     useEffect(() => {
@@ -15,7 +16,7 @@ export default function UserSignIn() {
     }, [])
     return (
         <div>
-            User sign in
+            <UserLogin />
         </div>
     )
 }

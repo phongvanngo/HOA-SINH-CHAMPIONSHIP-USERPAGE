@@ -8,6 +8,7 @@ import questionReducer from './../features/questionManagement/questionSlice';
 import contestSessionReducer from '../features/ContestSessionManagement/ContestSessionSlice';
 import userReducer from './../features/userManagement/UserSlice';
 import universityReducer from './../features/universityManagement/UniversitySlice';
+import userLoginReducer from './../features/userLogin/userLoginSlice';
 export default configureStore({
   reducer: {
     counter: counterReducer,
@@ -19,5 +20,6 @@ export default configureStore({
     contestSession: contestSessionReducer,
     user: userReducer,
     university: universityReducer,
+    userLogin: userLoginReducer
   },
 });

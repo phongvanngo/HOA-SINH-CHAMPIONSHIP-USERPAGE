@@ -10,11 +10,12 @@ export const UserDashboardRoutes = {
     LEADERBOARD: "/bang-xep-hang",
     TEST: "/Test",
     USER_LOGIN: "/dang-nhap",
-    CONTACT: "/lien-he"
+    CONTACT: "/lien-he",
+    USER: "/Ca-nhan",
 }
 
 export const PublicRoutes = {
     DASHBOARD: "/Dashboard",
     SIGN_IN: "/SignIn",
-    USER_DASHBOARD: "/",
+    LANDINGPAGE: "/",
 }

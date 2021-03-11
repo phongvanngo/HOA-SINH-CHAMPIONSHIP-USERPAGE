@@ -1,18 +1,17 @@
-import React, { lazy } from 'react'
-import { Redirect, Route, Switch, useRouteMatch } from 'react-router-dom';
+import React, { lazy } from 'react';
+import { Route, Switch, useRouteMatch } from 'react-router-dom';
+import { UserDashboardRoutes } from './../../../../routes.const';
 
-import { UserDashboardRoutes, PublicRoutes } from './../../../../routes.const';
-import UserDashboardView from './UserDashboardView';
 
-const Homepage = lazy(() => import('../../Homepage/Homepage'));
-const Leaderboard = lazy(() => import('./../../Leaderboard/Leaderboard'));
-const UserSignIn = lazy(() => import('./../../UserSignIn/UserSignIn'));
-const ContactPage = lazy(() => import('./../../Contact/Contact'));
+const Homepage = lazy(() => import('./Homepage/Homepage'));
+const Leaderboard = lazy(() => import('./Leaderboard/Leaderboard'));
+const UserSignIn = lazy(() => import('./UserSignIn/UserSignIn'));
+const ContactPage = lazy(() => import('./Contact/Contact'));
 
 
 export default function MainArea() {
     const match = useRouteMatch();
-    const { HOMEPAGE, LEADERBOARD, TEST, USER_LOGIN, CONTACT } = UserDashboardRoutes;
+    const { HOMEPAGE, LEADERBOARD, TEST, USER_LOGIN, CONTACT, USER } = UserDashboardRoutes;
     return (
         <div>
             <Switch>

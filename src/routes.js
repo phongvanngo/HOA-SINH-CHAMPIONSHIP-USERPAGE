@@ -7,7 +7,7 @@ const Dashboard = lazy(() => import('./containers/Pages/Dashboard/Dashboard'));
 const SignIn = lazy(() => import('./containers/Pages/SignIn/SignIn'));
 const NotFound = lazy(() => import('./containers/Pages/NotFound/NotFound'));
 const UserDashboard = lazy(() => import('./containers/Pages/UserDashboard/UserDashboard'));
-
+const LandingPage = lazy(() => import('./containers/Pages/LandingPage/LandingPage'));
 function PrivateRoute({ children, ...rest }) {
     let location = useLocation();
     const isLoggedIn = useSelector(state => state.login.isLoggedIn);
@@ -32,7 +32,7 @@ export default function AppRoutes() {
                         <Dashboard />
                     </PrivateRoute>
                     <Route path={PublicRoutes.SIGN_IN} component={SignIn} exact={true} />
-                    <Route path={PublicRoutes.USER_DASHBOARD} component={UserDashboard} exact={false} />
+                    <Route path={PublicRoutes.LANDINGPAGE} component={LandingPage} exact={false} />
                     <Route component={NotFound} />
                 </Switch>
             </Router>
