@@ -5,8 +5,15 @@ export const DashboardRoutes = {
     QUESTION_MANAGEMENT: "/Dashboard/quan-ly-cau-hoi",
     UNIVERSITY_MANAGEMENT: "/Dashboard/quan-ly-truong-dai-hoc"
 }
+export const UserDashboardRoutes = {
+    HOMEPAGE: "/Home",
+    RANK: "/Rank",
+    TEST: "/Test",
+    USER_LOGIN: "/UserLogin",
+}
 
 export const PublicRoutes = {
     DASHBOARD: "/Dashboard",
     SIGN_IN: "/SignIn",
+    USER_DASHBOARD:"/",
 }

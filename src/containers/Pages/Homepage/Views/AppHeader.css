@@ -1,0 +1,45 @@
+.homepage-header {
+    color: #0F1640;
+    position: fixed;
+    top: 0;
+    height: 80px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 64px;
+    font-size: 16px;
+    position: relative;
+}
+
+.homepage-header > h1 {
+    text-transform: uppercase;
+    font-size: 1.7em;
+    letter-spacing: 1px;
+}
+
+.homepage-header .menu {
+    display: flex;
+}
+
+.homepage-header .menu button {
+    display: none;
+}
+
+.homepage-header .menu-list {
+    list-style: none;
+    display: flex;
+}
+
+.homepage-header .menu-list li {
+    display: inline-block;
+    margin-left: 32px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.homepage-header .menu-list li.active,
+.homepage-header .menu-list li:hover {
+    color: #66D9B8;
+}

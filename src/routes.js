@@ -6,6 +6,7 @@ import { PublicRoutes } from './routes.const';
 const Dashboard = lazy(() => import('./containers/Pages/Dashboard/Dashboard'));
 const SignIn = lazy(() => import('./containers/Pages/SignIn/SignIn'));
 const NotFound = lazy(() => import('./containers/Pages/NotFound/NotFound'));
+const UserDashboard = lazy(() => import('./containers/Pages/UserDashboard/UserDashboard'));
 
 function PrivateRoute({ children, ...rest }) {
     let location = useLocation();
@@ -26,7 +27,8 @@ export default function AppRoutes() {
         <Suspense fallback={<div>Loading</div>}>
             <Router>
                 <Switch>
-                    <Redirect exact from="/" to={PublicRoutes.DASHBOARD} />
+                    <Route path={PublicRoutes.USER_DASHBOARD} component={UserDashboard} exact={false} />
+                    {/* <Redirect exact from="/" to={PublicRoutes.USER_DASHBOARD} /> */}
                     <PrivateRoute path={PublicRoutes.DASHBOARD}>
                         <Dashboard />
                     </PrivateRoute>
