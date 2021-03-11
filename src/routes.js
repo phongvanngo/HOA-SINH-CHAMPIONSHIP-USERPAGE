@@ -27,12 +27,12 @@ export default function AppRoutes() {
         <Suspense fallback={<div>Loading</div>}>
             <Router>
                 <Switch>
-                    <Route path={PublicRoutes.USER_DASHBOARD} component={UserDashboard} exact={false} />
                     {/* <Redirect exact from="/" to={PublicRoutes.USER_DASHBOARD} /> */}
                     <PrivateRoute path={PublicRoutes.DASHBOARD}>
                         <Dashboard />
                     </PrivateRoute>
                     <Route path={PublicRoutes.SIGN_IN} component={SignIn} exact={true} />
+                    <Route path={PublicRoutes.USER_DASHBOARD} component={UserDashboard} exact={false} />
                     <Route component={NotFound} />
                 </Switch>
             </Router>

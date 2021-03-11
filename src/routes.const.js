@@ -7,13 +7,14 @@ export const DashboardRoutes = {
 }
 export const UserDashboardRoutes = {
     HOMEPAGE: "/Home",
-    RANK: "/Rank",
+    LEADERBOARD: "/bang-xep-hang",
     TEST: "/Test",
-    USER_LOGIN: "/UserLogin",
+    USER_LOGIN: "/dang-nhap",
+    CONTACT: "/lien-he"
 }
 
 export const PublicRoutes = {
     DASHBOARD: "/Dashboard",
     SIGN_IN: "/SignIn",
-    USER_DASHBOARD:"/",
+    USER_DASHBOARD: "/",
 }

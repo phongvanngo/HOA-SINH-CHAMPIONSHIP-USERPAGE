@@ -49,6 +49,7 @@ homepage-container {
 }
 
 .menu-list li {
+        color:black;
     display: inline-block;
     margin-left: 32px;
     font-size: 1.1em;
@@ -56,10 +57,35 @@ homepage-container {
     transition: color 0.3s;
 }
 
-.menu-list li.active,
-.menu-list li:hover {
+.menu-list li a {
+    text-decoration: none;
+    color: black;
+
+}
+
+.menu-list li .active,
+.menu-list li .menu-item:hover {
     color: #66D9B8;
 }
+// .menu-list li a .active,
+// .menu-list li a:hover {
+//     color: #66D9B8;
+// }
+// .menu-list .menu-item.active,
+// .menu-list .menu-item:hover {
+//     color: #66D9B8;
+// }
+
+// .menu-list .menu-item {
+//     text-decoration: none;
+
+//     color:black;
+//     display: inline-block;
+//     margin-left: 32px;
+//     font-size: 1.1em;
+//     cursor: pointer;
+//     transition: color 0.3s;
+// }
 
 .main {
     flex: 1;
@@ -217,6 +243,10 @@ button.cta:hover {
     .menu-list li {
         font-size: 1.7em;
         margin: 32px 0px;
+    }
+
+    .menu-list li .menu-item {
+        color: white;
     }
 
     .menu.opened .menu-list {
