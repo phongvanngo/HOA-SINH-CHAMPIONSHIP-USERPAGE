@@ -1,10 +1,13 @@
 import React, { useEffect } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import MainArea from './MainArea';
-import { LandingPageRoutes } from '../../../../routes.const';
-export default function LandingpageView() {
+import { LandingPageRoutes, PublicRoutes } from '../../../../routes.const';
+import { Public } from '@material-ui/icons';
+export default function LandingpageView({ handleEnterUserPage }) {
 
     const { HOMEPAGE, LEADERBOARD, CONTACT, USER_LOGIN } = LandingPageRoutes;
+
+    const history = useHistory();
 
     const handleClickDotButton = (e) => {
         var menu = document.querySelector('.menu');
@@ -25,6 +28,10 @@ export default function LandingpageView() {
 
     })
 
+    const handleClickJoin = () => {
+        handleEnterUserPage();
+    }
+
 
     return (
         <div className="userDashboard-container">
@@ -40,7 +47,7 @@ export default function LandingpageView() {
                             <Link to={LEADERBOARD} className="menu-item leaderboard">Bảng xếp hạng</Link>
                         </li>
                         <li>
-                            <Link to={USER_LOGIN} className="menu-item signin">Tham gia thi</Link>
+                            <a onClick={handleClickJoin} className="menu-item signin">Tham gia thi</a>
                         </li>
                         <li>
                             <Link to={CONTACT} className="menu-item contact">Liên hệ</Link>
