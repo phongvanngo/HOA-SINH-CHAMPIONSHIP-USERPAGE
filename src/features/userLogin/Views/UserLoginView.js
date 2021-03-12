@@ -12,6 +12,8 @@ export default function UserLoginView({ handleLogin }) {
         handleLogin(loginInfo);
     }
 
+
+
     return (
         <div className="user-login-container">
             <div className="input-area">

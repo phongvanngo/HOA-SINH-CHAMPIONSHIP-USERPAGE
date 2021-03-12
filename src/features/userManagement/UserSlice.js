@@ -8,6 +8,7 @@ export const fetchUserRequest = createAsyncThunk(
     async ({ page, pageSize, sessionID }, thunkApi) => {
         //nếu không có tham số thứ nhất thì ko dispatch được ?????
         const { dispatch } = thunkApi;
+        console.log("fetch ", page, pageSize, sessionID);
         try {
             dispatch(startLoading());
             let response = await userApi.getUserData({ page, pageSize, sessionID });
@@ -126,6 +127,7 @@ export const userSlice = createSlice({
         currentSessionID: null,
         totalUsers: 0,
         isUserDialogOpen: false,
+        currentPagination: null,
         // {
         //     id: null,
         //     user_name: "abc",

@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react'
-import { BrowserRouter as Router, useHistory } from 'react-router-dom';
-import LandingPageView from './Views/LandingPageView';
-import './LandingPage.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import React from 'react';
+import { BrowserRouter as Router, useHistory } from 'react-router-dom';
 import { PublicRoutes } from './../../../routes.const';
+import './LandingPage.scss';
+import LandingPageView from './Views/LandingPageView';
 
 
 export default function LandingPage() {

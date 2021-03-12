@@ -6,7 +6,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { closeUserFormDialog, createUserRequest, updateUserRequest } from '../UserSlice';
+import { closeUserFormDialog, updateUserRequest } from '../UserSlice';
 export default function UserFormDialog() {
 
     const isOpen = useSelector(state => state.user.isUserDialogOpen);

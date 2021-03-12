@@ -5,7 +5,7 @@ import { startLoading, stopLoading } from './../../common/component/PageLoader/l
 
 export const fetchExamRequest = createAsyncThunk(
     'exam/fetchExamStatus',
-    async ({ }, thunkApi) => {
+    async (params, thunkApi) => {
         //nếu không có tham số thứ nhất thì ko dispatch được ?????
         const { dispatch } = thunkApi;
         try {
@@ -40,8 +40,8 @@ export const createExamRequest = createAsyncThunk(
             dispatch(startLoading());
 
             //transfer schema
-            const {exam_name,question,total_score} = examInfo;
-            const newExam ={name:exam_name,totalQuestionUserMustDo:question,maxScore:total_score};
+            const { exam_name, question, total_score } = examInfo;
+            const newExam = { name: exam_name, totalQuestionUserMustDo: question, maxScore: total_score };
 
             const response = await examApi.pushNewExam(newExam);
             dispatch(stopLoading());
@@ -69,11 +69,11 @@ export const updateExamRequest = createAsyncThunk(
         try {
             dispatch(startLoading());
 
-             //transfer schema
-            const {id,exam_name,question,total_score} = examInfo;
-            const newExam ={name:exam_name,totalQuestionUserMustDo:question,maxScore:total_score};
+            //transfer schema
+            const { id, exam_name, question, total_score } = examInfo;
+            const newExam = { name: exam_name, totalQuestionUserMustDo: question, maxScore: total_score };
 
-            const response = await examApi.patchExamInfo(newExam,id);
+            const response = await examApi.patchExamInfo(newExam, id);
             dispatch(stopLoading());
 
             switch (response.status) {
@@ -161,15 +161,15 @@ export const examSlice = createSlice({
             if (response_data === null) return;
 
             //chuyển đổi schema
-            let exams = response_data.rows.map((element)=>{
-                const {id,name,maxScore,totalQuestionUserMustDo,countQuestion} =  element;
+            let exams = response_data.rows.map((element) => {
+                const { id, name, maxScore, totalQuestionUserMustDo, countQuestion } = element;
                 return {
-                    id:id,
-                    exam_name:name,
+                    id: id,
+                    exam_name: name,
                     question: totalQuestionUserMustDo,
-                    total_score:maxScore,
-                    available_question:countQuestion
-                }    
+                    total_score: maxScore,
+                    available_question: countQuestion
+                }
             }
             )
 

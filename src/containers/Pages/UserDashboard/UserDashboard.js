@@ -1,9 +1,8 @@
-import React, { useEffect } from 'react'
-import { BrowserRouter as Router } from 'react-router-dom';
-import UserDashboardView from './Views/UserDashboardView';
-import './UserDashboard.scss'
-import { logout } from './../../../features/userLogin/userLoginSlice';
+import React from 'react';
 import { useDispatch } from 'react-redux';
+import { logout } from './../../../features/userLogin/userLoginSlice';
+import './UserDashboard.scss';
+import UserDashboardView from './Views/UserDashboardView';
 
 export default function UserDashboard() {
     const dispatch = useDispatch();

@@ -1,6 +1,4 @@
-import fake_contestSession_list from './fake_contest_session';
-import { fakeApi } from '../../app/fakeApi';
-import queryString from 'query-string'
+import queryString from 'query-string';
 import axiosClient from './../../app/AxiosClient';
 
 
@@ -16,8 +14,8 @@ export const contestSessionApi = {
         // })
 
         // return response;
-        const params = {page:0,pageSize:500};
-        const url = "/session"+'?'+queryString.stringify(params);
+        const params = { page: 0, pageSize: 500 };
+        const url = "/session?" + queryString.stringify(params);
 
         let response = await axiosClient.get(url);
         return response;
@@ -34,11 +32,11 @@ export const contestSessionApi = {
         // })
         // return response;
         const url = "/session";
-        let response = await axiosClient.post(url,contestSessionInfo);
+        let response = await axiosClient.post(url, contestSessionInfo);
         return response;
     },
 
-    patchContestSessionInfo: async (contestSessionInfo,sessionId) => {
+    patchContestSessionInfo: async (contestSessionInfo, sessionId) => {
         // const response = await fakeApi({
         //     request: contestSessionInfo,
         //     response:
@@ -50,7 +48,7 @@ export const contestSessionApi = {
         // return response;
 
         const url = `/session/${sessionId}`;
-        let response = await axiosClient.patch(url,contestSessionInfo);
+        let response = await axiosClient.patch(url, contestSessionInfo);
         return response;
 
     },

@@ -5,7 +5,7 @@ import { startLoading, stopLoading } from '../../common/component/PageLoader/loa
 
 export const fetchUniversityRequest = createAsyncThunk(
     'university/fetchUniversityStatus',
-    async ({ }, thunkApi) => {
+    async (params, thunkApi) => {
         //nếu không có tham số thứ nhất thì ko dispatch được ?????
         const { dispatch } = thunkApi;
         try {

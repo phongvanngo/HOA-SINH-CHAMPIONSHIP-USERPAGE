@@ -7,7 +7,7 @@ import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createContestSessionRequest, closeContestSessionFormDialog, updateContestSessionRequest } from '../ContestSessionSlice';
+import { closeContestSessionFormDialog, createContestSessionRequest, updateContestSessionRequest } from '../ContestSessionSlice';
 export default function ContestSessionFormDialog() {
 
     const isOpen = useSelector(state => state.contestSession.isContestSessionDialogOpen);
@@ -50,14 +50,14 @@ export default function ContestSessionFormDialog() {
             // setChosenExam(null);
             //nếu sửa ca thi, setFlag để render lại và lấy ref của input
             if (contestSession !== null) {
-                setFlag(flag + 1);
+                setFlag(flag => flag + 1);
                 const currentType = listTypes.find(element => element.id === type)
                 setChosenType(currentType);
             }
         } else {
             setValidInput(inititalValidInput);
         }
-    }, [isOpen])
+    }, [isOpen, inititalValidInput, contestSession, type])
 
     useEffect(() => {
         //nếu sửa ca thi
@@ -67,7 +67,7 @@ export default function ContestSessionFormDialog() {
 
         }
 
-    }, [flag])
+    }, [flag, name])
 
     const CheckValidInput = (dataSubmit) => {
         let valid = true;

@@ -6,10 +6,8 @@ import Typography from '@material-ui/core/Typography';
 import AddToPhotosIcon from '@material-ui/icons/AddToPhotos';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { chooseUniversity, createUniversity, deleteUniversityRequest, editUniversity, fetchUniversityRequest } from '../UniversitySlice';
+import { createUniversity, deleteUniversityRequest, editUniversity, fetchUniversityRequest } from '../UniversitySlice';
 import UniversityItem from './UniversityItem';
-import { useHistory } from 'react-router-dom';
-import { DashboardRoutes } from '../../../routes.const';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -34,7 +32,6 @@ const useStyles = makeStyles((theme) => ({
 export default function InteractiveList() {
     const classes = useStyles();
     const dispatch = useDispatch();
-    const history = useHistory();
 
     const universitys = useSelector(state => state.university.listUniversitys);
     // console.log()

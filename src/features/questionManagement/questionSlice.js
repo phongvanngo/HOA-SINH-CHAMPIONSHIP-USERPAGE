@@ -66,17 +66,17 @@ export const createQuestionRequest = createAsyncThunk(
             dispatch(startLoading());
 
             //transfer schema
-            const {exam_id,content,image,answerA,answerB,answerC,answerD,answerE,correctAnswer} = questionInfo;
+            const { exam_id, content, image, answerA, answerB, answerC, answerD, answerE, correctAnswer } = questionInfo;
             const newQuestion = {
                 examId: exam_id,
-                content:content,
-                image:image,
-                answerA:answerA,
-                answerB:answerB,
-                answerC:answerC,
-                answerD:answerD,
-                answerE:answerE,
-                result:correctAnswer
+                content: content,
+                image: image,
+                answerA: answerA,
+                answerB: answerB,
+                answerC: answerC,
+                answerD: answerD,
+                answerE: answerE,
+                result: correctAnswer
             }
 
             const response = await questionApi.pushNewQuestion(newQuestion);
@@ -110,20 +110,20 @@ export const updateQuestionRequest = createAsyncThunk(
             dispatch(startLoading());
 
             //transfer schema
-            const {id,exam_id,content,image,answerA,answerB,answerC,answerD,answerE,correctAnswer} = questionInfo;
+            const { id, exam_id, content, image, answerA, answerB, answerC, answerD, answerE, correctAnswer } = questionInfo;
             const newQuestion = {
                 examId: exam_id,
-                content:content,
-                image:image,
-                answerA:answerA,
-                answerB:answerB,
-                answerC:answerC,
-                answerD:answerD,
-                answerE:answerE,
-                result:correctAnswer
+                content: content,
+                image: image,
+                answerA: answerA,
+                answerB: answerB,
+                answerC: answerC,
+                answerD: answerD,
+                answerE: answerE,
+                result: correctAnswer
             }
 
-            const response = await questionApi.patchQuestionInfo(newQuestion,id);
+            const response = await questionApi.patchQuestionInfo(newQuestion, id);
             dispatch(stopLoading());
 
             switch (response.status) {
@@ -261,18 +261,19 @@ export const questionSlice = createSlice({
         [fetchQuestionRequest.fulfilled]: (state, action) => {
             const response_data = action.payload;
             if (response_data === null) return;
-            let questions = response_data.rows.map(element =>{
-                const {id,examId,content,answerA,answerB,answerC,answerD,answerE,result,image} = element;
+            let questions = response_data.rows.map(element => {
+                const { id, examId, content, answerA, answerB, answerC, answerD, answerE, result, image } = element;
                 return {
-                    id:id,
-                    exam_id:examId,
-                    content:content,
-                    answerA:answerA,
-                    answerB:answerB,
-                    answerC:answerC,
-                    answerD:answerD,
-                    answerE:answerE,
-                    correctAnswer:result,
+                    id: id,
+                    exam_id: examId,
+                    content: content,
+                    answerA: answerA,
+                    answerB: answerB,
+                    answerC: answerC,
+                    answerD: answerD,
+                    answerE: answerE,
+                    correctAnswer: result,
+                    image: image
                 }
             });
             console.log(response_data);

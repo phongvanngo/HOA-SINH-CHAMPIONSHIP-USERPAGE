@@ -1,8 +1,6 @@
-import fake_exam_list from './fake_exam_data';
-import { fakeApi } from './../../app/fakeApi';
-import queryString from 'query-string'
-
+import queryString from 'query-string';
 import axiosClient from './../../app/AxiosClient';
+
 
 export const examApi = {
     getExamData: async () => {
@@ -14,8 +12,8 @@ export const examApi = {
         //     },
         //     timeOut: 1000
         // })
-        const params = {page:0,pageSize:500};
-        const url = "/exam"+'?'+queryString.stringify(params);
+        const params = { page: 0, pageSize: 500 };
+        const url = "/exam?" + queryString.stringify(params);
 
         let response = await axiosClient.get(url);
         return response;
@@ -33,11 +31,11 @@ export const examApi = {
         // })
         const url = "/exam";
         console.log(examInfo);
-        let response = await axiosClient.post(url,examInfo);
+        let response = await axiosClient.post(url, examInfo);
         return response;
     },
 
-    patchExamInfo: async (examInfo,exam_id) => {
+    patchExamInfo: async (examInfo, exam_id) => {
         // const response = await fakeApi({
         //     request: examInfo,
         //     response:
@@ -47,9 +45,9 @@ export const examApi = {
         //     }
         // })
         // return response;
-        const url = "/exam/"+exam_id;
+        const url = "/exam/" + exam_id;
         console.log(examInfo);
-        let response = await axiosClient.patch(url,examInfo);
+        let response = await axiosClient.patch(url, examInfo);
         return response;
     },
 
@@ -65,7 +63,7 @@ export const examApi = {
         // })
         // return response;
 
-        const url = "/exam/"+exam_id;
+        const url = "/exam/" + exam_id;
         let response = await axiosClient.delete(url);
         return response;
     },

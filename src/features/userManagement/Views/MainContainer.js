@@ -1,26 +1,23 @@
 import { Typography } from '@material-ui/core';
-import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import './MainContainer.css';
-import UserCodeForm from './UserCodeForm';
-import FilterArea from './FilterArea';
-import UserList from './UserList';
-import SearchArea from './SearchArea';
 import { fetchContestSessionRequest } from './../../ContestSessionManagement/ContestSessionSlice';
-import { fetchUniversityRequest} from './../../universityManagement/UniversitySlice';
+import { fetchUniversityRequest } from './../../universityManagement/UniversitySlice';
+import FilterArea from './FilterArea';
+import './MainContainer.css';
+import SearchArea from './SearchArea';
+import UserCodeForm from './UserCodeForm';
+import UserList from './UserList';
 
 
 export default function QuestionManagement() {
     const dispatch = useDispatch();
-    const history = useHistory();
 
     useEffect(() => {
         dispatch(fetchContestSessionRequest({}));
         dispatch(fetchUniversityRequest({}));
-    }, [])
+    }, [dispatch])
 
 
     return (

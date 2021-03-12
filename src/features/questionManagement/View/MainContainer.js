@@ -24,7 +24,7 @@ export default function QuestionManagement() {
     console.log(detailedChosenExam);
     useEffect(() => {
         dispatch(fetchQuestionRequest(exam_id));
-    }, [dispatch])
+    }, [dispatch, exam_id])
 
     return (
         <React.Fragment>

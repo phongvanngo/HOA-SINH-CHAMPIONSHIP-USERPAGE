@@ -1,25 +1,22 @@
-import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
+import IconButton from '@material-ui/core/IconButton';
+import Paper from '@material-ui/core/Paper';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
-import TextField from '@material-ui/core/TextField';
-import FormControl from '@material-ui/core/FormControl';
-import Autocomplete from '@material-ui/lab/Autocomplete';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableFooter from '@material-ui/core/TableFooter';
+import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
-import IconButton from '@material-ui/core/IconButton';
 import FirstPageIcon from '@material-ui/icons/FirstPage';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import LastPageIcon from '@material-ui/icons/LastPage';
-import TableHead from '@material-ui/core/TableHead';
+import PropTypes from 'prop-types';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchUserRequest, changeSession } from '../UserSlice';
+import { fetchUserRequest } from '../UserSlice';
 import UserItem from './UserItem';
 
 const useStyles1 = makeStyles((theme) => ({
@@ -97,19 +94,27 @@ export default function CustomPaginationActionsTable() {
     const classes = useStyles2();
     const dispatch = useDispatch();
     const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(5);
+    const [rowsPerPage, setRowsPerPage] = React.useState(0);
 
     const totalUsers = useSelector(state => state.user.totalUsers)
     const currentSessionID = useSelector(state => state.user.currentSessionID);
     let listUsers = useSelector(state => state.user.listUsers);
 
-    listUsers = listUsers.slice(0, rowsPerPage);
+    const count = rowsPerPage > 0 ? rowsPerPage : listUsers.length;
+    listUsers = listUsers.slice(0, count + 1);
 
     useEffect(() => {
+        console.log("page change effect");
+        if (rowsPerPage === 0) return;
         dispatch(fetchUserRequest({ page: page, pageSize: rowsPerPage !== -1 ? rowsPerPage : totalUsers, sessionID: currentSessionID }));
-    }, [currentSessionID, rowsPerPage, page])
+    }, [rowsPerPage, page])
 
-    const emptyRows = rowsPerPage - Math.min(rowsPerPage, totalUsers - page * rowsPerPage);
+    useEffect(() => {
+        console.log("current ID change");
+        setRowsPerPage(10);
+    }, [currentSessionID])
+
+    // const emptyRows = rowsPerPage - Math.min(rowsPerPage, totalUsers - page * rowsPerPage);
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -119,6 +124,8 @@ export default function CustomPaginationActionsTable() {
         setRowsPerPage(parseInt(event.target.value, 10));
         setPage(0);
     };
+
+    console.log("data render");
 
     return (
         <TableContainer component={Paper}>

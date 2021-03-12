@@ -1,7 +1,7 @@
 import React, { lazy } from 'react';
-import { Route, Switch, useRouteMatch, Redirect, useLocation } from 'react-router-dom';
-import { LandingPageRoutes } from './../../../../routes.const';
 import { useSelector } from "react-redux";
+import { Redirect, Route, Switch, useLocation } from 'react-router-dom';
+import { LandingPageRoutes } from './../../../../routes.const';
 
 
 const Homepage = lazy(() => import('./Homepage/Homepage'));
@@ -10,7 +10,7 @@ const UserSignIn = lazy(() => import('./UserSignIn/UserSignIn'));
 const ContactPage = lazy(() => import('./Contact/Contact'));
 const Userpage = lazy(() => import('./Userpage/Userpage'));
 
-const { HOMEPAGE, LEADERBOARD, TEST, USER_LOGIN, CONTACT, USER, LANDINGPAGE } = LandingPageRoutes;
+const { HOMEPAGE, LEADERBOARD, USER_LOGIN, CONTACT, USER, LANDINGPAGE } = LandingPageRoutes;
 function PrivateRouteUser({ children, ...rest }) {
     let location = useLocation();
     const hasLoggedIn = useSelector(state => state.userLogin.hasLoggedIn);
@@ -26,7 +26,6 @@ function PrivateRouteUser({ children, ...rest }) {
 }
 
 export default function MainArea() {
-    const match = useRouteMatch();
     return (
         <div>
             <Switch>

@@ -5,7 +5,7 @@ import { startLoading, stopLoading } from '../../common/component/PageLoader/loa
 
 export const fetchContestSessionRequest = createAsyncThunk(
     'contestSession/fetchContestSessionStatus',
-    async ({ }, thunkApi) => {
+    async (params, thunkApi) => {
         //nếu không có tham số thứ nhất thì ko dispatch được ?????
         const { dispatch } = thunkApi;
         try {
@@ -37,15 +37,15 @@ export const createContestSessionRequest = createAsyncThunk(
         const { dispatch } = thunkApi;
         try {
             dispatch(startLoading());
-            
+
             //transfer schema
-            const {exam_id,name,type} = contestSessionInfo;
-            const newContestSession =  {
-                typeId : type,
-                examId:exam_id,
-                name:name,
+            const { exam_id, name, type } = contestSessionInfo;
+            const newContestSession = {
+                typeId: type,
+                examId: exam_id,
+                name: name,
             }
-            
+
             const response = await contestSessionApi.pushNewContestSession(newContestSession);
             dispatch(stopLoading());
             switch (response.status) {
@@ -70,14 +70,14 @@ export const updateContestSessionRequest = createAsyncThunk(
         const { dispatch } = thunkApi;
         try {
             dispatch(startLoading());
-            
-            const {exam_id,name,id} = contestSessionInfo;
-            const newContestSession =  {
-                examId:exam_id,
-                name:name,
+
+            const { exam_id, name, id } = contestSessionInfo;
+            const newContestSession = {
+                examId: exam_id,
+                name: name,
             }
-            
-            const response = await contestSessionApi.patchContestSessionInfo(newContestSession,id);
+
+            const response = await contestSessionApi.patchContestSessionInfo(newContestSession, id);
             dispatch(stopLoading());
 
             switch (response.status) {
@@ -213,14 +213,14 @@ export const contestSessionSlice = createSlice({
         [fetchContestSessionRequest.fulfilled]: (state, action) => {
             const response_data = action.payload;
             if (response_data === null) return;
-            let contestSessions = response_data.rows.map(element=>{
-                const {id,name,isActive,examId,typeId} = element;
+            let contestSessions = response_data.rows.map(element => {
+                const { id, name, isActive, examId, typeId } = element;
                 return {
-                    id:id,
-                    name:name,
-                    is_active:isActive,
-                    type:typeId,
-                    exam_id:examId
+                    id: id,
+                    name: name,
+                    is_active: isActive,
+                    type: typeId,
+                    exam_id: examId
                 }
             });
             state.listContestSessions = [...contestSessions];

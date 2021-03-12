@@ -1,7 +1,11 @@
 import React, { useEffect } from 'react'
+import { useHistory } from 'react-router';
+import { LandingPageRoutes } from './../../../../../routes.const';
+import MainImage from './images/img.svg';
 // import './Homepage.scss';
 
 export default function Homepage() {
+    const history = useHistory();
 
     useEffect(() => {
         var menuContainer = document.getElementById("MenuUserPage");
@@ -13,6 +17,10 @@ export default function Homepage() {
         currentItem[0].className += " active";
     }, [])
 
+    const handleGoToExam = () => {
+        history.push(LandingPageRoutes.USER);
+    }
+
 
     return (
         <section className="main">
@@ -21,11 +29,11 @@ export default function Homepage() {
                 <p className="title">HÓA SINH CHAMPIONSHIP</p>
                 <p className="msg">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex nihil rerum itaque quisquam!
                 Natus repudiandae nesciunt tempora odio amet. Saepe?</p>
-                <button className="cta">THI NGAY</button>
+                <button onClick={handleGoToExam} className="cta">THI NGAY</button>
             </section>
 
             <section className="right">
-                <img src="./images/img.svg" alt="Langing image" />
+                <img src={MainImage} alt="landingpage" />
             </section>
 
         </section>

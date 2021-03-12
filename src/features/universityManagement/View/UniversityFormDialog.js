@@ -4,10 +4,9 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
-import Autocomplete from '@material-ui/lab/Autocomplete';
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createUniversityRequest, closeUniversityFormDialog, updateUniversityRequest } from '../UniversitySlice';
+import { closeUniversityFormDialog, createUniversityRequest, updateUniversityRequest } from '../UniversitySlice';
 export default function UniversityFormDialog() {
 
     const isOpen = useSelector(state => state.university.isUniversityDialogOpen);
@@ -32,7 +31,7 @@ export default function UniversityFormDialog() {
             // setChosenExam(null);
             //nếu sửa ca thi, setFlag để render lại và lấy ref của input
             if (university !== null) {
-                setFlag(flag+1);
+                setFlag(flag + 1);
             }
         } else {
             setValidInput(inititalValidInput);
@@ -52,7 +51,7 @@ export default function UniversityFormDialog() {
     const CheckValidInput = (dataSubmit) => {
         let valid = true;
         let validInputDetail = inititalValidInput;
-        const { university_name} = dataSubmit;
+        const { university_name } = dataSubmit;
 
 
         if (university_name.trim() === "") {

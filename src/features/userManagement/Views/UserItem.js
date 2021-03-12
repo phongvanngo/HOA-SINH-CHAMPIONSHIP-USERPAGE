@@ -1,17 +1,17 @@
-import TableCell from '@material-ui/core/TableCell';
-import TableRow from '@material-ui/core/TableRow';
-import React from 'react';
 import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+import TableCell from '@material-ui/core/TableCell';
+import TableRow from '@material-ui/core/TableRow';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import { updateUser, deleteUserRequest } from './../UserSlice';
+import React from 'react';
 import { useDispatch } from 'react-redux';
+import { deleteUserRequest, updateUser } from './../UserSlice';
 
 const ITEM_HEIGHT = 48;
 
 export default function UserItem({ detailedUser, index }) {
-    const { id, code, name, score, time, sessionName } = detailedUser;
+    const { id, code, name, score, time } = detailedUser;
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
     const dispatch = useDispatch();
@@ -37,7 +37,7 @@ export default function UserItem({ detailedUser, index }) {
 
     return (
         <React.Fragment>
-            <TableRow key={id}>
+            <TableRow key={id} hover>
                 <TableCell component="th" scope="row">
                     {index}
                 </TableCell>

@@ -1,8 +1,6 @@
-import fake_university_list from './fake_university_data';
-import { fakeApi } from '../../app/fakeApi';
-import queryString from 'query-string'
-
+import queryString from 'query-string';
 import axiosClient from '../../app/AxiosClient';
+
 
 export const universityApi = {
     getUniversityData: async () => {
@@ -17,7 +15,7 @@ export const universityApi = {
         // return response;
 
         const params = { page: 0, pageSize: 500 };
-        const url = "/user/university" + '?' + queryString.stringify(params);
+        const url = "/user/university?" + queryString.stringify(params);
 
         let response = await axiosClient.get(url);
         return response;

@@ -1,6 +1,4 @@
-import { fakeApi } from './../../app/fakeApi';
-import { list_question } from './fake_question_list';
-import queryString from 'query-string'
+import queryString from 'query-string';
 import axiosClient from './../../app/AxiosClient';
 
 export const questionApi = {
@@ -14,7 +12,7 @@ export const questionApi = {
         //     timeOut: 1000
         // })
 
-        const params = {page:0,pageSize:100};
+        const params = { page: 0, pageSize: 100 };
         const url = `/exam/${examId}/questions?${queryString.stringify(params)}`;
         let response = await axiosClient.get(url,);
         return response;
@@ -30,11 +28,11 @@ export const questionApi = {
         //     }
         // })
         const url = `/question`;
-        let response = await axiosClient.post(url,questionInfo);
+        let response = await axiosClient.post(url, questionInfo);
         return response;
     },
 
-    patchQuestionInfo: async (questionInfo,questionId) => {
+    patchQuestionInfo: async (questionInfo, questionId) => {
         // const response = await fakeApi({
         //     request: questionInfo,
         //     response:
@@ -46,7 +44,7 @@ export const questionApi = {
         // return response;
 
         const url = `/question/${questionId}`;
-        let response = await axiosClient.patch(url,questionInfo);
+        let response = await axiosClient.patch(url, questionInfo);
         return response;
     },
 

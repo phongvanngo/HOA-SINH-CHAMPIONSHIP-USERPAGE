@@ -1,16 +1,16 @@
 import Button from '@material-ui/core/Button';
-import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import Divider from '@material-ui/core/Divider';
 import FormControl from '@material-ui/core/FormControl';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import React, { useRef, useState } from 'react';
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import Autocomplete from '@material-ui/lab/Autocomplete';
+import React, { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
-
 import { createUserRequest } from './../UserSlice';
+
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -42,14 +42,14 @@ export default function CenteredGrid() {
     // let listContestSessions = useSelector(state => state.contestSession.listContestSessions) || [];
     let listUniversities = useSelector(state => state.university.listUniversitys);
 
-    listUniversities = [ {id:null,university_name:"Thí sinh tự do"},...listUniversities]
+    listUniversities = [{ id: null, university_name: "Thí sinh tự do" }, ...listUniversities]
 
     const userNameInputRef = useRef(null)
     const prefixInputRef = useRef(null)
 
     const inititalValidInput = {
         userName: true,
-        universityId:true,
+        universityId: true,
     }
 
     const [validInput, setValidInput] = useState(inititalValidInput);
@@ -59,7 +59,7 @@ export default function CenteredGrid() {
     const checkValidInput = (dataSubmit) => {
         let valid = true;
         let validInputDetail = inititalValidInput;
-        const { name, universityId } = dataSubmit;
+        const { name } = dataSubmit;
 
 
         if (name.trim() === "") {
@@ -84,15 +84,13 @@ export default function CenteredGrid() {
         setChosenUniversityId(newValue);
     }
 
-
-
     const handleSubmit = () => {
         const shortid = Math.random().toString(36).substr(2, 9);
         const userInfo = {
             name: userNameInputRef.current.value,
             code: `${prefixInputRef.current.value}${shortid}`,
             // sessionID: choosenSessionID ? choosenSessionID.id : null,
-            universityId:chosenUniversityId ? chosenUniversityId.id : null
+            universityId: chosenUniversityId ? chosenUniversityId.id : null
         }
 
         if (checkValidInput(userInfo) === false) return;

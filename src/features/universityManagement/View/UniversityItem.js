@@ -4,15 +4,14 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
+import Tooltip from '@material-ui/core/Tooltip';
 import DeleteIcon from '@material-ui/icons/Delete';
 import FolderIcon from '@material-ui/icons/Folder';
-import React from 'react';
-import OpenInNewIcon from '@material-ui/icons/OpenInNew';
 import SettingsIcon from '@material-ui/icons/Settings';
-import Tooltip from '@material-ui/core/Tooltip';
+import React from 'react';
 
 export default function UniversityItem(props) {
-    const { detailedUniversity, handleDeleteUniversity, handleEditUniversity} = props;
+    const { detailedUniversity, handleDeleteUniversity, handleEditUniversity } = props;
     const { id, university_name } = detailedUniversity;
 
     return (
@@ -28,7 +27,7 @@ export default function UniversityItem(props) {
 
                 />
                 <ListItemSecondaryAction>
-            
+
 
                     <Tooltip title="Chỉnh sửa đề thi" placement="top-end">
                         <IconButton

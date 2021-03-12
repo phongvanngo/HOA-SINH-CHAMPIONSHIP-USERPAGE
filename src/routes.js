@@ -1,12 +1,12 @@
 import React, { lazy, Suspense } from 'react';
-import { Route, BrowserRouter as Router, Switch, useLocation, Redirect } from 'react-router-dom';
 import { useSelector } from "react-redux";
-import { PublicRoutes, LandingPageRoutes } from './routes.const';
-
+import { BrowserRouter as Router, Redirect, Route, Switch, useLocation } from 'react-router-dom';
+import PageLoaderRouter from './common/component/PageLoader/PageLoaderRouter';
+import { PublicRoutes } from './routes.const';
 const Dashboard = lazy(() => import('./containers/Pages/Dashboard/Dashboard'));
 const AdminSignIn = lazy(() => import('./containers/Pages/AdminSignIn/AdminSignIn'));
 const NotFound = lazy(() => import('./containers/Pages/NotFound/NotFound'));
-const UserDashboard = lazy(() => import('./containers/Pages/UserDashboard/UserDashboard'));
+// const UserDashboard = lazy(() => import('./containers/Pages/UserDashboard/UserDashboard'));
 const LandingPage = lazy(() => import('./containers/Pages/LandingPage/LandingPage'));
 function PrivateRoute({ children, ...rest }) {
     let location = useLocation();
@@ -21,23 +21,10 @@ function PrivateRoute({ children, ...rest }) {
         />
     )
 }
-function PrivateRouteUser({ children, ...rest }) {
-    let location = useLocation();
-    const hasLoggedIn = useSelector(state => state.userLogin.hasLoggedIn);
-    if (hasLoggedIn) return <Route {...rest}>{children}</Route>
-    return (
-        <Redirect
-            to={{
-                pathname: LandingPageRoutes.USER_LOGIN,
-                state: { from: location },
-            }}
-        />
-    )
-}
 
 export default function AppRoutes() {
     return (
-        <Suspense fallback={<div>Loading</div>}>
+        <Suspense fallback={<PageLoaderRouter />}>
             <Router>
                 <Switch>
                     {/* <Redirect exact from="/" to={PublicRoutes.USER_DASHBOARD} /> */}
@@ -45,7 +32,6 @@ export default function AppRoutes() {
                         <Dashboard />
                     </PrivateRoute>
                     <Route path={PublicRoutes.ADMIN_SIGNIN} component={AdminSignIn} exact={true} />
-                    {/* <Redirect exact from={PublicRoutes.LANDINGPAGE} to={LandingPageRoutes.HOMEPAGE} /> */}
                     <Route path={PublicRoutes.LANDINGPAGE} component={LandingPage} exact={false} />
                     <Route component={NotFound} />
                 </Switch>
