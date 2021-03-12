@@ -20,7 +20,7 @@ export default function ContestSessionFormDialog() {
 
     const contestSessionNameInputRef = useRef(null);
 
-    const listTypes = [
+    let listTypes = [
         {
             id: 1,
             name: "Bảng cá nhân"
@@ -40,6 +40,17 @@ export default function ContestSessionFormDialog() {
 
     const [chosenExam, setChosenExam] = useState(listExams[0]);
     const [chosenType, setChosenType] = useState(listTypes[0]);
+
+
+    const handleChangeExam = (newValue) => {
+        setChosenExam(newValue);
+    }
+
+    const handleChangeType = (newValue) => {
+        setChosenType(newValue);
+    }
+
+
     const [flag, setFlag] = useState(0);
 
     console.log("genre", type);
@@ -51,18 +62,18 @@ export default function ContestSessionFormDialog() {
             //nếu sửa ca thi, setFlag để render lại và lấy ref của input
             if (contestSession !== null) {
                 setFlag(flag => flag + 1);
-                const currentType = listTypes.find(element => element.id === type)
-                setChosenType(currentType);
+
             }
         } else {
             setValidInput(inititalValidInput);
         }
-    }, [isOpen, inititalValidInput, contestSession, type])
+    }, [isOpen])
 
     useEffect(() => {
         //nếu sửa ca thi
         try {
             contestSessionNameInputRef.current.value = name;
+            chosenType = listTypes.find(element => element.id === type)
         } catch (error) {
 
         }
@@ -146,12 +157,11 @@ export default function ContestSessionFormDialog() {
                         helperText={!validInput.contestSessionName ? "Dữ liệu không được để trống" : ""}
                     />
                     <Autocomplete
-                        defaultValue={listExams.find(exam => exam.id === exam_id)}
+                        // defaultValue={listExams.find(exam => exam.id === exam_id)}
                         options={listExams}
-                        value={chosenExam}
                         getOptionLabel={(option) => option.exam_name}
                         onChange={(event, newValue) => {
-                            setChosenExam(newValue)
+                            handleChangeExam(newValue)
                         }}
                         style={{ width: 300 }}
                         renderInput={(params) =>
@@ -165,11 +175,11 @@ export default function ContestSessionFormDialog() {
                             />}
                     />
                     <Autocomplete
+                        // defaultValue={listTypes.find(exam => exam.type === type)}
                         options={listTypes}
-                        value={chosenType}
                         getOptionLabel={(option) => option.name}
                         onChange={(event, newValue) => {
-                            setChosenType(newValue)
+                            handleChangeType(newValue)
                         }}
                         style={{ width: 300, marginTop: '20px' }}
                         renderInput={(params) =>

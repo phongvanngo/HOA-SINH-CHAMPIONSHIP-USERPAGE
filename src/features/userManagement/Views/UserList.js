@@ -95,6 +95,7 @@ export default function CustomPaginationActionsTable() {
     const dispatch = useDispatch();
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(0);
+    const [flag, setFlag] = React.useState(0);
 
     const totalUsers = useSelector(state => state.user.totalUsers)
     const currentSessionID = useSelector(state => state.user.currentSessionID);
@@ -107,10 +108,11 @@ export default function CustomPaginationActionsTable() {
         console.log("page change effect");
         if (rowsPerPage === 0) return;
         dispatch(fetchUserRequest({ page: page, pageSize: rowsPerPage !== -1 ? rowsPerPage : totalUsers, sessionID: currentSessionID }));
-    }, [rowsPerPage, page])
+    }, [rowsPerPage, page, flag])
 
     useEffect(() => {
         console.log("current ID change");
+        setFlag(flag + 1);
         setRowsPerPage(10);
     }, [currentSessionID])
 
