@@ -5,7 +5,7 @@ import { LandingPageRoutes, PublicRoutes } from '../../../../routes.const';
 import { Public } from '@material-ui/icons';
 export default function LandingpageView({ handleEnterUserPage }) {
 
-    const { HOMEPAGE, LEADERBOARD, CONTACT, USER_LOGIN } = LandingPageRoutes;
+    const { HOMEPAGE, LEADERBOARD, CONTACT, USER_LOGIN, USER } = LandingPageRoutes;
 
     const history = useHistory();
 
@@ -47,7 +47,8 @@ export default function LandingpageView({ handleEnterUserPage }) {
                             <Link to={LEADERBOARD} className="menu-item leaderboard">Bảng xếp hạng</Link>
                         </li>
                         <li>
-                            <a onClick={handleClickJoin} className="menu-item signin">Tham gia thi</a>
+                            {/* <a onClick={handleClickJoin} className="menu-item signin">Tham gia thi</a> */}
+                            <Link to={USER} className="menu-item signin">Tham gia thi</Link>
                         </li>
                         <li>
                             <Link to={CONTACT} className="menu-item contact">Liên hệ</Link>
