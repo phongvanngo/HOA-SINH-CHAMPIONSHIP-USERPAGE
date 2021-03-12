@@ -48,6 +48,7 @@ export default function AppRoutes() {
                         <UserDashboard />
                     </PrivateRouteUser>
                     <Route path={PublicRoutes.ADMIN_SIGNIN} component={AdminSignIn} exact={true} />
+                    <Redirect exact from={PublicRoutes.LANDINGPAGE} to={LandingPageRoutes.HOMEPAGE} />
                     <Route path={PublicRoutes.LANDINGPAGE} component={LandingPage} exact={false} />
                     <Route component={NotFound} />
                 </Switch>

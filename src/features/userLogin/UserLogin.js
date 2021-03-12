@@ -41,7 +41,7 @@ export default function UserLogin() {
 
     return (
         <div>
-            <UserLoginView />
+            <UserLoginView handleLogin={handleLogin} />
         </div>
     )
 }
