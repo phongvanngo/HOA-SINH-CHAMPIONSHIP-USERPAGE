@@ -4,9 +4,12 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import './Userpage.scss';
 import { logout } from './../../../../../features/userLogin/userLoginSlice';
+import { useHistory } from 'react-router';
+import { PublicRoutes } from './../../../../../routes.const';
 
 export default function Userpage() {
     const dispatch = useDispatch();
+    const history = useHistory();
     const user = useSelector(state => state.userLogin.user);
     let { code, fullName, sessionName, isActive } = user;
 
@@ -30,7 +33,7 @@ export default function Userpage() {
     }
 
     const handleGoToExam = () => {
-
+        history.push(PublicRoutes.TEST);
     }
 
     return (
@@ -45,6 +48,7 @@ export default function Userpage() {
                             isActive ?
                                 (
                                     <Button
+                                        onClick={handleGoToExam}
                                         variant="primary"
                                         style={{ marginRight: '5px' }}>
                                         Bắt đầu làm bài

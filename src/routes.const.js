@@ -11,7 +11,8 @@ export const PublicRoutes = {
     ADMIN_DASHBOARD: "/admin-dashboard",
     ADMIN_SIGNIN: "/SignIn",
     LANDINGPAGE: "/",
-    USER_DASHBOARD: "/user"
+    USER_DASHBOARD: "/user",
+    TEST: "/test"
 }
 export const DashboardRoutes = {
     COMPETITION_MANAGEMENT: `${PublicRoutes.ADMIN_DASHBOARD}/quan-ly-ca-thi`,

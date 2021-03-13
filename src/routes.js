@@ -3,11 +3,15 @@ import { useSelector } from "react-redux";
 import { BrowserRouter as Router, Redirect, Route, Switch, useLocation } from 'react-router-dom';
 import PageLoaderRouter from './common/component/PageLoader/PageLoaderRouter';
 import { PublicRoutes } from './routes.const';
+
 const Dashboard = lazy(() => import('./containers/Pages/Dashboard/Dashboard'));
 const AdminSignIn = lazy(() => import('./containers/Pages/AdminSignIn/AdminSignIn'));
 const NotFound = lazy(() => import('./containers/Pages/NotFound/NotFound'));
-// const UserDashboard = lazy(() => import('./containers/Pages/UserDashboard/UserDashboard'));
 const LandingPage = lazy(() => import('./containers/Pages/LandingPage/LandingPage'));
+const UserExam = lazy(() => import('./features/userExam/UserExam'));
+
+
+
 function PrivateRoute({ children, ...rest }) {
     let location = useLocation();
     const isLoggedIn = useSelector(state => state.login.isLoggedIn);
@@ -32,6 +36,7 @@ export default function AppRoutes() {
                         <Dashboard />
                     </PrivateRoute>
                     <Route path={PublicRoutes.ADMIN_SIGNIN} component={AdminSignIn} exact={true} />
+                    <Route path={PublicRoutes.TEST} component={UserExam} />
                     <Route path={PublicRoutes.LANDINGPAGE} component={LandingPage} exact={false} />
                     <Route component={NotFound} />
                 </Switch>
