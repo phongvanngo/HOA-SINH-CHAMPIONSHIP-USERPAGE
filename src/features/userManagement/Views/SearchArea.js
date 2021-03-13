@@ -5,7 +5,10 @@ import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import SearchIcon from '@material-ui/icons/Search';
-import React from 'react';
+import React, { useRef } from 'react';
+import { useDispatch } from 'react-redux';
+import { searchUserRequest } from './../UserSlice';
+
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
@@ -32,6 +35,12 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SearhArea() {
     const classes = useStyles();
+    const dispatch = useDispatch();
+    const searchInputRef = useRef(null);
+
+    const handleSumbit = () => {
+        dispatch(searchUserRequest({ userCode: searchInputRef.current.value }));
+    }
 
     return (
         <div className={classes.root}>
@@ -43,6 +52,7 @@ export default function SearhArea() {
                         variant="contained"
                         color="default"
                         size='small'
+                        onClick={handleSumbit}
                         startIcon={<SearchIcon />}
                     >
                         Tìm
@@ -52,7 +62,7 @@ export default function SearhArea() {
                 <FormControl component="fieldset" style={{ marginTop: '10px', width: '100%' }}>
                     <TextField
                         size="small"
-
+                        inputRef={searchInputRef}
                         id="outlined-basic"
                         style={{ marginTop: '10px' }}
                         variant="outlined" label="Mã dự thi" />

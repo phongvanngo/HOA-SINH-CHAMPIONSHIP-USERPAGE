@@ -12,7 +12,7 @@ export default function UserLogin() {
     const [redirectToReferrer, setRedirectToReferrer] = React.useState(false);
 
     //kiểm tra đã đăng nhập gần đây chưa, nếu rồi thì ko cần đăng nhập lại
-    const idToken = localStorage.getItem('id_token');
+    const idToken = localStorage.getItem('id_user_token');
 
     if (idToken != null) dispatch(userLoginAgain());
 

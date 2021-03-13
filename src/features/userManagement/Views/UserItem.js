@@ -37,7 +37,7 @@ export default function UserItem({ detailedUser, index }) {
 
     return (
         <React.Fragment>
-            <TableRow key={id} hover>
+            <TableRow key={id} hover style={{ height: '14px' }}>
                 <TableCell component="th" scope="row">
                     {index}
                 </TableCell>

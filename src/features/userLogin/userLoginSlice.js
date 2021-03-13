@@ -16,11 +16,11 @@ export const userLoginRequest = createAsyncThunk(
                     dispatch(stopLoading());
                     return response.data;
                 case 401:
-                    throw new Error("Sai tên đăng nhập hoặc mật khẩu");
+                    throw new Error("Mã dự thi không đúng");
                 case 400:
-                    throw new Error("Chưa nhập tên đăng nhập và mật khẩu");
+                    throw new Error("Bạn cần nhập mã dự thi");
                 default:
-                    throw new Error("Failed");
+                    throw new Error("Đăng nhập thất bại");
             }
         } catch (error) {
             dispatch(notify({ message: `${error}`, options: { variant: 'error' } }));
@@ -34,27 +34,37 @@ export const userLoginSlice = createSlice({
     name: 'userLogin',
     initialState: {
         hasLoggedIn: false,
-        idToken: null
+        idToken: null,
+        user: null,
     },
 
     reducers: {
         userLoginAgain: state => {
+            const user = localStorage.getItem('user');
+            state.user = JSON.parse(user);
+
             state.hasLoggedIn = true;
+
         },
 
         logout: state => {
-            window.localStorage.removeItem('id_token');
+            window.localStorage.removeItem('id_user_token');
             state.hasLoggedIn = false;
         },
     },
 
     extraReducers: {
         [userLoginRequest.fulfilled]: (state, action) => {
-            const data = action.payload;
-            console.log(data);
-            if (data === null) return;
-            localStorage.setItem("id_token", data.token);
+            let response_data = action.payload;
+            if (response_data === null) return;
+            const { token, user } = response_data;
+            // const {code,fullName,sessionName,isActive} = data.user;
+
+            localStorage.setItem("id_user_token", token);
+            localStorage.setItem("user", JSON.stringify(user));
+
             state.hasLoggedIn = true;
+            state.user = user;
         }
     }
 })

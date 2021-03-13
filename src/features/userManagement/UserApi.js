@@ -22,6 +22,26 @@ export const userApi = {
         return response;
 
     },
+    getUserByUserCode: async (data) => {
+        const { page, pageSize, userCode } = data;
+        // let response = await fakeApi({
+        //     request: data,
+        //     response: {
+        //         status: 200,
+        //         data: user_fake_data({ page: page, pageSize: pageSize, sessionID: sessionID })
+        //     },
+        //     timeOut: 1000
+        // })
+
+        // return response;
+
+        const params = { page: page, pageSize: pageSize, userCode: userCode };
+        const url = "/user/search?" + queryString.stringify(params);
+        let response = await axiosClient.get(url);
+        return response;
+
+    },
+
 
     pushNewUser: async (userInfo) => {
         // const response = await fakeApi({

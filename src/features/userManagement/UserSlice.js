@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { notify } from './../../common/component/Notifier/notifierSlice';
 import { userApi } from './UserApi';
 import { startLoading, stopLoading } from './../../common/component/PageLoader/loadingSlice';
+import { RepeatOneSharp } from "@material-ui/icons";
 
 export const fetchUserRequest = createAsyncThunk(
     'user/fetchUserStatus',
@@ -16,6 +17,34 @@ export const fetchUserRequest = createAsyncThunk(
             switch (response.status) {
                 case 200:
                     dispatch(notify({ message: "Lấy dữ liệu thành công", options: { variant: 'success' } }));
+                    return response.data;
+                case 404:
+                    throw new Error("Unauthorized");
+                default:
+                    throw new Error("Unsuccessfully");
+            }
+        }
+        catch (error) {
+            dispatch(notify({ message: `${error}`, options: { variant: 'error' } }));
+            dispatch(stopLoading());
+            return null;
+        }
+
+    }
+);
+export const searchUserRequest = createAsyncThunk(
+    'user/searchUserRequest',
+    async ({ userCode }, thunkApi) => {
+        //nếu không có tham số thứ nhất thì ko dispatch được ?????
+        const { dispatch } = thunkApi;
+        try {
+            dispatch(startLoading());
+            let response = await userApi.getUserByUserCode({ userCode });
+            dispatch(stopLoading());
+            switch (response.status) {
+                case 200:
+                    dispatch(notify({ message: "Lấy dữ liệu thành công", options: { variant: 'success' } }));
+                    response.data = { ...response.data, searchingUserCode: userCode }
                     return response.data;
                 case 404:
                     throw new Error("Unauthorized");
@@ -128,6 +157,7 @@ export const userSlice = createSlice({
         totalUsers: 0,
         isUserDialogOpen: false,
         currentPagination: null,
+        searchingUserCode: null,
         // {
         //     id: null,
         //     user_name: "abc",
@@ -163,6 +193,45 @@ export const userSlice = createSlice({
     },
 
     extraReducers: {
+        [fetchUserRequest.fulfilled]: (state, action) => {
+            const response_data = action.payload;
+            if (response_data === null) return;
+            let { rows, count } = response_data;
+
+            let users = rows.map(element => {
+                const { code, fullName, id, score, time } = element;
+                return {
+                    id: id,
+                    code: code,
+                    name: fullName,
+                    score: score,
+                    time: time
+                }
+            })
+
+            state.totalUsers = count;
+            state.listUsers = [...users];
+        },
+        [searchUserRequest.fulfilled]: (state, action) => {
+            const response_data = action.payload;
+            if (response_data === null) return;
+            let { rows, count, searchingUserCode } = response_data;
+
+            let users = rows.map(element => {
+                const { code, fullName, id, score, time } = element;
+                return {
+                    id: id,
+                    code: code,
+                    name: fullName,
+                    score: score,
+                    time: time
+                }
+            })
+
+            state.searchingUserCode = searchingUserCode;
+            state.totalUsers = count;
+            state.listUsers = [...users];
+        },
         [fetchUserRequest.fulfilled]: (state, action) => {
             const response_data = action.payload;
             if (response_data === null) return;
