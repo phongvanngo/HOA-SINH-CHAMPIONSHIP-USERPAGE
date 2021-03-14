@@ -1,0 +1,26 @@
+.headerbar-container {
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 7vh;
+    // padding: 0 64px;
+    background-color: #0f1640;
+    z-index: 1100;
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+    h1 {
+        color: white;
+        text-transform: uppercase;
+        font-size: 1.7em;
+        letter-spacing: 2px;
+        margin: 10px;
+    }
+    p {
+        color: white;
+        margin: 0px;
+        margin-right: 5px;
+        font-size: 1.1em;
+    }
+}

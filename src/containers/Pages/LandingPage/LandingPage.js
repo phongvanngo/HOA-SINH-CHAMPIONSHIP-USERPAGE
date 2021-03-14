@@ -14,8 +14,8 @@ export default function LandingPage() {
     }
 
     return (
-        <Router>
-            <LandingPageView handleEnterUserPage={handleEnterUserPage} />
-        </Router>
+        // <Router>
+        <LandingPageView handleEnterUserPage={handleEnterUserPage} />
+        // </Router >
     )
 }

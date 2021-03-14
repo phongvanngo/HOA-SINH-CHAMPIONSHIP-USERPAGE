@@ -1,0 +1,64 @@
+$common-max-width: 700px;
+$common-min-width: 200px;
+
+.user-exam-container {
+  background-color: #f2f2f2;
+  .MainArea {
+    margin: 10px;
+    // margin-top: 10vh;
+
+    .greeting-area {
+      padding: 10px;
+      margin-left: auto;
+      margin-right: auto;
+      max-width: $common-max-width;
+      min-width: $common-min-width;
+      background-color: white;
+      box-shadow: 0px 3px 2px 2px gainsboro;
+      text-align: center;
+    }
+
+    .time-container {
+      #timeArea {
+        z-index: 1100;
+        margin: auto;
+        max-width: $common-max-width;
+        min-width: $common-min-width;
+        background-color: white;
+        box-shadow: 0px 5px 20px 10px gainsboro;
+        text-align: center;
+        p {
+          padding: 10px;
+        }
+      }
+
+      .sticky {
+        z-index: 1100;
+        position: fixed;
+        top: 8vh;
+
+        p {
+          margin: 0px;
+        }
+      }
+    }
+
+    .main-content {
+      .question-area {
+        margin: auto;
+        max-width: $common-max-width;
+        min-width: $common-min-width;
+      }
+      .footer-exam {
+        margin: auto;
+        width: 100px;
+        // margin-left: auto;
+        // margin-right: auto;
+      }
+    }
+  }
+}
+
+.sticky + .content {
+  //   padding-top: 60px;
+}

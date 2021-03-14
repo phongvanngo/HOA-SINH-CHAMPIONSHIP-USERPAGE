@@ -29,6 +29,7 @@ export default function MainArea() {
     return (
         <div>
             <Switch>
+                {/* <Route exact path={LANDINGPAGE} component={Homepage} /> */}
                 <Route path={HOMEPAGE} component={Homepage} />
                 <Route path={LEADERBOARD} component={Leaderboard} />
                 <Route path={USER_LOGIN} component={UserSignIn} />
@@ -36,7 +37,6 @@ export default function MainArea() {
                 <PrivateRouteUser path={USER}>
                     <Userpage />
                 </PrivateRouteUser>
-                <Route exact path={LANDINGPAGE} component={Homepage} />
             </Switch>
         </div>
     )

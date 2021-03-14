@@ -52,7 +52,9 @@ export default function LandingpageView({ handleEnterUserPage }) {
                     </button>
                 </section>
             </div>
-            <MainArea />
+            <div className="landingpage-content">
+                <MainArea />
+            </div>
 
         </div>
     )

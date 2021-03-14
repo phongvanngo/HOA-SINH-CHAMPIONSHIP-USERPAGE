@@ -2,7 +2,6 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { notify } from './../../common/component/Notifier/notifierSlice';
 import { userApi } from './UserApi';
 import { startLoading, stopLoading } from './../../common/component/PageLoader/loadingSlice';
-import { RepeatOneSharp } from "@material-ui/icons";
 
 export const fetchUserRequest = createAsyncThunk(
     'user/fetchUserStatus',

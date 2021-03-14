@@ -2,6 +2,8 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { notify } from '../../common/component/Notifier/notifierSlice';
 import { userExamApi } from './UserExamApi';
 import { startLoading, stopLoading } from '../../common/component/PageLoader/loadingSlice';
+import { StarsTwoTone } from "@material-ui/icons";
+import { fakeDetailedExam, fakeListQuestions } from './fakedata';
 
 export const fetchUserExamRequest = createAsyncThunk(
     'userExam/fetchUserExamStatus',
@@ -34,22 +36,22 @@ export const fetchUserExamRequest = createAsyncThunk(
 
 export const submitUserAnswers = createAsyncThunk(
     'userExam/createUserExamStatus',
-    async (userExamInfo, thunkApi) => {
-        const { dispatch } = thunkApi;
+    async (params, thunkApi) => {
+        const { dispatch, getState } = thunkApi;
+
         try {
             dispatch(startLoading());
-
+            const userAnswers = getState().userExam.userAnswers;
             //transfer schema
-            const { userExam_name, question, total_score } = userExamInfo;
-            const newUserExam = { name: userExam_name, totalQuestionUserMustDo: question, maxScore: total_score };
-
-            const response = await userExamApi.putUserAnswer(newUserExam);
+            console.log(userAnswers);
+            const response = await userExamApi.putUserAnswer(userAnswers);
             dispatch(stopLoading());
+            console.log(response);
             switch (response.status) {
                 case 200:
-                    dispatch(notify({ message: "Thêm đề thi thành công", options: { variant: 'success' } }));
+                    dispatch(notify({ message: "Nộp bài thi thành công", options: { variant: 'success' } }));
                     dispatch(stopLoading());
-                    return { data: response.data, userExamInfo };
+                    return 1;
                 default:
                     throw new Error("Lỗi kết nối");
             }
@@ -69,12 +71,35 @@ export const userExamSlice = createSlice({
         // listAnswers:null,
         // timeStart:null,
         // timeToDo: null,
+        // detailedUserExam: fakeDetailedExam,
+        // listQuestions: fakeListQuestions,
 
         detailedUserExam: null,
+        listQuestions: null,
+        userAnswers: null,
+        time: null,
+        timeStart: null,
+        openingImage: null,
 
     },
 
     reducers: {
+        choseAnswer: (state, action) => {
+            const { id, ans } = action.payload;
+            const newListAnswers = state.userAnswers.map((element) => {
+                if (element.id === id) return { id: id, ans: ans }; else return element;
+            })
+
+            state.userAnswers = newListAnswers;
+        },
+
+        openImageDialog: (state, action) => {
+            state.openingImage = action.payload;
+        },
+
+        closeImageDialog: (state) => {
+            state.openingImage = null;
+        }
 
     },
 
@@ -84,7 +109,16 @@ export const userExamSlice = createSlice({
             console.log(response_data);
             if (response_data === null) return;
 
+            const { questions, timeServerStart, time } = response_data;
+            const listAnswers = questions.map((element) => { return { id: element.id, ans: null } });
+
             state.detailedUserExam = response_data;
+            state.listQuestions = questions;
+            state.timeStart = timeServerStart;
+            state.time = time;
+            state.userAnswers = listAnswers;
+
+
 
         },
         [submitUserAnswers.fulfilled]: (state, action) => {
@@ -94,6 +128,6 @@ export const userExamSlice = createSlice({
     }
 })
 
-export const { } = userExamSlice.actions;
+export const { openImageDialog, closeImageDialog, choseAnswer } = userExamSlice.actions;
 
 export default userExamSlice.reducer;

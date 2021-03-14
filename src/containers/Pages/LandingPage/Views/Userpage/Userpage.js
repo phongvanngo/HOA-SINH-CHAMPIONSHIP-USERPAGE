@@ -1,11 +1,12 @@
-import React, { useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux';
-import Card from 'react-bootstrap/Card';
+import React, { useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
-import './Userpage.scss';
-import { logout } from './../../../../../features/userLogin/userLoginSlice';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
-import { PublicRoutes } from './../../../../../routes.const';
+import { fetchUserExamRequest } from './../../../../../features/userExam/UserExamSlice';
+import { logout } from './../../../../../features/userLogin/userLoginSlice';
+import { LandingPageRoutes, PublicRoutes } from './../../../../../routes.const';
+import './Userpage.scss';
+
 
 export default function Userpage() {
     const dispatch = useDispatch();
@@ -29,11 +30,14 @@ export default function Userpage() {
     }
 
     const handleGoToLeaderboard = () => {
-
+        history.push(LandingPageRoutes.LEADERBOARD);
     }
 
     const handleGoToExam = () => {
-        history.push(PublicRoutes.TEST);
+        dispatch(fetchUserExamRequest()).then(() => {
+            history.push(PublicRoutes.TEST);
+        });
+
     }
 
     return (
@@ -57,6 +61,7 @@ export default function Userpage() {
                                 :
                                 (
                                     <Button
+                                        onClick={handleGoToLeaderboard}
                                         variant="primary"
                                         style={{ marginRight: '5px' }}>
                                         Bảng xếp hạng
