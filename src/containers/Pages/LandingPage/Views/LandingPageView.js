@@ -27,7 +27,7 @@ export default function LandingpageView({ handleEnterUserPage }) {
 
     return (
         <div className="userDashboard-container">
-            <div className="header">
+            <div className="landingpage-header">
                 <h1>My Logo</h1>
 
                 <section className="menu">

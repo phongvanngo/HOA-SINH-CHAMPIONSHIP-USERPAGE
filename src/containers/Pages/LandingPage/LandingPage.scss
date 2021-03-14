@@ -4,11 +4,11 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
 }
 
 .landingpage-content {
-margin-top: 50px;
+    margin-top: 12vh;
 }
 
 homepage-container {
@@ -19,11 +19,11 @@ homepage-container {
     flex-direction: column;
 }
 
-.header {
-    color: #0F1640;
+.landingpage-header {
+    color: #0f1640;
     position: fixed;
     top: 0;
-    height: 80px;
+    height: 10vh;
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -34,7 +34,7 @@ homepage-container {
     // position: relative;
 }
 
-.header h1 {
+.landingpage-header h1 {
     text-transform: uppercase;
     font-size: 1.7em;
     letter-spacing: 1px;
@@ -54,7 +54,7 @@ homepage-container {
 }
 
 .menu-list li {
-        color:black;
+    color: black;
     display: inline-block;
     margin-left: 32px;
     font-size: 1.1em;
@@ -65,12 +65,11 @@ homepage-container {
 .menu-list li a {
     text-decoration: none;
     color: black;
-
 }
 
 .menu-list li .active,
 .menu-list li .menu-item:hover {
-    color: #66D9B8;
+    color: #66d9b8;
 }
 // .menu-list li a .active,
 // .menu-list li a:hover {
@@ -112,7 +111,7 @@ homepage-container {
 }
 
 .title {
-    color: #66D9B8;
+    color: #66d9b8;
     font-size: 3.2em;
     width: 100%;
     font-weight: bold;
@@ -131,15 +130,14 @@ homepage-container {
 button.cta {
     border: none;
     outline: none;
-    background-color: #0F1640;
+    background-color: #0f1640;
     color: #fff;
     padding: 18px 32px;
     font-weight: bold;
     letter-spacing: 3px;
     text-transform: uppercase;
     border-radius: 30px;
-    box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1),
-    0 15px 12px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1), 0 15px 12px rgba(0, 0, 0, 0.08);
     cursor: pointer;
     transition: opacity 0.9;
 }
@@ -150,8 +148,8 @@ button.cta:hover {
 
 /*  -----    RESPONSIVENESS    -----  */
 
-@media (max-width:800px) {
-    .header,
+@media (max-width: 800px) {
+    .landingpage-header,
     .left,
     .right {
         padding-left: 40px;
@@ -160,7 +158,6 @@ button.cta:hover {
 }
 
 @media (max-width: 650px) {
-
     .main {
         flex-direction: column;
     }
@@ -201,7 +198,7 @@ button.cta:hover {
         height: 40px;
         border: none;
         background: transparent;
-        color: #0F1640;
+        color: #0f1640;
         outline: none;
         font-size: 1.7em;
         cursor: pointer;
@@ -235,7 +232,7 @@ button.cta:hover {
         right: 0;
         width: 80%;
         height: 100%;
-        background-color: #0F1640;
+        background-color: #0f1640;
         color: #fff;
         padding: 46px;
         flex-direction: column;
