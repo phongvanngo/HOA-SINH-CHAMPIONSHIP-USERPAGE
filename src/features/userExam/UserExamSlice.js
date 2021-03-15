@@ -34,7 +34,7 @@ export const fetchUserExamRequest = createAsyncThunk(
     }
 );
 export const fetchUserExamRequestAgain = createAsyncThunk(
-    'userExam/fetchUserExamStatus',
+    'userExam/fetchUserExamStatusAgain',
     async (params, thunkApi) => {
         //nếu không có tham số thứ nhất thì ko dispatch được ?????
         const { dispatch } = thunkApi;
@@ -55,6 +55,34 @@ export const fetchUserExamRequestAgain = createAsyncThunk(
         }
         catch (error) {
             dispatch(notify({ message: `${error}`, options: { variant: 'error' } }));
+            dispatch(stopLoading());
+            return null;
+        }
+    }
+);
+export const checkUserExamStatus = createAsyncThunk(
+    'userExam/checkUserExamStatus',
+    async (params, thunkApi) => {
+        //nếu không có tham số thứ nhất thì ko dispatch được ?????
+        const { dispatch } = thunkApi;
+        try {
+            dispatch(startLoading());
+            let response = await userExamApi.getUserExamStatus();
+
+            dispatch(stopLoading());
+            switch (response.status) {
+                case 200:
+                    console.log(response);
+                    // dispatch(notify({ message: "Lấy dữ liệu thành công", options: { variant: 'success' } }));
+                    return response.data;
+                case 401:
+                    throw new Error("Unauthorized");
+                default:
+                    throw new Error("Unsuccessfully");
+            }
+        }
+        catch (error) {
+            // dispatch(notify({ message: `${error}`, options: { variant: 'error' } }));
             dispatch(stopLoading());
             return null;
         }
@@ -111,7 +139,8 @@ export const userExamSlice = createSlice({
         time: null,
         timeStart: null,
         openingImage: null,
-        isTimeOutDialogOpen: false
+        isTimeOutDialogOpen: false,
+        userExamStatus: null,
 
     },
 
@@ -156,28 +185,58 @@ export const userExamSlice = createSlice({
             state.detailedUserExam = response_data;
             state.listQuestions = questions;
             state.timeStart = timeServerStart;
-            state.time = time;
+            console.log(time);
+            state.time = time * 60;
             state.userAnswers = listAnswers;
         },
 
-        [fetchUserExamRequest.Again]: (state, action) => {
+        [fetchUserExamRequestAgain.fulfilled]: (state, action) => {
             const response_data = action.payload;
             console.log(response_data);
             if (response_data === null) return;
 
             const { questions, timeServerStart, time } = response_data;
-            const listAnswers = questions.map((element) => { return { id: element.id, ans: null } });
+            const listAnswers = questions ? questions.map((element) => { return { id: element.id, ans: null } }) : [];
 
-            let timeRemaining = time * 60 * 1000 - (Date.now() - Date.parse(timeServerStart));
+            let usedTime = Date.now() - Date.parse(timeServerStart);
+            console.log("sfdsf", time, usedTime);
+            let timeRemaining = time * 60 * 1000 - usedTime;
+
 
             state.detailedUserExam = response_data;
             state.listQuestions = questions;
             state.timeStart = timeServerStart;
-            state.time = timeRemaining;
+            state.time = Math.floor(timeRemaining / 1000);
             state.userAnswers = listAnswers;
         },
         [submitUserAnswers.fulfilled]: (state, action) => {
             state.detailedUserExam = null;
+        },
+        [checkUserExamStatus.fulfilled]: (state, action) => {
+            const { message } = action.payload;
+            console.log(message);
+
+            switch (message) {
+                case "User had submited this exam":
+                    state.userExamStatus = 2;
+                    break;
+
+                case "You are doing exam":
+                    state.userExamStatus = 1;
+                    break
+
+                case "you already to start exam":
+                    state.userExamStatus = 0;
+                    break;
+
+                case "It's over time":
+                    state.userExamStatus = 2;
+                    break;
+
+                default:
+                    break;
+            }
+
 
         },
 

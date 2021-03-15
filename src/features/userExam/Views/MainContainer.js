@@ -12,6 +12,8 @@ export default function MainContainer() {
 
     const time = useSelector(state => state.userExam.time);
 
+    console.log(time);
+
     useEffect(() => {
         window.onscroll = function () { myFunction() };
 

@@ -9,6 +9,12 @@ export const userExamApi = {
 
     },
 
+    getUserExamStatus: async () => {
+        const url = "/test/check";
+        let response = await axiosClient.get(url);
+        return response;
+    },
+
 
     putUserAnswer: async (userAnswer) => {
         const url = "/test";
