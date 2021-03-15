@@ -22,6 +22,7 @@ export default function UserLoginView({ handleLogin }) {
 
     return (
         <div className="user-login-container">
+            <div style={{ height: '30px' }}></div>
             <div className="input-area">
                 <Form.Label>Mã dự thi của bạn</Form.Label>
                 <Form.Control ref={codeInputRef} type="email" placeholder='Enter code here

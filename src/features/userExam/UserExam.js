@@ -4,6 +4,7 @@ import { Redirect } from 'react-router';
 import { LandingPageRoutes } from './../../routes.const';
 import MainContainer from './Views/MainContainer';
 import ImageDialog from './Views/ImageDialog';
+import TimeOutDialog from './Views/TimeOutDialog';
 
 
 
@@ -21,6 +22,7 @@ export default function UserExam() {
 
     return (
         <div>
+            <TimeOutDialog />
             <ImageDialog />
             <MainContainer />
         </div>

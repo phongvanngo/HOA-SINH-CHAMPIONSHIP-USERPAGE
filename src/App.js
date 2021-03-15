@@ -7,7 +7,7 @@ import Notifier from './common/component/Notifier/Notifier';
 
 function App() {
   return (
-    <div className="App">
+    <div className="App" style={{ height: '100vh', background: '#f2f2f2' }}>
       <SnackbarProvider max={3}>
         <Notifier />
         <AppRoutes />

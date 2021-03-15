@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: theme.palette.background.paper,
     },
     title: {
-        margin: theme.spacing(2, 0, 2),
+        margin: theme.spacing(0, 0, 0),
     },
     buttonCreateExam: {
         opacity: 0.4,
@@ -77,9 +77,7 @@ export default function InteractiveList() {
                         </IconButton>
                     </Typography>
                     <div className={classes.demo}>
-                        <List>
-                        </List>
-                        <List >
+                        <List style={{ background: "#f2f2f2" }} >
                             {exams.map((exam, index) =>
                                 <ExamItem
                                     key={index}
@@ -92,6 +90,6 @@ export default function InteractiveList() {
                     </div>
                 </Grid>
             </Grid>
-        </div>
+        </div >
     );
 }

@@ -4,10 +4,14 @@ import HeaderBar from './HeaderBar';
 import './MainContainer.scss';
 import Button from '@material-ui/core/Button';
 import { submitUserAnswers } from './../UserExamSlice';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import Countdown from './Countdown';
 
 export default function MainContainer() {
     const dispatch = useDispatch();
+
+    const time = useSelector(state => state.userExam.time);
+
     useEffect(() => {
         window.onscroll = function () { myFunction() };
 
@@ -33,7 +37,7 @@ export default function MainContainer() {
                 </div>
                 <div className="time-container">
                     <div id="timeArea">
-                        <p>Thời gian còn lại: 14:59</p>
+                        <p>Thời gian còn lại: <Countdown timeRemaining={time} /></p>
                     </div>
                 </div>
 

@@ -5,11 +5,12 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import DeleteIcon from '@material-ui/icons/Delete';
-import FolderIcon from '@material-ui/icons/Folder';
 import React from 'react';
 import OpenInNewIcon from '@material-ui/icons/OpenInNew';
 import SettingsIcon from '@material-ui/icons/Settings';
 import Tooltip from '@material-ui/core/Tooltip';
+import Paper from '@material-ui/core/Paper';
+import MenuBookIcon from '@material-ui/icons/MenuBook';
 
 export default function ExamItem(props) {
     const { detailedExam, handleDeleteExam, handleEditExam, handleOpenExam } = props;
@@ -17,11 +18,11 @@ export default function ExamItem(props) {
 
     const more_exam_info = `Đã soạn: ${available_question}/${question}    Tổng điểm: ${total_score}`
     return (
-        <div>
+        <Paper style={{ marginBottom: "20px" }} >
             <ListItem>
                 <ListItemAvatar>
                     <Avatar>
-                        <FolderIcon />
+                        <MenuBookIcon />
                     </Avatar>
                 </ListItemAvatar>
                 <ListItemText
@@ -57,6 +58,6 @@ export default function ExamItem(props) {
                     </Tooltip>
                 </ListItemSecondaryAction>
             </ListItem>
-        </div>
+        </Paper>
     )
 }

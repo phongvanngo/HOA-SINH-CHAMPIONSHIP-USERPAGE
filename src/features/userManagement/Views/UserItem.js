@@ -54,7 +54,9 @@ export default function UserItem({ detailedUser, index }) {
                     {score}
                 </TableCell>
                 <TableCell align="center">
-                    {time}
+                    {time ?
+                        new Date(time).toISOString().substr(14, 5) : ''
+                    }
                 </TableCell>
                 <TableCell align="center">
                     <div>

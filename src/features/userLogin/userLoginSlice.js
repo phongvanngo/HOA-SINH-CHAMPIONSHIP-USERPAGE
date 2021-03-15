@@ -51,6 +51,14 @@ export const userLoginSlice = createSlice({
             window.localStorage.removeItem('id_user_token');
             state.hasLoggedIn = false;
         },
+
+        deactiveUser: state => {
+            let user = { ...state.user, isActive: false };
+            localStorage.setItem("user", JSON.stringify(user));
+            console.log(user);
+            state.user = user;
+        }
+
     },
 
     extraReducers: {
@@ -69,6 +77,6 @@ export const userLoginSlice = createSlice({
     }
 })
 
-export const { userLoginAgain, logout } = userLoginSlice.actions;
+export const { deactiveUser, userLoginAgain, logout } = userLoginSlice.actions;
 
 export default userLoginSlice.reducer;

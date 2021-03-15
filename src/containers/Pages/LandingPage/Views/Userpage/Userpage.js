@@ -42,6 +42,7 @@ export default function Userpage() {
 
     return (
         <div className="userpage-container">
+            <div style={{ height: '30px' }}></div>
             <div className="card-container">
                 <div className="card-body">
                     <h2 className="greeting">{`Xin chào ${fullName}`}</h2>

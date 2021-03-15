@@ -6,20 +6,21 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import Tooltip from '@material-ui/core/Tooltip';
 import DeleteIcon from '@material-ui/icons/Delete';
-import FolderIcon from '@material-ui/icons/Folder';
 import SettingsIcon from '@material-ui/icons/Settings';
 import React from 'react';
+import SchoolIcon from '@material-ui/icons/School';
+import Paper from '@material-ui/core/Paper';
 
 export default function UniversityItem(props) {
     const { detailedUniversity, handleDeleteUniversity, handleEditUniversity } = props;
     const { id, university_name } = detailedUniversity;
 
     return (
-        <div>
+        <Paper style={{ marginBottom: "20px" }}>
             <ListItem>
                 <ListItemAvatar>
                     <Avatar>
-                        <FolderIcon />
+                        <SchoolIcon />
                     </Avatar>
                 </ListItemAvatar>
                 <ListItemText
@@ -47,6 +48,6 @@ export default function UniversityItem(props) {
                     </Tooltip>
                 </ListItemSecondaryAction>
             </ListItem>
-        </div>
+        </Paper>
     )
 }

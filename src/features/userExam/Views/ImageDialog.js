@@ -15,7 +15,7 @@ export default function UserFormDialog() {
     }
 
     return (
-        <Dialog style={{ width: '80vw', height: '80vh' }} open={openingImage === null ? false : true} onClose={handleClose} aria-labelledby="form-dialog-title">
+        <Dialog maxWidth='xl' open={openingImage === null ? false : true} onClose={handleClose} aria-labelledby="form-dialog-title">
             <DialogContent>
                 <img src={openingImage} alt="hinhanh" />
             </DialogContent>
