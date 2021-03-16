@@ -108,6 +108,6 @@ export const competitionTypeSlice = createSlice({
     }
 })
 
-export const { } = competitionTypeSlice.actions;
+// export const { } = competitionTypeSlice.actions;
 
 export default competitionTypeSlice.reducer;

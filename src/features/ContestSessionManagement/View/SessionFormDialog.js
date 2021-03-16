@@ -15,7 +15,7 @@ export default function ContestSessionFormDialog() {
     let listExams = useSelector(state => state.exam.listExams)
     const dispatch = useDispatch();
 
-    const { id, name, exam_id, type } = contestSession || {};
+    const { id, name, type } = contestSession || {};
 
 
     const contestSessionNameInputRef = useRef(null);
@@ -73,7 +73,7 @@ export default function ContestSessionFormDialog() {
         //nếu sửa ca thi
         try {
             contestSessionNameInputRef.current.value = name;
-            chosenType = listTypes.find(element => element.id === type)
+            setChosenType(listTypes.find(element => element.id === type));
         } catch (error) {
 
         }

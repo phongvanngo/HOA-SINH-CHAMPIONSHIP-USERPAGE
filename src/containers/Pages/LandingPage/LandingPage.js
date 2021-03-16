@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
-import { BrowserRouter as Router, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { PublicRoutes } from './../../../routes.const';
 import './LandingPage.scss';
 import LandingPageView from './Views/LandingPageView';

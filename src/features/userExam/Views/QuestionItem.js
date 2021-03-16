@@ -1,15 +1,12 @@
-import React, { useEffect } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
-import { Typography } from '@material-ui/core';
-import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
-import Radio from '@material-ui/core/Radio';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Paper from '@material-ui/core/Paper';
+import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
-import './QuestionItem.scss';
+import { makeStyles } from '@material-ui/core/styles';
+import React from 'react';
 import { useDispatch } from 'react-redux';
-import { openImageDialog, choseAnswer } from './../UserExamSlice';
+import { choseAnswer, openImageDialog } from './../UserExamSlice';
+import './QuestionItem.scss';
 
 const useStyles = makeStyles((theme) => ({
     root: {

@@ -30,7 +30,7 @@ export default function UserFormDialog() {
             // setChosenExam(null);
             //nếu sửa thí sinh, setFlag để render lại và lấy ref của input
             if (user !== null) {
-                setFlag(flag + 1);
+                setFlag(flag => flag + 1);
             }
         } else {
         }

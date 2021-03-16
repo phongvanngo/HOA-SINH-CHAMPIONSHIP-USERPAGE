@@ -15,7 +15,7 @@ export default function Countdown({ timeRemaining }) {
         } else {
             dispatch(timeOut());
         }
-    }, [time]);
+    }, [time, dispatch]);
 
     return (
         <span>{formatTime}</span>

@@ -1,4 +1,3 @@
-import { fakeApi } from './../../app/fakeApi';
 import axiosClientUser from './../../app/AxiosClientUser';
 
 const loginApi = {

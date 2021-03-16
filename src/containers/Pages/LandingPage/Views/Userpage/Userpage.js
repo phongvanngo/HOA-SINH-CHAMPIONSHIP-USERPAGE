@@ -17,7 +17,7 @@ export default function Userpage() {
 
     console.log(userExamStatus);
 
-    let { code, fullName, sessionName } = user;
+    let { fullName, sessionName } = user;
 
     useEffect(() => {
         var menuContainer = document.getElementById("MenuUserPage");
@@ -31,7 +31,7 @@ export default function Userpage() {
 
         //check user exam status - kiểm tra user đã làm, đang làm hay đang thi
         dispatch(checkUserExamStatus({}));
-    }, [])
+    }, [dispatch])
 
     const handleLogut = () => {
         dispatch(logout());

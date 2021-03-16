@@ -112,7 +112,7 @@ export default function CustomPaginationActionsTable() {
 
     useEffect(() => {
         console.log("current ID change");
-        setFlag(flag + 1);
+        setFlag(flag => flag + 1);
         setRowsPerPage(10);
     }, [currentSessionID])
 

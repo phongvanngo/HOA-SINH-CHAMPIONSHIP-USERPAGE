@@ -10,7 +10,7 @@ const UserSignIn = lazy(() => import('./UserSignIn/UserSignIn'));
 const ContactPage = lazy(() => import('./Contact/Contact'));
 const Userpage = lazy(() => import('./Userpage/Userpage'));
 
-const { HOMEPAGE, LEADERBOARD, USER_LOGIN, CONTACT, USER, LANDINGPAGE } = LandingPageRoutes;
+const { HOMEPAGE, LEADERBOARD, USER_LOGIN, CONTACT, USER } = LandingPageRoutes;
 function PrivateRouteUser({ children, ...rest }) {
     let location = useLocation();
     const hasLoggedIn = useSelector(state => state.userLogin.hasLoggedIn);

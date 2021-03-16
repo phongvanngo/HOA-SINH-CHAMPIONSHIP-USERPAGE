@@ -31,7 +31,7 @@ export default function UniversityFormDialog() {
             // setChosenExam(null);
             //nếu sửa ca thi, setFlag để render lại và lấy ref của input
             if (university !== null) {
-                setFlag(flag + 1);
+                setFlag(flag => flag + 1);
             }
         } else {
             setValidInput(inititalValidInput);
