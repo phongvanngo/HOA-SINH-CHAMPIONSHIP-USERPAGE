@@ -20,4 +20,5 @@ export const DashboardRoutes = {
     USER_MANAGEMENT: `${PublicRoutes.ADMIN_DASHBOARD}/quan-ly-thi-sinh`,
     QUESTION_MANAGEMENT: `${PublicRoutes.ADMIN_DASHBOARD}/quan-ly-cau-hoi`,
     UNIVERSITY_MANAGEMENT: `${PublicRoutes.ADMIN_DASHBOARD}/quan-ly-truong-hoc`,
+    SETTINGS: `${PublicRoutes.ADMIN_DASHBOARD}/cai-dat`,
 }

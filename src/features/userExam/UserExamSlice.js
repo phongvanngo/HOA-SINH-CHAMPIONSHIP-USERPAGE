@@ -106,7 +106,7 @@ export const submitUserAnswers = createAsyncThunk(
             console.log(response);
             switch (response.status) {
                 case 200:
-                    dispatch(notify({ message: "Nộp bài thi thành công", options: { variant: 'success' } }));
+                    dispatch(notify({ message: "Nộp bài thi thành công", options: { variant: 'success', autoHideDuration: 3000, } }));
                     console.log("nop bai thi thanh cong");
                     dispatch(deactiveUser());
                     dispatch(stopLoading());
@@ -202,14 +202,17 @@ export const userExamSlice = createSlice({
             console.log("sfdsf", time, usedTime);
             let timeRemaining = time * 60 * 1000 - usedTime;
 
+            console.log(timeRemaining);
+
 
             state.detailedUserExam = response_data;
             state.listQuestions = questions;
             state.timeStart = timeServerStart;
-            state.time = Math.floor(timeRemaining / 1000);
+            state.time = isNaN(timeRemaining) ? 0 : Math.floor(timeRemaining / 1000);
             state.userAnswers = listAnswers;
         },
         [submitUserAnswers.fulfilled]: (state, action) => {
+            if (action.payload === null) return;
             state.detailedUserExam = null;
         },
         [checkUserExamStatus.fulfilled]: (state, action) => {

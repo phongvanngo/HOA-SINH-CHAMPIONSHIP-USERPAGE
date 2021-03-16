@@ -49,7 +49,12 @@ export default function MainContainer() {
                     </div>
                     <div className="footer-exam">
                         <Button
-                            onClick={() => { dispatch(submitUserAnswers({})) }}
+                            onClick={() => {
+                                if (window.confirm('Bạn có chắc chắn nộp và kết thúc bài làm ?')) {
+                                    dispatch(submitUserAnswers({}))
+                                }
+                            }
+                            }
                             variant="contained" color="secondary">
                             Nộp bài
 </Button>
