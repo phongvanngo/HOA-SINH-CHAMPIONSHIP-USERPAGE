@@ -42,7 +42,7 @@ export default function CenteredGrid() {
     // let listContestSessions = useSelector(state => state.contestSession.listContestSessions) || [];
     let listUniversities = useSelector(state => state.university.listUniversitys);
 
-    listUniversities = [{ id: null, university_name: "Thí sinh tự do" }, ...listUniversities]
+    // listUniversities = [{ id: 0, university_name: "Thí sinh tự do" }, ...listUniversities]
 
     const userNameInputRef = useRef(null)
     const prefixInputRef = useRef(null)
@@ -165,7 +165,7 @@ export default function CenteredGrid() {
                             <TextField {...params}
                                 size="small"
                                 variant="outlined"
-                                label="Trường đại học"
+                                label="Đơn vị thi"
                             />}
                     />
                 </FormControl>

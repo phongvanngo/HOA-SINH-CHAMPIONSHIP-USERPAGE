@@ -22,7 +22,7 @@ export const SidebarOption = [
         icon: () => <ContactsIcon />
     },
     {
-        title: "Trường đại học",
+        title: "Các đơn vị thi",
         path: DashboardRoutes.UNIVERSITY_MANAGEMENT,
         icon: () => <SchoolIcon />
     },

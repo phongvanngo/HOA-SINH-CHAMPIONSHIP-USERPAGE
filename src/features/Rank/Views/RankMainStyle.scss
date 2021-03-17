@@ -1,0 +1,79 @@
+// .rank-fullpage {
+//     margin-left: 20px;
+//     margin-right: 20px;
+//     .space-top {
+//         height: 10vh;
+//     }
+//     .rank-container {
+//         display: flex;
+//         .rank-single {
+//             width: 50%;
+//             margin: 10px;
+//             .rank-header {
+//                 height: 300px;
+//                 padding-top: 10px;
+//                 background-color: white;
+//                 .rank-header-title {
+//                     margin-top: 5px;
+//                     text-align: center;
+//                 }
+//             }
+//             .rank-list {
+//             }
+//         }
+
+//         .rank-team {
+//             width: 50%;
+//             margin: 10px;
+//             .rank-header {
+//                 background-color: white;
+//             }
+//             .rank-list {
+//             }
+//         }
+//     }
+// }
+
+.rank-fullpage {
+    @import url("https://fonts.googleapis.com/css?family=Montserrat:400,600,700&display=swap");
+    margin: 10px;
+    * {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        box-sizing: border-box;
+        font-family: "Montserrat", sans-serif;
+    }
+
+    .space-top {
+        height: 2vh;
+    }
+
+    .leaderboard-area {
+        display: flex;
+        .single-leaderboard {
+            // margin: auto;
+            width: 40%;
+            margin-right: 10px;
+            margin-bottom: 30px;
+        }
+        .team-leaderboard {
+            // margin: auto;
+            width: 60%;
+        }
+    }
+
+    @media screen and (max-width: 1200px) {
+        .leaderboard-area {
+            display: block;
+            .single-leaderboard {
+                margin-right: 0px;
+                margin-bottom: 30px;
+                width: 100%;
+            }
+            .team-leaderboard {
+                width: 100%;
+            }
+        }
+    }
+}

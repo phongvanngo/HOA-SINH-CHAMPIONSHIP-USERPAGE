@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-
+import Rank from './../../../../../features/Rank/Rank';
 export default function Leaderboard() {
     useEffect(() => {
         var menuContainer = document.getElementById("MenuUserPage");
@@ -12,7 +12,7 @@ export default function Leaderboard() {
     }, [])
     return (
         <div>
-            Bang xep hang
+            <Rank />
         </div>
     )
 }

@@ -1,0 +1,215 @@
+.team-leaderboard-wrapper {
+    // width: 100%;
+    // height: 100%;
+    // margin: 5px;
+    width: 100%;
+    .lboard_section {
+        .lboard_tabs {
+            background: #66d9b8;
+            border-radius: 5px 5px 0px 0px;
+            padding: 10px 20px;
+            .header {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                .title {
+                    width: 40%;
+                    // margin-right: 50px;
+                    font-size: 18px;
+                    font-weight: 600;
+                    color: #fff;
+                    cursor: pointer;
+                }
+                .filter-area {
+                    width: 60%;
+                    display: flex;
+
+                    .school {
+                        width: 50%;
+                        // margin-right: 50px;
+                        font-size: 18px;
+                        font-weight: 600;
+                        color: #fff;
+                        margin-right: 5px;
+                        cursor: pointer;
+                        select {
+                            width: 100%;
+                            outline: none;
+                            border: none;
+                            background: none;
+                            border-bottom: 1px solid white;
+                            color: white;
+                            option {
+                                color: black;
+                            }
+                        }
+                    }
+                    .input-search {
+                        width: 50%;
+                        input {
+                            color: white;
+                            width: 100%;
+                            background: none;
+                            border: none;
+                            outline: none;
+                            border-bottom: 1px solid white;
+                        }
+                        ::placeholder {
+                            color: white;
+                            opacity: 1; /* Firefox */
+                        }
+                    }
+                }
+            }
+
+            @media screen and (max-width: 600px) {
+                .header {
+                    display: block;
+                    .title {
+                        width: 100%;
+                    }
+                    .filter-area {
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
+
+    .lboard_wrap {
+        // position: absolute;
+        // top: 70px;
+        // left: 0px;
+        background: white;
+        width: 100%;
+        height: 80vh;
+        border-radius: 5px;
+        overflow-y: scroll;
+        overflow-x: hidden;
+    }
+
+    .lboard_wrap .lboard_item {
+        padding: 25px;
+    }
+
+    .lboard_wrap .lboard_header {
+        display: flex;
+        align-items: center;
+        padding: 5px 0;
+        border-bottom: 1px solid gainsboro;
+        :first-child {
+            padding-top: 0;
+        }
+        :last-child {
+            padding-bottom: 0;
+            border-bottom: 0;
+        }
+        img {
+            display: block;
+            width: 100%;
+        }
+        .name_bar {
+            text-align: center;
+            margin: 0 20px;
+            // width: calc(100% - 150px);
+            width: 35%;
+            p {
+                color: #3a3d51;
+                span {
+                    margin-right: 5px;
+                }
+            }
+        }
+        .school {
+            text-align: center;
+            width: 25%;
+        }
+        .points {
+            text-align: center;
+            width: 20%;
+            color: #3a3d51;
+        }
+        .time {
+            text-align: center;
+            width: 20%;
+            color: #3a3d51;
+        }
+    }
+    .lboard_wrap .lboard_mem {
+        display: flex;
+        align-items: center;
+        padding: 5px 0;
+        border-bottom: 1px solid gainsboro;
+        .school {
+            width: 25%;
+        }
+        .name_bar {
+            width: 35%;
+        }
+        .points {
+            width: 20%;
+        }
+        .times {
+            width: 20%;
+        }
+    }
+
+    .lboard_wrap .lboard_mem:first-child {
+        padding-top: 0;
+    }
+
+    .lboard_wrap .lboard_mem:last-child {
+        padding-bottom: 0;
+        border-bottom: 0;
+    }
+
+    .lboard_wrap .lboard_mem .img {
+        width: 30px;
+    }
+
+    .lboard_wrap .lboard_mem img {
+        display: block;
+        width: 100%;
+    }
+
+    .lboard_wrap .lboard_mem .name_bar {
+        margin: 0 20px;
+        // width: calc(100% - 150px);
+    }
+
+    .lboard_wrap .lboard_mem .name_bar p {
+        color: #3a3d51;
+    }
+
+    .lboard_wrap .lboard_mem .name_bar p span {
+        margin-right: 5px;
+    }
+
+    .lboard_wrap .lboard_mem .points {
+        color: #3a3d51;
+    }
+    .lboard_wrap .lboard_mem .time {
+        color: #3a3d51;
+    }
+
+    .lboard_wrap .lboard_mem .name_bar .bar_wrap {
+        width: 100%;
+        height: 5px;
+        background: #dee2e6;
+        margin-top: 5px;
+        border-radius: 5px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .lboard_wrap .lboard_mem .name_bar .bar_wrap .inner_bar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 5px;
+        background: #66d9b8;
+        border-radius: 5px;
+        border-top-right-radius: 0px;
+        border-bottom-right-radius: 0px;
+    }
+}

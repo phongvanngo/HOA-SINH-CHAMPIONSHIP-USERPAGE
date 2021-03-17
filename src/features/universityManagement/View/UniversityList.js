@@ -63,7 +63,7 @@ export default function InteractiveList() {
                 <Grid item xs={12} md={12}>
                     <Typography
                         variant="h6" className={classes.title}>
-                        Danh sách trường đại học
+                        Danh sách các đơn vị thi
                     <IconButton
                             className={classes.buttonCreateUniversity}
                             onClick={handleCreateUniversity}

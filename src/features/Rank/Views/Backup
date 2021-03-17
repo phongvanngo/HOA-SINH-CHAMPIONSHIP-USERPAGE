@@ -1,0 +1,29 @@
+import React from 'react'
+import './RankMainStyle.scss';
+
+export default function MainContainer() {
+    return (
+        <div className="rank-fullpage">
+            <div className="space-top"></div>
+            <div className="rank-container">
+                <div className="rank-single">
+                    <div className="rank-header">
+                        <h5 className="rank-header-title">Bảng cá nhân</h5>
+                    </div>
+                    <div className="rank-list">
+
+                    </div>
+                </div>
+                <div className="rank-team">
+                    <div className="rank-header">
+                        <h5>Bảng đội</h5>
+                    </div>
+                    <div className="rank-list">
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    )
+}

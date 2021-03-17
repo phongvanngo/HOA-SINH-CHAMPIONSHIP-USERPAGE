@@ -232,6 +232,11 @@ export const userExamSlice = createSlice({
                     state.userExamStatus = 0;
                     break;
 
+
+                case "This exam is current not available":
+                    state.userExamStatus = 3;
+                    break;
+
                 case "It's over time":
                     state.userExamStatus = 2;
                     break;

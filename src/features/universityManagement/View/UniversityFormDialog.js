@@ -93,7 +93,7 @@ export default function UniversityFormDialog() {
         <div>
             <Dialog open={isOpen} onClose={handleClose} aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">
-                    {university ? 'Chỉnh sửa trường đại học' : 'Tạo mới trường đại học'}
+                    {university ? 'Chỉnh sửa đơn vị thi' : 'Tạo mới đơn vị thi'}
                 </DialogTitle>
                 <DialogContent>
                     {/* <DialogContentText>
