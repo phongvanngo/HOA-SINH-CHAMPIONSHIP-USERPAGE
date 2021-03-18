@@ -66,7 +66,7 @@ export default function Userpage() {
                     <h2 className="greeting">{`Xin chào ${fullName}`}</h2>
                     <p>Ca thi của bạn: {sessionName}</p>
                     {userExamStatus === 2 ? <p style={{ color: 'red' }}>Bạn đã hoàn thành bài thi, hãy theo dõi bảng xếp hạng để biết được kết quả nhé</p> : ''}
-                    {userExamStatus === 3 ? <p style={{ color: 'red' }}>Ca thi của bạn hiện tại chưa bắt đ</p> : ''}
+                    {userExamStatus === 3 ? <p style={{ color: 'red' }}>Ca thi của bạn hiện tại chưa bắt đầu</p> : ''}
                     <div style={{ display: 'flex', flexWrap: 'wrap', margin: 'auto' }}>
                         {
                             (userExamStatus === 0 || userExamStatus === 1) ?

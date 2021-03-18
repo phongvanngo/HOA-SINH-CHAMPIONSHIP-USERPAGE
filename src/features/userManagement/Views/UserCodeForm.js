@@ -59,17 +59,17 @@ export default function CenteredGrid() {
     const checkValidInput = (dataSubmit) => {
         let valid = true;
         let validInputDetail = inititalValidInput;
-        const { name } = dataSubmit;
+        const { name, universityId } = dataSubmit;
 
 
-        if (name.trim() === "") {
-            valid = false;
-            validInputDetail.userName = false;
-        }
-        // if (universityId === null) {
+        // if (name.trim() === "") {
         //     valid = false;
-        //     validInputDetail.universityId = false;
+        //     validInputDetail.userName = false;
         // }
+        if (universityId === null) {
+            valid = false;
+            validInputDetail.universityId = false;
+        }
 
 
         if (valid === false) {
@@ -166,6 +166,8 @@ export default function CenteredGrid() {
                                 size="small"
                                 variant="outlined"
                                 label="Đơn vị thi"
+                                error={!validInput.universityId}
+                                helperText={!validInput.universityId ? "Phải chọn đơn vị thi" : ""}
                             />}
                     />
                 </FormControl>
