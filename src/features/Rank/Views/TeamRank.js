@@ -11,6 +11,8 @@ import './TeamRank.scss';
 
 const TeamRankItem = ({ detailedUser }) => {
     const { fullName, img, score, time, index } = detailedUser;
+    console.log(detailedUser);
+
     return (
         <div className="lboard_mem">
             <div className="img">
@@ -22,8 +24,13 @@ const TeamRankItem = ({ detailedUser }) => {
                                         <div className="inner_bar" style={{ width: "95%" }}></div>
                                     </div> */}
             </div>
-            <div className="points">{score}</div>
-            <div className="time">{millisToMinutesAndSeconds(time)}</div>
+            <div className="points">
+                {
+                    score === null && time ? (<span style={{ color: 'green' }}>chưa nộp bài</span>) :
+                        score === null && time === null ? (<span style={{ color: 'red' }}>chưa thi</span>) : score
+                }
+            </div>
+            <div className="time">{time ? millisToMinutesAndSeconds(time) : (<span style={{ color: 'red' }}>chưa thi</span>)}</div>
         </div>
     )
 }

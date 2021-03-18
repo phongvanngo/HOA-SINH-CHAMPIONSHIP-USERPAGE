@@ -160,7 +160,8 @@ export const rankSlice = createSlice({
             }
             )
 
-            ranks = ranks.filter(element => element.time !== null);
+            // ranks = ranks.filter(element => element.time !== null);
+
             if (response_data.reloadAll === false) {
                 state.singleRank = {
                     rowsPerPage: rowsPerPageRank,
@@ -193,7 +194,8 @@ export const rankSlice = createSlice({
             }
             )
 
-            ranks = ranks.filter(element => element.time !== null);
+            // ranks = ranks.filter(element => element.time !== null);
+
             if (response_data.reloadAll === false) {
                 state.teamRank = {
                     rowsPerPage: rowsPerPageRank,

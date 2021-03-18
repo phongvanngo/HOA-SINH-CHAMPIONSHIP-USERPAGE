@@ -20,8 +20,13 @@ const SingleRankItem = ({ detailedUser }) => {
                                         <div className="inner_bar" style={{ width: "95%" }}></div>
                                     </div> */}
             </div>
-            <div className="points">{score}</div>
-            <div className="time">{millisToMinutesAndSeconds(time)}</div>
+            <div className="points">
+                {
+                    score === null && time ? (<span style={{ color: 'green' }}>chưa nộp bài</span>) :
+                        score === null && time === null ? (<span style={{ color: 'red' }}>chưa thi</span>) : score
+                }
+            </div>
+            <div className="time">{time ? millisToMinutesAndSeconds(time) : (<span style={{ color: 'red' }}>chưa thi</span>)}</div>
         </div>
     )
 }
