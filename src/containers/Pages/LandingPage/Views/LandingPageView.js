@@ -4,6 +4,7 @@ import { LandingPageRoutes } from '../../../../routes.const';
 import MainArea from './MainArea';
 import LOGO_DHYD from './../../../../Assets/logo_DHYD.jpg';
 import LOGO_HSV from './../../../../Assets/logo_HSV.jpg';
+import LOGO_HSC_Black from './../../../../Assets/logo-HSC-Black-v2.svg';
 export default function LandingpageView({ handleEnterUserPage }) {
 
     const { HOMEPAGE, LEADERBOARD, CONTACT, USER } = LandingPageRoutes;
@@ -31,9 +32,11 @@ export default function LandingpageView({ handleEnterUserPage }) {
         <div className="userDashboard-container">
             <div className="landingpage-header">
                 <div className="logo-area">
-                    <img src={LOGO_DHYD} alt="log-dhyd" />
+                    <img src={LOGO_HSC_Black} alt="log-dhyd" />
                     {/* <img src={LOGO_HSV} alt="log-dhyd" /> */}
-
+                </div>
+                <div className="contest-name">
+                    <span>HOA SINH CHAMPIONSHIP 2021</span>
                 </div>
 
                 <section className="menu">
