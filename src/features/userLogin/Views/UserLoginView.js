@@ -23,16 +23,21 @@ export default function UserLoginView({ handleLogin }) {
     return (
         <div className="user-login-container">
             <div style={{ height: '30px' }}></div>
-            <div className="input-area">
-                <Form.Label>Mã dự thi của bạn</Form.Label>
-                <Form.Control ref={codeInputRef} type="email" placeholder='Enter code here
+            <div className="main-container">
+                <div className="input-area">
+                    <Form.Label style={{ color: 'black' }}>Mã dự thi của bạn</Form.Label>
+                    <Form.Control ref={codeInputRef} type="email" placeholder='Enter code here
                 ' />
-                <Form.Text className="text-muted">
-                    Bạn cần nhập chính xác mã dự thi được cung cấp
-    </Form.Text>
-                <Button onClick={handleSubmit} variant="primary" type="submit">
-                    Đăng nhập
+                    <Form.Text className="text-muted" >
+                        <span style={{ color: 'black' }}>
+                            Bạn cần nhập chính xác mã dự thi được cung cấp
+                    </span>
+                    </Form.Text>
+                    <Button onClick={handleSubmit} variant="primary" type="submit">
+                        Đăng nhập
   </Button>
+                </div>
+
 
             </div>
         </div>
