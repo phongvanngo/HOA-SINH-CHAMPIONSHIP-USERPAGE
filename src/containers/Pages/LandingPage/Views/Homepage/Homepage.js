@@ -27,7 +27,11 @@ export default function Homepage() {
         <section className="main">
 
             <section className="left">
-                <p className="title">VÒNG SƠ LOẠI HÓA SINH CHAMPIONSHIP</p>
+                <div className="title">
+                    <p> VÒNG SƠ LOẠI</p>
+                    <p> HÓA SINH CHAMPIONSHIP</p>
+                </div>
+
                 <p className="msg">
                     Hóa Sinh Championship Mùa 3 là một cuộc thi về bộ môn Hóa sinh dành cho sinh viên khối ngành chăm sóc sức khỏe do Đại học Y Dược TP.HCM tổ chức nhằm tạo ra sân chơi bổ ích và thú vị để tăng kiến thức, kĩ năng và tạo cơ hội giao lưu gặp gỡ giữa các sinh viên có cùng đam mê.
                 </p>
