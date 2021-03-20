@@ -50,10 +50,12 @@ homepage-container {
     // }
     .contest-name {
         margin-left: 10px;
+        display: inline-block;
         span {
             font-weight: 500;
             font-size: 20px;
             vertical-align: middle;
+            overflow: hidden;
         }
     }
     .logo-area {
@@ -178,16 +180,31 @@ button.cta:hover {
 
 /*  -----    RESPONSIVENESS    -----  */
 
+@media (max-width: 450px) {
+    .landingpage-header {
+        .contest-name {
+            span {
+                font-size: 14px;
+            }
+        }
+    }
+}
 @media (max-width: 800px) {
     .landingpage-header,
     .left,
     .right {
-        padding-left: 40px;
-        padding-right: 40px;
+        padding-left: 10px;
+        padding-right: 10px;
     }
 }
 
-@media (max-width: 650px) {
+// @media (max-width: 500px) {
+//     .left {
+//         font-size: 30px;
+//     }
+// }
+
+@media (max-width: 940px) {
     .main {
         flex-direction: column;
     }
@@ -196,7 +213,7 @@ button.cta:hover {
     .right {
         width: 100%;
         max-width: 100%;
-        padding: 24px;
+        // padding: 5px;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -204,6 +221,8 @@ button.cta:hover {
 
     .left {
         font-size: 0.8em;
+        .title {
+        }
     }
 
     .left * {
@@ -270,6 +289,7 @@ button.cta:hover {
         padding-top: 80px;
         transform: translateX(100%);
         transition: transform 0.5s;
+        font-size: 10px;
     }
 
     .menu-list li {
