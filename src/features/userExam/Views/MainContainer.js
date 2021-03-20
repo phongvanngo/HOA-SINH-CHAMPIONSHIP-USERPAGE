@@ -6,6 +6,8 @@ import Button from '@material-ui/core/Button';
 import { submitUserAnswers } from './../UserExamSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import Countdown from './Countdown';
+import Footer from '../../../containers/User/Footer';
+
 
 export default function MainContainer() {
     const dispatch = useDispatch();
@@ -62,6 +64,7 @@ export default function MainContainer() {
                     </div>
                 </div>
             </div>
+            <div className="user-exam-footer" style={{ height: '20px' }}></div>
         </div >
     )
 }

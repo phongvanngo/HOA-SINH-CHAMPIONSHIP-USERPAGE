@@ -4,8 +4,10 @@ $common-min-width: 200px;
 .user-exam-container {
   // background-image: linear-gradient(to right, #ffffff, #e4f2ff, #b4eaff, #7de3e9, #66d9b8);
   background-image: linear-gradient(120deg, #ffffff, #ffffff, #ffffff, #e4f2ff, #b4eaff, #7de3e9, #66d9b8);
+  min-height: 100vh;
   .MainArea {
-    margin: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
     // margin-top: 10vh;
 
     .greeting-area {
@@ -40,7 +42,7 @@ $common-min-width: 200px;
       .sticky {
         z-index: 1100;
         position: fixed;
-        top: 8vh;
+        top: 9vh;
 
         p {
           margin: 0px;
