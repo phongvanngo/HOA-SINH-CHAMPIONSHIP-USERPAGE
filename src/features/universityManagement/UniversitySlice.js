@@ -14,7 +14,7 @@ export const fetchUniversityRequest = createAsyncThunk(
             dispatch(stopLoading());
             switch (response.status) {
                 case 200:
-                    dispatch(notify({ message: "Lấy dữ liệu trườn học thành công", options: { variant: 'success' } }));
+                    // dispatch(notify({ message: "Lấy dữ liệu trườn học thành công", options: { variant: 'success' } }));
                     return response.data;
                 case 401:
                     throw new Error("Unauthorized");
@@ -54,7 +54,6 @@ export const createUniversityRequest = createAsyncThunk(
             }
 
         } catch (error) {
-            console.log(error);
             dispatch(notify({ message: `${error}`, options: { variant: 'error' } }));
             dispatch(stopLoading());
             return null;
@@ -142,7 +141,6 @@ export const universitySlice = createSlice({
 
         editUniversity: (state, action) => {
             const universityInfo = action.payload;
-            console.log(universityInfo);
             state.isUniversityDialogOpen = true;
             state.universityEditing = universityInfo;
         },
@@ -156,7 +154,6 @@ export const universitySlice = createSlice({
     extraReducers: {
         [fetchUniversityRequest.fulfilled]: (state, action) => {
             const response_data = action.payload;
-            console.log(response_data);
             if (response_data === null) return;
 
             // let universitys = response_data;
@@ -179,7 +176,6 @@ export const universitySlice = createSlice({
             if (response_data === null) return;
 
             const { data, universityInfo } = response_data;
-            console.log(response_data);
             const { id } = data;
             const newListUniversitys = [
                 ...state.listUniversitys,
@@ -196,7 +192,6 @@ export const universitySlice = createSlice({
             if (response_data === null) return;
 
             const { universityInfo } = response_data;
-            console.log(universityInfo);
             const newListUniversitys = state.listUniversitys.map((university) => {
                 if (university.id === universityInfo.id)
                     return {

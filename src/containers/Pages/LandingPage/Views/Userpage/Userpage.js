@@ -14,9 +14,6 @@ export default function Userpage() {
     const user = useSelector(state => state.userLogin.user);
     const userExamStatus = useSelector(state => state.userExam.userExamStatus);
 
-
-    console.log(userExamStatus);
-
     let { fullName, sessionName } = user;
 
     useEffect(() => {
@@ -42,9 +39,7 @@ export default function Userpage() {
     }
 
     const handleGoToExam = () => {
-        console.log(userExamStatus);
         if (userExamStatus === 0) {
-            console.log('fetete');
             dispatch(fetchUserExamRequest()).then(() => {
                 history.push(PublicRoutes.TEST);
             });

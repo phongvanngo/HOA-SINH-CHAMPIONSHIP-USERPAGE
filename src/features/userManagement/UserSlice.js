@@ -8,7 +8,6 @@ export const fetchUserRequest = createAsyncThunk(
     async ({ page, pageSize, sessionID }, thunkApi) => {
         //nếu không có tham số thứ nhất thì ko dispatch được ?????
         const { dispatch } = thunkApi;
-        console.log("fetch ", page, pageSize, sessionID);
         try {
             dispatch(startLoading());
             let response = await userApi.getUserData({ page, pageSize, sessionID });
@@ -85,7 +84,35 @@ export const createUserRequest = createAsyncThunk(
             }
 
         } catch (error) {
-            console.log(error);
+            dispatch(notify({ message: `${error}`, options: { variant: 'error' } }));
+            dispatch(stopLoading());
+            return null;
+        }
+    });
+export const createListUserRequest = createAsyncThunk(
+    'user/createListUserStatus',
+    async (userInfo, thunkApi) => {
+        const { dispatch, getState } = thunkApi;
+        try {
+            dispatch(startLoading());
+            const currentSessionId = getState().user.currentSessionID;
+            userInfo = { ...userInfo, sessionID: currentSessionId };
+
+            //transfer schema
+            const { sessionID, listUser, universityId } = userInfo;
+            const newUser = { sessionId: sessionID, listUser: JSON.stringify(listUser), universityId: universityId };
+            const response = await userApi.pushNewListUser(newUser);
+            dispatch(stopLoading());
+            switch (response.status) {
+                case 200:
+                    dispatch(notify({ message: "Tạo thí sinh thành công", options: { variant: 'success' } }));
+                    dispatch(stopLoading());
+                    return { data: response.data, userInfo };
+                default:
+                    throw new Error("Lỗi kết nối");
+            }
+
+        } catch (error) {
             dispatch(notify({ message: `${error}`, options: { variant: 'error' } }));
             dispatch(stopLoading());
             return null;
@@ -101,7 +128,6 @@ export const updateUserRequest = createAsyncThunk(
 
             //transfer schema
             const { id, name } = userInfo;
-            console.log(id);
             const newUser = { fullName: name };
 
 
@@ -196,15 +222,15 @@ export const userSlice = createSlice({
             const response_data = action.payload;
             if (response_data === null) return;
             let { rows, count } = response_data;
-
             let users = rows.map(element => {
-                const { code, fullName, id, score, time } = element;
+                const { code, fullName, id, score, time, historyQues } = element;
                 return {
                     id: id,
                     code: code,
                     name: fullName,
                     score: score,
-                    time: time
+                    time: time,
+                    historyQues,
                 }
             })
 
@@ -217,36 +243,18 @@ export const userSlice = createSlice({
             let { rows, count, searchingUserCode } = response_data;
 
             let users = rows.map(element => {
-                const { code, fullName, id, score, time } = element;
+                const { code, fullName, id, score, time, historyQues } = element;
                 return {
                     id: id,
                     code: code,
                     name: fullName,
                     score: score,
-                    time: time
+                    time: time,
+                    historyQues
                 }
             })
 
             state.searchingUserCode = searchingUserCode;
-            state.totalUsers = count;
-            state.listUsers = [...users];
-        },
-        [fetchUserRequest.fulfilled]: (state, action) => {
-            const response_data = action.payload;
-            if (response_data === null) return;
-            let { rows, count } = response_data;
-
-            let users = rows.map(element => {
-                const { code, fullName, id, score, time } = element;
-                return {
-                    id: id,
-                    code: code,
-                    name: fullName,
-                    score: score,
-                    time: time
-                }
-            })
-
             state.totalUsers = count;
             state.listUsers = [...users];
         },
@@ -261,6 +269,9 @@ export const userSlice = createSlice({
                 {
                     ...userInfo,
                     available_user: 0,
+                    historyAns: "",
+                    time: null,
+                    score: null,
                     id: id
                 },
                 ...state.listUsers,
@@ -268,12 +279,44 @@ export const userSlice = createSlice({
             state.listUsers = newListUsers;
             state.totalUsers = state.totalUsers + 1;
         },
+        [createListUserRequest.fulfilled]: (state, action) => {
+            const response_data = action.payload;
+            if (response_data === null) return;
+
+            const { data, userInfo } = response_data;
+
+
+            const newListUsers = data.map((user) => {
+                const { id, code, fullName } = user;
+                return {
+                    id: id,
+                    code: code,
+                    name: fullName,
+                    historyAns: "",
+                    time: null,
+                    score: null,
+                }
+            });
+
+            // const newListUsers = [
+            //     {
+            //         ...userInfo,
+            //         available_user: 0,
+            //         historyAns: "",
+            //         time: null,
+            //         score: null,
+
+            //     },
+            //     ...state.listUsers,
+            // ]
+            state.listUsers = [...newListUsers, ...state.listUsers];
+            state.totalUsers = state.totalUsers + 1;
+        },
         [updateUserRequest.fulfilled]: (state, action) => {
             const response_data = action.payload;
             if (response_data === null) return;
 
             const { userInfo } = response_data;
-            console.log(userInfo);
             const newListUsers = state.listUsers.map((user) => {
                 if (user.id === userInfo.id)
                     return {

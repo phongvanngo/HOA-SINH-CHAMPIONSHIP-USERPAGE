@@ -49,9 +49,6 @@ export default function CompetitionType() {
     }
 
     let listCompetitionTypes = useSelector(state => state.competitionType.listCompetitionTypes);
-
-    console.log(listCompetitionTypes);
-
     useEffect(() => {
         dispatch(fetchCompetitionTypeRequest({}));
     }, [dispatch])

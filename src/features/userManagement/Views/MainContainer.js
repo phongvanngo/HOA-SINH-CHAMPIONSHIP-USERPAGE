@@ -8,6 +8,7 @@ import FilterArea from './FilterArea';
 import './MainContainer.css';
 import SearchArea from './SearchArea';
 import UserCodeForm from './UserCodeForm';
+import FastUserCodeForm from './FastUserCodeForm';
 import UserList from './UserList';
 
 
@@ -34,8 +35,11 @@ export default function QuestionManagement() {
                         <Grid item xs={12}>
                             <FilterArea />
                         </Grid>
-                        <Grid item xs={12}>
+                        {/* <Grid item xs={12}>
                             <UserCodeForm />
+                        </Grid> */}
+                        <Grid item xs={12}>
+                            <FastUserCodeForm />
                         </Grid>
                     </Grid>
                     <Grid item xs={12} md={9}>

@@ -160,7 +160,6 @@ export const userSlice = createSlice({
             if (response_data === null) return;
 
             const { userInfo } = response_data;
-            console.log(userInfo);
             const newListUsers = state.listUsers.map((user) => {
                 if (user.id === userInfo.id)
                     return {

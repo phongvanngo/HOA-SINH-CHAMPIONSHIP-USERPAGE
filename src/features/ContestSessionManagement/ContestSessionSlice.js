@@ -14,7 +14,7 @@ export const fetchContestSessionRequest = createAsyncThunk(
             dispatch(stopLoading());
             switch (response.status) {
                 case 200:
-                    dispatch(notify({ message: "Lấy dữ liệu ca thi thành công", options: { variant: 'success' } }));
+                    // dispatch(notify({ message: "Lấy dữ liệu ca thi thành công", options: { variant: 'success' } }));
                     return response.data;
                 case 404:
                     throw new Error("Unauthorized");
@@ -198,7 +198,6 @@ export const contestSessionSlice = createSlice({
 
         editContestSession: (state, action) => {
             const contestSessionInfo = action.payload;
-            console.log(contestSessionInfo);
             state.isContestSessionDialogOpen = true;
             state.contestSessionEditing = contestSessionInfo;
         },
@@ -247,7 +246,6 @@ export const contestSessionSlice = createSlice({
             if (response_data === null) return;
 
             const { contestSessionInfo } = response_data;
-            console.log(contestSessionInfo);
             const newListContestSessions = state.listContestSessions.map((contestSession) => {
                 if (contestSession.id === contestSessionInfo.id)
                     return {

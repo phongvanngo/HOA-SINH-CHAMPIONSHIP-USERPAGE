@@ -32,7 +32,6 @@ export const contestSessionApi = {
         // })
         // return response;
         const url = "/session";
-        console.log("push", contestSessionInfo);
         let response = await axiosClient.post(url, contestSessionInfo);
         return response;
     },

@@ -8,7 +8,7 @@ import { fetchRankSingleRequest } from './../RankSlice';
 import { millisToMinutesAndSeconds } from './../../../app/utilities';
 
 const SingleRankItem = ({ detailedUser }) => {
-    const { fullName, img, score, time, index } = detailedUser;
+    const { fullName, img, score, time, index, historyQues } = detailedUser;
     return (
         <div className="lboard_mem">
             <div className="img">
@@ -22,11 +22,17 @@ const SingleRankItem = ({ detailedUser }) => {
             </div>
             <div className="points">
                 {
-                    score === null && time ? (<span style={{ color: 'green' }}>chưa nộp bài</span>) :
+                    score === null && historyQues ? (<span style={{ color: 'green' }}>chưa nộp bài</span>) :
                         score === null && time === null ? (<span style={{ color: 'red' }}>chưa thi</span>) : score
                 }
             </div>
-            <div className="time">{time ? millisToMinutesAndSeconds(time) : (<span style={{ color: 'red' }}>chưa thi</span>)}</div>
+            <div className="time">{
+
+
+                time === null && historyQues ? (<span style={{ color: 'green' }}>chưa nộp bài</span>) :
+                    time === null && time === null ? (<span style={{ color: 'red' }}>chưa thi</span>) : millisToMinutesAndSeconds(time)
+
+            }</div>
         </div>
     )
 }

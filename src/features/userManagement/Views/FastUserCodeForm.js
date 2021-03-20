@@ -8,7 +8,7 @@ import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import React, { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createUserRequest } from './../UserSlice';
+import { createListUserRequest } from './../UserSlice';
 
 
 
@@ -22,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
         padding: theme.spacing(2),
         textAlign: 'left',
         color: theme.palette.text.secondary,
+        marginTop: '10px',
     },
     headerArea: {
         marginBottom: '10px',
@@ -59,13 +60,14 @@ export default function CenteredGrid() {
     const checkValidInput = (dataSubmit) => {
         let valid = true;
         let validInputDetail = inititalValidInput;
-        const { name, universityId } = dataSubmit;
+        const { listUser, universityId } = dataSubmit;
 
 
-        // if (name.trim() === "") {
-        //     valid = false;
-        //     validInputDetail.userName = false;
-        // }
+        if (listUser === null) {
+            valid = false;
+            validInputDetail.userName = false;
+        }
+
         if (universityId === null) {
             valid = false;
             validInputDetail.universityId = false;
@@ -85,18 +87,32 @@ export default function CenteredGrid() {
     }
 
     const handleSubmit = () => {
-        const shortid = Math.random().toString(36).substr(2, 9);
-        const userInfo = {
-            name: userNameInputRef.current.value,
-            code: `${prefixInputRef.current.value}${shortid}`,
-            // sessionID: choosenSessionID ? choosenSessionID.id : null,
+
+        const inputData = userNameInputRef.current.value;
+
+        let userInfo = {
+            listUser: inputData,
             universityId: chosenUniversityId ? chosenUniversityId.id : null
         }
 
         if (checkValidInput(userInfo) === false) return;
 
-        dispatch(createUserRequest(userInfo));
+        const listNames = inputData.split('\n');
 
+        const listUserCode = listNames.map((element) => {
+            const shortid = Math.random().toString(36).substr(2, 9);
+            return {
+                fullName: element,
+                code: `${prefixInputRef.current.value}${shortid}`,
+            }
+        });
+
+        userInfo = {
+            listUser: listUserCode,
+            universityId: chosenUniversityId ? chosenUniversityId.id : null
+        }
+
+        dispatch(createListUserRequest(userInfo));
         setValidInput(inititalValidInput);
 
 
@@ -106,7 +122,7 @@ export default function CenteredGrid() {
         <div className={classes.root}>
             <Paper className={classes.paper}>
                 <div className={classes.headerArea}>
-                    <h3 style={{ display: 'inline', verticalAlign: 'bottom', }}>Tạo mã dự thi</h3>
+                    <h3 style={{ display: 'inline', verticalAlign: 'bottom', }}>Tạo nhanh mã dự thi</h3>
                     <Button
                         className={classes.buttonCreate}
                         variant="contained"
@@ -122,10 +138,12 @@ export default function CenteredGrid() {
                 <FormControl component="fieldset" style={{ marginTop: '10px', width: '100%' }}>
                     <TextField
                         size="small"
+                        multiline
+                        rows={10}
                         inputRef={userNameInputRef}
                         style={{ marginTop: '10px', width: '100%' }}
                         variant="outlined"
-                        label="Tên thí sinh (Tên đội)"
+                        label="Danh sách tên thí sinh"
                         error={!validInput.userName}
                         helperText={!validInput.userName ? "Dữ liệu không được để trống" : ""}
 

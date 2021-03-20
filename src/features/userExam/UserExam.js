@@ -11,7 +11,6 @@ import TimeOutDialog from './Views/TimeOutDialog';
 export default function UserExam() {
     const detailedUserExam = useSelector(state => state.userExam.detailedUserExam)
 
-    console.log(detailedUserExam);
 
     useEffect(() => {
         // if (detailedUserExam === null) setIsHaveExam(false);

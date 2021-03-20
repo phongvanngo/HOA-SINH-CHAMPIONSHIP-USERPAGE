@@ -8,7 +8,7 @@ import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import React, { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createUserRequest } from './../UserSlice';
+import { createListUserRequest } from './../UserSlice';
 
 
 
@@ -22,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
         padding: theme.spacing(2),
         textAlign: 'left',
         color: theme.palette.text.secondary,
+        marginTop: '10px',
     },
     headerArea: {
         marginBottom: '10px',
@@ -87,7 +88,7 @@ export default function CenteredGrid() {
     const handleSubmit = () => {
         const shortid = Math.random().toString(36).substr(2, 9);
         const userInfo = {
-            name: userNameInputRef.current.value,
+            listNames: userNameInputRef.current.value,
             code: `${prefixInputRef.current.value}${shortid}`,
             // sessionID: choosenSessionID ? choosenSessionID.id : null,
             universityId: chosenUniversityId ? chosenUniversityId.id : null
@@ -95,7 +96,10 @@ export default function CenteredGrid() {
 
         if (checkValidInput(userInfo) === false) return;
 
-        dispatch(createUserRequest(userInfo));
+        const listNames = userInfo.listNames.split("\n");
+
+
+        dispatch(createListUserRequest(userInfo));
 
         setValidInput(inititalValidInput);
 
@@ -106,7 +110,7 @@ export default function CenteredGrid() {
         <div className={classes.root}>
             <Paper className={classes.paper}>
                 <div className={classes.headerArea}>
-                    <h3 style={{ display: 'inline', verticalAlign: 'bottom', }}>Tạo mã dự thi</h3>
+                    <h3 style={{ display: 'inline', verticalAlign: 'bottom', }}>Tạo nhanh mã dự thi</h3>
                     <Button
                         className={classes.buttonCreate}
                         variant="contained"
@@ -122,10 +126,12 @@ export default function CenteredGrid() {
                 <FormControl component="fieldset" style={{ marginTop: '10px', width: '100%' }}>
                     <TextField
                         size="small"
+                        multiline
+                        rows={10}
                         inputRef={userNameInputRef}
                         style={{ marginTop: '10px', width: '100%' }}
                         variant="outlined"
-                        label="Tên thí sinh (Tên đội)"
+                        label="Danh sách tên thí sinh"
                         error={!validInput.userName}
                         helperText={!validInput.userName ? "Dữ liệu không được để trống" : ""}
 

@@ -53,7 +53,6 @@ export default function RecipeReviewCard(props) {
     let { detailedContestSession, handleToggleContestSession, handleDeleteContestSession, handleEditContestSession } = props;
     const { id, name, exam_id, is_active, type } = detailedContestSession;
 
-    console.log(type);
 
     let index = listExams.findIndex((exam) => exam.id === exam_id);
     let exam_name = index > -1 ? listExams[index].exam_name : "";

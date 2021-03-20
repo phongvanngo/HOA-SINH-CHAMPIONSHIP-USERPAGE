@@ -20,8 +20,6 @@ export default function QuestionManagement() {
         //trường hợp reload trang thì không lấy được chi tiết đề thi từ redux, phải redirect về
         history.replace(DashboardRoutes.EXAM_MANAGEMENT);
     }
-    console.log("question manager render");
-    console.log(detailedChosenExam);
     useEffect(() => {
         dispatch(fetchQuestionRequest(exam_id));
     }, [dispatch, exam_id])

@@ -72,7 +72,6 @@ export const checkUserExamStatus = createAsyncThunk(
             dispatch(stopLoading());
             switch (response.status) {
                 case 200:
-                    console.log(response);
                     // dispatch(notify({ message: "Lấy dữ liệu thành công", options: { variant: 'success' } }));
                     return response.data;
                 case 401:
@@ -100,14 +99,11 @@ export const submitUserAnswers = createAsyncThunk(
             dispatch(startLoading());
             const userAnswers = getState().userExam.userAnswers;
             //transfer schema
-            console.log(userAnswers);
             const response = await userExamApi.putUserAnswer(userAnswers);
             dispatch(stopLoading());
-            console.log(response);
             switch (response.status) {
                 case 200:
                     dispatch(notify({ message: "Nộp bài thi thành công", options: { variant: 'success', autoHideDuration: 3000, } }));
-                    console.log("nop bai thi thanh cong");
                     dispatch(deactiveUser());
                     dispatch(stopLoading());
                     return 1;
@@ -116,7 +112,6 @@ export const submitUserAnswers = createAsyncThunk(
             }
 
         } catch (error) {
-            console.log(error);
             dispatch(notify({ message: `${error}`, options: { variant: 'error' } }));
             dispatch(stopLoading());
             return null;
@@ -141,6 +136,7 @@ export const userExamSlice = createSlice({
         openingImage: null,
         isTimeOutDialogOpen: false,
         userExamStatus: null,
+        timeToDo: null,
 
     },
 
@@ -163,7 +159,6 @@ export const userExamSlice = createSlice({
         },
 
         timeOut: (state) => {
-            console.log("timeOUt");
             state.isTimeOutDialogOpen = true;
         },
 
@@ -176,7 +171,6 @@ export const userExamSlice = createSlice({
     extraReducers: {
         [fetchUserExamRequest.fulfilled]: (state, action) => {
             const response_data = action.payload;
-            console.log(response_data);
             if (response_data === null) return;
 
             const { questions, timeServerStart, time } = response_data;
@@ -185,29 +179,27 @@ export const userExamSlice = createSlice({
             state.detailedUserExam = response_data;
             state.listQuestions = questions;
             state.timeStart = timeServerStart;
-            console.log(time);
             state.time = time * 60;
+            state.timeToDo = time;
             state.userAnswers = listAnswers;
         },
 
         [fetchUserExamRequestAgain.fulfilled]: (state, action) => {
             const response_data = action.payload;
-            console.log(response_data);
             if (response_data === null) return;
 
             const { questions, timeServerStart, time } = response_data;
             const listAnswers = questions ? questions.map((element) => { return { id: element.id, ans: null } }) : [];
 
             let usedTime = Date.now() - Date.parse(timeServerStart);
-            console.log("sfdsf", time, usedTime);
             let timeRemaining = time * 60 * 1000 - usedTime;
 
-            console.log(timeRemaining);
 
 
             state.detailedUserExam = response_data;
             state.listQuestions = questions;
             state.timeStart = timeServerStart;
+            state.timeToDo = time;
             state.time = isNaN(timeRemaining) ? 0 : Math.floor(timeRemaining / 1000);
             state.userAnswers = listAnswers;
         },
@@ -217,7 +209,6 @@ export const userExamSlice = createSlice({
         },
         [checkUserExamStatus.fulfilled]: (state, action) => {
             const { message } = action.payload;
-            console.log(message);
 
             switch (message) {
                 case "User had submited this exam":

@@ -8,7 +8,6 @@ export default function UserDashboard() {
     const dispatch = useDispatch();
 
     const handleLogout = () => {
-        console.log('log out');
         dispatch(logout());
     }
 

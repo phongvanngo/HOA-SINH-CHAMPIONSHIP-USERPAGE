@@ -54,7 +54,21 @@ export const userApi = {
         // })
         // return response;
         const url = "/user";
-        console.log(userInfo);
+        let response = await axiosClient.post(url, userInfo);
+        return response;
+    },
+
+    pushNewListUser: async (userInfo) => {
+        // const response = await fakeApi({
+        //     request: userInfo,
+        //     response:
+        //     {
+        //         status: 200,
+        //         data: { id: new Date().getTime() + Math.random() }
+        //     }
+        // })
+        // return response;
+        const url = "/user/create-list";
         let response = await axiosClient.post(url, userInfo);
         return response;
     },

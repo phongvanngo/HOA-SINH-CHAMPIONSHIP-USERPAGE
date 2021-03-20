@@ -131,7 +131,6 @@ export const examSlice = createSlice({
 
         editExam: (state, action) => {
             const examInfo = action.payload;
-            console.log(examInfo);
             state.isExamDialogOpen = true;
             state.examEditing = examInfo;
         },
@@ -171,7 +170,6 @@ export const examSlice = createSlice({
             if (response_data === null) return;
 
             const { examInfo } = response_data;
-            console.log(examInfo);
             const newListExams = state.listExams.map((exam) => {
                 if (exam.id === examInfo.id)
                     return {

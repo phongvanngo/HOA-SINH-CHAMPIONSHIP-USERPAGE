@@ -34,10 +34,8 @@ export default function InteractiveList() {
     const dispatch = useDispatch();
 
     const universitys = useSelector(state => state.university.listUniversitys);
-    // console.log()
 
     React.useEffect(() => {
-        console.log("fetch data");
         dispatch(fetchUniversityRequest({}));
     }, [dispatch])
 

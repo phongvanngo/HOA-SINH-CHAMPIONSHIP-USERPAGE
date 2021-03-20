@@ -55,7 +55,6 @@ export const userLoginSlice = createSlice({
         deactiveUser: state => {
             let user = { ...state.user, isActive: false };
             localStorage.setItem("user", JSON.stringify(user));
-            console.log(user);
             state.user = user;
         }
 

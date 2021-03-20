@@ -72,7 +72,7 @@ export default function MiniDrawer({ handleLogout }) {
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h6" noWrap>
-                        Mini variant drawer
+                        HOA SINH CHAMPIONISHIP 2021
           </Typography>
                     <div className={classes.grow} />
                     <div className={classes.sectionDesktop}>

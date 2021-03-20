@@ -38,7 +38,10 @@ export default function LoginView(props) {
                         <LockOutlinedIcon />
                     </Avatar>
                     <Typography component="h1" variant="h5">
-                        Sign in
+                        HOA SINH CHAMPIONSHIP 2021
+          </Typography>
+                    <Typography component="h2" variant="h6">
+                        Trang quản trị
           </Typography>
                     <form className={classes.form} noValidate>
                         <TextField
@@ -47,7 +50,7 @@ export default function LoginView(props) {
                             required
                             fullWidth
                             id="email"
-                            label="Email Address"
+                            label="Tên đăng nhập"
                             name="email"
                             autoComplete="email"
                             autoFocus
@@ -59,7 +62,7 @@ export default function LoginView(props) {
                             required
                             fullWidth
                             name="password"
-                            label="Password"
+                            label="Mật khẩu"
                             type="password"
                             id="password"
                             autoComplete="current-password"
@@ -67,7 +70,7 @@ export default function LoginView(props) {
                         />
                         <FormControlLabel
                             control={<Checkbox value="remember" color="primary" />}
-                            label="Remember me"
+                            label="Nhớ mật khẩu"
                         />
                         <Button
                             onClick={onButtonLoginClick}
@@ -76,17 +79,17 @@ export default function LoginView(props) {
                             color="primary"
                             className={classes.submit}
                         >
-                            Sign In
+                            Đăng nhập
             </Button>
                         <Grid container>
                             <Grid item xs>
                                 <Link href="#" variant="body2">
-                                    Forgot password?
+                                    Quên mật khẩu
                 </Link>
                             </Grid>
                             <Grid item>
                                 <Link href="#" variant="body2">
-                                    {"Don't have an account? Sign Up"}
+                                    {"Chưa có tài khoản ? Đăng ký"}
                                 </Link>
                             </Grid>
                         </Grid>

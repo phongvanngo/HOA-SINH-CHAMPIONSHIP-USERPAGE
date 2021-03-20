@@ -18,7 +18,6 @@ export const userExamApi = {
 
     putUserAnswer: async (userAnswer) => {
         const url = "/test";
-        console.log('submit ', { arrayAns: userAnswer });
         let response = await axiosClient.post(url, { arrayAns: JSON.stringify(userAnswer) });
         return response;
     },

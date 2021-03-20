@@ -5,7 +5,6 @@ import axiosClient from './../../app/AxiosClient';
 export const rankApi = {
     getRankData: async (params) => {
         // const params = { page: 0, pageSize: 10 };
-        console.log(params);
         const url = "/user/rank?" + queryString.stringify(params);
 
         let response = await axiosClient.get(url);
@@ -13,7 +12,6 @@ export const rankApi = {
     },
     getRankByUserCode: async (params) => {
         // const params = { page: 0, pageSize: 10 };
-        console.log(params);
         const url = "/user/search?" + queryString.stringify(params);
 
         let response = await axiosClient.get(url);

@@ -23,7 +23,6 @@ export const competitionTypeApi = {
         // })
         // return response;
         const url = "/session/type/" + competitionType_id;
-        console.log(competitionTypeInfo);
         let response = await axiosClient.patch(url, competitionTypeInfo);
         return response;
     }

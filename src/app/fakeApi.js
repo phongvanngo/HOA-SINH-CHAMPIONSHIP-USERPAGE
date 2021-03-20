@@ -1,5 +1,4 @@
 export const fakeApi = ({ request, response, timeOut }) => {
-    console.log("send ", request);
     const { status, data } = response;
     return new Promise((resolve, reject) => {
         if (status === 1000) throw new Error('lỗi code');

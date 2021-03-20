@@ -105,13 +105,11 @@ export default function CustomPaginationActionsTable() {
     listUsers = listUsers.slice(0, count + 1);
 
     useEffect(() => {
-        console.log("page change effect");
         if (rowsPerPage === 0) return;
         dispatch(fetchUserRequest({ page: page, pageSize: rowsPerPage !== -1 ? rowsPerPage : totalUsers, sessionID: currentSessionID }));
     }, [rowsPerPage, page, flag])
 
     useEffect(() => {
-        console.log("current ID change");
         setFlag(flag => flag + 1);
         setRowsPerPage(10);
     }, [currentSessionID])
@@ -127,7 +125,6 @@ export default function CustomPaginationActionsTable() {
         setPage(0);
     };
 
-    console.log("data render");
 
     return (
         <TableContainer component={Paper}>
@@ -148,7 +145,7 @@ Tên ca thi
                 <TableBody>
                     {listUsers.map((user, index) => (
                         <UserItem
-                            key={user.id}
+                            key={index}
                             detailedUser={user}
                             index={index + 1}
                         />
@@ -184,7 +181,7 @@ Tên ca thi
                 <TableFooter>
                     <TableRow>
                         <TablePagination
-                            rowsPerPageOptions={[5, 10, 25, 50, 100, { label: 'All', value: -1 }]}
+                            rowsPerPageOptions={[5, 10, 25, 50, 100, { label: 'Tất cả', value: -1 }]}
                             colSpan={3}
                             count={totalUsers}
                             rowsPerPage={rowsPerPage}

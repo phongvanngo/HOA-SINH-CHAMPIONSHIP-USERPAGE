@@ -33,7 +33,6 @@ export const universityApi = {
         // })
         // return response;
         const url = "/user/university/";
-        console.log(universityInfo);
         let response = await axiosClient.post(url, universityInfo);
         return response;
     },
@@ -49,7 +48,6 @@ export const universityApi = {
         // })
         // return response;
         const url = "/user/university/" + university_id;
-        console.log(universityInfo);
         let response = await axiosClient.patch(url, universityInfo);
         return response;
     },

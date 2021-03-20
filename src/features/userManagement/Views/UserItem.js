@@ -4,6 +4,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import { millisToMinutesAndSeconds } from './../../../app/utilities';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { deleteUserRequest, updateUser } from './../UserSlice';
@@ -11,7 +12,8 @@ import { deleteUserRequest, updateUser } from './../UserSlice';
 const ITEM_HEIGHT = 48;
 
 export default function UserItem({ detailedUser, index }) {
-    const { id, code, name, score, time } = detailedUser;
+    const { id, code, name, score, time, historyQues } = detailedUser;
+
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
     const dispatch = useDispatch();
@@ -51,11 +53,14 @@ export default function UserItem({ detailedUser, index }) {
                     {sessionName}
                 </TableCell> */}
                 <TableCell align="center">
-                    {score}
+                    {
+                        score === null && historyQues ? (<span style={{ color: 'green' }}>chưa nộp bài</span>) :
+                            score === null && time === null ? (<span style={{ color: 'red' }}>chưa thi</span>) : score
+                    }
                 </TableCell>
                 <TableCell align="center">
-                    {time ?
-                        new Date(time).toISOString().substr(14, 5) : ''
+                    {time === null && historyQues ? (<span style={{ color: 'green' }}>chưa nộp bài</span>) :
+                        time === null && time === null ? (<span style={{ color: 'red' }}>chưa thi</span>) : millisToMinutesAndSeconds(time)
                     }
                 </TableCell>
                 <TableCell align="center">

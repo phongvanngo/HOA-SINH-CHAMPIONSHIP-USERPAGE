@@ -153,9 +153,9 @@ export const rankSlice = createSlice({
 
             //chuyển đổi schema
             let ranks = response_data.rows.map((element) => {
-                const { id, fullName, time, score } = element;
+                const { id, fullName, time, score, historyQues } = element;
                 return {
-                    id: id, fullName: fullName, time: time, score: score
+                    id: id, fullName: fullName, time: time, score: score, historyQues
                 }
             }
             )
@@ -182,14 +182,13 @@ export const rankSlice = createSlice({
         },
         [fetchRankTeamRequest.fulfilled]: (state, action) => {
             const response_data = action.payload;
-            console.log("team response", response_data);
             if (response_data === null) return;
 
             //chuyển đổi schema
             let ranks = response_data.rows.map((element) => {
-                const { id, fullName, time, score } = element;
+                const { id, fullName, time, score, historyQues } = element;
                 return {
-                    id: id, fullName: fullName, time: time, score: score
+                    id: id, fullName: fullName, time: time, score: score, historyQues
                 }
             }
             )

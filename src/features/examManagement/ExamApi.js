@@ -30,7 +30,6 @@ export const examApi = {
         //     }
         // })
         const url = "/exam";
-        console.log(examInfo);
         let response = await axiosClient.post(url, examInfo);
         return response;
     },
@@ -46,7 +45,6 @@ export const examApi = {
         // })
         // return response;
         const url = "/exam/" + exam_id;
-        console.log(examInfo);
         let response = await axiosClient.patch(url, examInfo);
         return response;
     },

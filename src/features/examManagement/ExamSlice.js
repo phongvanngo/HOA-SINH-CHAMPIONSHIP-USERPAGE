@@ -55,7 +55,6 @@ export const createExamRequest = createAsyncThunk(
             }
 
         } catch (error) {
-            console.log(error);
             dispatch(notify({ message: `${error}`, options: { variant: 'error' } }));
             dispatch(stopLoading());
             return null;
@@ -143,7 +142,6 @@ export const examSlice = createSlice({
 
         editExam: (state, action) => {
             const examInfo = action.payload;
-            console.log(examInfo);
             state.isExamDialogOpen = true;
             state.examEditing = examInfo;
         },
@@ -157,7 +155,6 @@ export const examSlice = createSlice({
     extraReducers: {
         [fetchExamRequest.fulfilled]: (state, action) => {
             const response_data = action.payload;
-            console.log(response_data);
             if (response_data === null) return;
 
             //chuyển đổi schema
@@ -181,7 +178,6 @@ export const examSlice = createSlice({
             if (response_data === null) return;
 
             const { data, examInfo } = response_data;
-            console.log(response_data);
             const { id } = data;
             const newListExams = [
                 ...state.listExams,
@@ -198,7 +194,6 @@ export const examSlice = createSlice({
             if (response_data === null) return;
 
             const { examInfo } = response_data;
-            console.log(examInfo);
             const newListExams = state.listExams.map((exam) => {
                 if (exam.id === examInfo.id)
                     return {

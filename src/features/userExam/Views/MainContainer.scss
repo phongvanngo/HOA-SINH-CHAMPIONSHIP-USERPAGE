@@ -1,27 +1,32 @@
-$common-max-width: 700px;
+$common-max-width: 800px;
 $common-min-width: 200px;
 
 .user-exam-container {
-  background-color: #f2f2f2;
+  // background-image: linear-gradient(to right, #ffffff, #e4f2ff, #b4eaff, #7de3e9, #66d9b8);
+  background-image: linear-gradient(120deg, #ffffff, #ffffff, #ffffff, #e4f2ff, #b4eaff, #7de3e9, #66d9b8);
   .MainArea {
     margin: 10px;
     // margin-top: 10vh;
 
     .greeting-area {
-      padding: 10px;
+      padding: 30px;
+      background-color: #66d9b8;
       margin-left: auto;
       margin-right: auto;
+      margin-bottom: 20px;
       max-width: $common-max-width;
       min-width: $common-min-width;
-      background-color: white;
+      color: white;
       box-shadow: 0px 3px 2px 2px gainsboro;
       text-align: center;
+      border-radius: 40px 40px;
     }
 
     .time-container {
       #timeArea {
         z-index: 1100;
         margin: auto;
+        color: red;
         max-width: $common-max-width;
         min-width: $common-min-width;
         background-color: white;

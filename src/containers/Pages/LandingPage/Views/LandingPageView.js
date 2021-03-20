@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { LandingPageRoutes } from '../../../../routes.const';
 import MainArea from './MainArea';
+import LOGO_DHYD from './../../../../Assets/logo_DHYD.jpg';
+import LOGO_HSV from './../../../../Assets/logo_HSV.jpg';
 export default function LandingpageView({ handleEnterUserPage }) {
 
     const { HOMEPAGE, LEADERBOARD, CONTACT, USER } = LandingPageRoutes;
@@ -28,7 +30,11 @@ export default function LandingpageView({ handleEnterUserPage }) {
     return (
         <div className="userDashboard-container">
             <div className="landingpage-header">
-                <h1>My Logo</h1>
+                <div className="logo-area">
+                    <img src={LOGO_DHYD} alt="log-dhyd" />
+                    {/* <img src={LOGO_HSV} alt="log-dhyd" /> */}
+
+                </div>
 
                 <section className="menu">
                     <ul className="menu-list" id="MenuUserPage">

@@ -70,7 +70,6 @@ export const competitionTypeSlice = createSlice({
     extraReducers: {
         [fetchCompetitionTypeRequest.fulfilled]: (state, action) => {
             const response_data = action.payload;
-            console.log(response_data);
             if (response_data === null) return;
 
             //chuyển đổi schema
@@ -91,7 +90,6 @@ export const competitionTypeSlice = createSlice({
             if (response_data === null) return;
 
             const { competitionTypeInfo } = response_data;
-            console.log(competitionTypeInfo);
             const newListCompetitionTypes = state.listCompetitionTypes.map((competitionType) => {
                 if (competitionType.id === competitionTypeInfo.id)
                     return {

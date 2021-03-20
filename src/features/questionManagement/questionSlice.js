@@ -59,7 +59,6 @@ export const fetchQuestionRequest = createAsyncThunk(
 export const createQuestionRequest = createAsyncThunk(
     'question/createQuestionStatus',
     async (questionInfo, thunkApi) => {
-        console.log(questionInfo);
         const { dispatch } = thunkApi;
 
         try {
@@ -276,7 +275,6 @@ export const questionSlice = createSlice({
                     image: image
                 }
             });
-            console.log(response_data);
             state.editingQuestion = null;
             state.chosenQuestionId = null;
             state.listQuestions = [...questions];
@@ -288,7 +286,6 @@ export const questionSlice = createSlice({
 
             const { response_data, questionInfo } = data;
             const { id } = response_data;
-            console.log(id);
             let newQuestion = {
                 ...questionInfo,
                 available_question: 0,

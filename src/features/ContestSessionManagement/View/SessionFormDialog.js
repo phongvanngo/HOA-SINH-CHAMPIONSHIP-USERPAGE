@@ -53,7 +53,6 @@ export default function ContestSessionFormDialog() {
 
     const [flag, setFlag] = useState(0);
 
-    console.log("genre", type);
 
 
     useEffect(() => {

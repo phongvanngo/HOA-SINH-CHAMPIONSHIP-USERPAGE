@@ -29,17 +29,29 @@ homepage-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 64px;
+    padding-right: 64px;
+    padding-left: 10px;
     font-size: 16px;
     background: white;
     // position: relative;
 }
 
-.landingpage-header h1 {
-    margin: 0px;
-    text-transform: uppercase;
-    font-size: 1.7em;
-    letter-spacing: 1px;
+.landingpage-header {
+    h1 {
+        margin: 0px;
+        text-transform: uppercase;
+        font-size: 1.7em;
+        letter-spacing: 1px;
+    }
+    .logo-area {
+        height: 70%;
+        display: flex;
+        img {
+            height: 100%;
+            width: auto;
+            margin-right: 15px;
+        }
+    }
 }
 
 .menu {

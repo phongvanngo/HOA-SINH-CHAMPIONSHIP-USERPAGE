@@ -39,7 +39,6 @@ export default function InteractiveList() {
     const exams = useSelector(state => state.exam.listExams);
 
     React.useEffect(() => {
-        console.log("fetch data");
         dispatch(fetchExamRequest({}));
     }, [dispatch])
 

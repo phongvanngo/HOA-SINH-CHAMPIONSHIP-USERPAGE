@@ -50,11 +50,9 @@ export default function CenteredGrid() {
         setCurrentCorrectAnswer(event.target.value);
     };
 
-    console.log("question form render", editingQuestion, hasEditRequest);
 
     useEffect(() => {
         //khi có yêu cầu sửa câu khác
-        console.log("request -- render");
         if (hasEditRequest === true && editingQuestion !== null) {
             saveData();
         };
@@ -63,7 +61,6 @@ export default function CenteredGrid() {
 
 
     useEffect(() => {
-        console.log("editing -- render");
         try {
             content_ref.current.value = content;
             image_ref.current.value = image;
@@ -76,7 +73,6 @@ export default function CenteredGrid() {
             setQuestionImage(image);
 
         } catch (error) {
-            console.log(error);
         }
     }, [editingQuestion]);
 

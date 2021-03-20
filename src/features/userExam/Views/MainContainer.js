@@ -12,7 +12,8 @@ export default function MainContainer() {
 
     const time = useSelector(state => state.userExam.time);
 
-    console.log(time);
+    const timeToDo = useSelector(state => state.userExam.timeToDo);
+
 
     useEffect(() => {
         window.onscroll = function () { myFunction() };
@@ -35,7 +36,7 @@ export default function MainContainer() {
             <div className="MainArea">
                 <div className="greeting-area">
                     <h2>Bài thi HÓA SINH CHAMPIONISHIP 2021</h2>
-                    <p>Thời gian làm bài: 10 phút</p>
+                    <p>Thời gian làm bài: <span>{`${timeToDo} phút`}</span></p>
                 </div>
                 <div className="time-container">
                     <div id="timeArea">

@@ -42,10 +42,8 @@ export default function InteractiveList() {
 
     const contestSessions = useSelector(state => state.contestSession.listContestSessions);
 
-    console.log(contestSessions);
 
     React.useEffect(() => {
-        console.log("fetch data");
         dispatch(fetchContestSessionRequest({}));
     }, [dispatch])
 
