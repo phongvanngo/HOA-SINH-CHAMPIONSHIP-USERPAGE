@@ -37,12 +37,16 @@ export const fetchQuestionRequest = createAsyncThunk(
             dispatch(startLoading());
             let response = await questionApi.getQuestionData(examId);
             dispatch(stopLoading());
+            console.log(response);
             switch (response.status) {
                 case 200:
                     dispatch(notify({ message: "Lấy dữ liệu thành công", options: { variant: 'success' } }));
                     return response.data;
                 case 401:
                     throw new Error("Unauthorized");
+                case 403:
+                    dispatch(notify({ message: "Truy cập bị từ chối", options: { variant: 'error' } }));
+                    return { rows: [], count: 0 }
                 default:
                     throw new Error("Unsuccessfully");
             }
@@ -260,7 +264,8 @@ export const questionSlice = createSlice({
         [fetchQuestionRequest.fulfilled]: (state, action) => {
             const response_data = action.payload;
             if (response_data === null) return;
-            let questions = response_data.rows.map(element => {
+            let questions = [];
+            questions = response_data.rows.map(element => {
                 const { id, examId, content, answerA, answerB, answerC, answerD, answerE, result, image } = element;
                 return {
                     id: id,

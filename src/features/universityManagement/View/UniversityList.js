@@ -33,7 +33,9 @@ export default function InteractiveList() {
     const classes = useStyles();
     const dispatch = useDispatch();
 
-    const universitys = useSelector(state => state.university.listUniversitys);
+    let universitys = useSelector(state => state.university.listUniversitys);
+
+
 
     React.useEffect(() => {
         dispatch(fetchUniversityRequest({}));
@@ -72,12 +74,16 @@ export default function InteractiveList() {
                     <div className={classes.demo}>
                         <List style={{ background: "#f2f2f2" }}>
                             {universitys.map((university, index) =>
-                                <UniversityItem
-                                    key={index}
-                                    detailedUniversity={university}
-                                    handleDeleteUniversity={handleDeleteUniversity}
-                                    handleEditUniversity={handleEditUniversity}
-                                />)}
+                                //không show thí sinh tự do 
+                                university.id !== 1 ?
+                                    (<UniversityItem
+                                        key={index}
+                                        detailedUniversity={university}
+                                        handleDeleteUniversity={handleDeleteUniversity}
+                                        handleEditUniversity={handleEditUniversity}
+
+                                    />) : ''
+                            )}
                         </List>
                     </div>
                 </Grid>

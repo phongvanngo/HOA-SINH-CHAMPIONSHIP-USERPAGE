@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import Rank from './../../../../../features/Rank/Rank';
+import Footer from './../../../../User/Footer';
 export default function Leaderboard() {
     useEffect(() => {
         var menuContainer = document.getElementById("MenuUserPage");
@@ -13,6 +14,7 @@ export default function Leaderboard() {
     return (
         <div>
             <Rank />
+            <Footer />
         </div>
     )
 }

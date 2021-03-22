@@ -166,7 +166,7 @@ export const universitySlice = createSlice({
                     university_name: name,
                 }
             }
-            )
+            );
 
             state.listUniversitys = [...universities];
 
