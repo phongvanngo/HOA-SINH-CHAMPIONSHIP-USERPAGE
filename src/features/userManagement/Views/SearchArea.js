@@ -5,7 +5,7 @@ import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import SearchIcon from '@material-ui/icons/Search';
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { searchUserRequest } from './../UserSlice';
 
@@ -36,10 +36,30 @@ const useStyles = makeStyles((theme) => ({
 export default function SearhArea() {
     const classes = useStyles();
     const dispatch = useDispatch();
-    const searchInputRef = useRef(null);
 
-    const handleSumbit = () => {
-        dispatch(searchUserRequest({ userCode: searchInputRef.current.value }));
+    const [findUserCode, setFindUserCode] = useState({
+        code: '',
+        typing: false,
+        typingTimeout: 0,
+    });
+
+    const handleSearch = (e) => {
+
+        if (findUserCode.typingTimeout) {
+            clearTimeout(findUserCode.typingTimeout);
+        };
+
+        setFindUserCode({
+            code: e.target.value,
+            typing: false,
+            typingTimeout: setTimeout(() => {
+                // dispatch(fetchRankSingleRequest({ reloadAll: true, searchValue: e.target.value }));
+                dispatch(searchUserRequest({ userCode: e.target.value }));
+            }, 500)
+        })
+
+
+
     }
 
     return (
@@ -47,22 +67,21 @@ export default function SearhArea() {
             <Paper className={classes.paper}>
                 <div className={classes.headerArea}>
                     <h3 style={{ display: 'inline', verticalAlign: 'bottom', }}>Tìm kiếm</h3>
-                    <Button
+                    {/* <Button
                         className={classes.buttonCreate}
                         variant="contained"
                         color="default"
                         size='small'
-                        onClick={handleSumbit}
                         startIcon={<SearchIcon />}
                     >
                         Tìm
-      </Button>
+      </Button> */}
                 </div>
                 <Divider />
                 <FormControl component="fieldset" style={{ marginTop: '10px', width: '100%' }}>
                     <TextField
                         size="small"
-                        inputRef={searchInputRef}
+                        onChange={handleSearch}
                         id="outlined-basic"
                         style={{ marginTop: '10px' }}
                         variant="outlined" label="Mã dự thi" />
