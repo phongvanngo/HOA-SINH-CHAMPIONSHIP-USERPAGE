@@ -5,7 +5,8 @@ import queryString from 'query-string';
 
 const instance = axios.create({
   // baseURL: 'http://localhost:3000/api/v1',
-  baseURL: 'http://45.119.81.93:3000/api/v1',
+  // baseURL: 'http://45.119.81.93:3000/api/v1',
+  baseURL: 'https://www.api.hoasinhchampionship.com/api/v1',
   headers: {
     'content-type': 'application/json',
   },
