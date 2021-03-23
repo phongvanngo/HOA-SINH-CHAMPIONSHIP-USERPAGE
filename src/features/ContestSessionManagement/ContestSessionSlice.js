@@ -71,9 +71,10 @@ export const updateContestSessionRequest = createAsyncThunk(
         try {
             dispatch(startLoading());
 
-            const { exam_id, name, id } = contestSessionInfo;
+            const { exam_id, name, id, type } = contestSessionInfo;
             const newContestSession = {
                 examId: exam_id,
+                typeId: type,
                 name: name,
             }
 
