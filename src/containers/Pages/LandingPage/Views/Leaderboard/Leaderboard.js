@@ -14,7 +14,6 @@ export default function Leaderboard() {
     return (
         <div>
             <Rank />
-            <Footer />
         </div>
     )
 }

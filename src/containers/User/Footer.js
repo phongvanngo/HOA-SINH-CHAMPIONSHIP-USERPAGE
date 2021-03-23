@@ -6,6 +6,7 @@ import './Footer.scss';
 export default function Copyright() {
     return (
         <div className="user-footer">
+            <div style={{ height: '20px' }}></div>
             <Typography variant="body2" color="textSecondary" align="center">
                 {'Powered by '}
                 <Link target="_blank" color="inherit" href="https://www.facebook.com/webdevstudios.org">

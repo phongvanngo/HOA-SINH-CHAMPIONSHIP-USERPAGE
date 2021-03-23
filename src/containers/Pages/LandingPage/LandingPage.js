@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { PublicRoutes } from './../../../routes.const';
 import './LandingPage.scss';
 import LandingPageView from './Views/LandingPageView';
+import Footer from './../../User/Footer';
 
 
 export default function LandingPage() {
@@ -15,7 +16,10 @@ export default function LandingPage() {
 
     return (
         // <Router>
-        <LandingPageView handleEnterUserPage={handleEnterUserPage} />
+        <React.Fragment>
+            <LandingPageView handleEnterUserPage={handleEnterUserPage} />
+            <Footer />
+        </React.Fragment>
         // </Router >
     )
 }
