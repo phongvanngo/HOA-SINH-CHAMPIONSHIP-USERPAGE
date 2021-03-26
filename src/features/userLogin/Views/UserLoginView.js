@@ -38,7 +38,7 @@ export default function UserLoginView({ handleLogin }) {
                         Đăng nhập
   </Button>
                 </div>
-                <ExamRules />
+
 
             </div>
         </div>

@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
+import ExamRules from '../../../../User/ExamRules/ExamRules';
 import { fetchUserExamRequest, fetchUserExamRequestAgain, checkUserExamStatus } from './../../../../../features/userExam/UserExamSlice';
 import { logout } from './../../../../../features/userLogin/userLoginSlice';
 import { LandingPageRoutes, PublicRoutes } from './../../../../../routes.const';
@@ -56,7 +57,7 @@ export default function Userpage() {
     return (
         <div className="userpage-container">
             <div style={{ height: '30px' }}></div>
-            <div className="card-container">
+            <div className="card-container" style={{ marginBottom: '50px' }}>
                 <div className="card-body">
                     <h2 className="greeting">{`Xin chào ${fullName}`}</h2>
                     <p>Ca thi của bạn: {sessionName}</p>
@@ -93,6 +94,7 @@ export default function Userpage() {
 
                 </div>
             </div>
+            <ExamRules />
         </div>
     )
 }

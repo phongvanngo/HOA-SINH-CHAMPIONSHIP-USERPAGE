@@ -13,7 +13,7 @@ export default function ExamRules() {
                 <Card.Body>
                     <p style={{}}>Trong khung giờ của ca thi đã đăng kí, bạn có thể vào bất cứ lúc nào để hoàn thành bài thi của minh theo bảng đơn/bảng đội. Lưu ý rằng, đúng giờ kết thúc ca thi, bài thi sẽ tự động nộp dù thời gian làm bài thi vẫn còn.</p>
                     <p style={{}}>Đối với các thiết bị di động như điện thoại, máy tính bảng hoặc ipad, thí sinh mở link dẫn đến web thi bằng trình duyệt.</p>
-                    <ul>
+                    <ul style={{ paddingLeft: '40px' }}>
                         <li style={{ lineHeight: 2 }}><strong>Bước 1</strong>: Kiểm tra email, thông tin thí sinh và lấy mã code dự thi</li>
                         <li style={{ lineHeight: 2 }}><strong>Bước 2</strong>: Dán mã code thi vào khung đăng nhập trên web và kiểm tra thông tin thí sinh thi đã chính xác chưa.</li>
                         <li style={{ lineHeight: 2 }}><strong>Bước 3:</strong> Đặt tên đội thi (đối với bảng đội).</li>
@@ -32,7 +32,7 @@ export default function ExamRules() {
                     <p style={{ marginBottom: '10px !important' }}>Thời lượng: 14 phút (bảng đội) và 18 phút (bảng đơn). Hết ca thi, bài thi sẽ được tự động nộp bài dù thời gian thi vẫn còn. Trong khi thi, các thao tác thoát khỏi trang web thi hoặc trình duyệt thi vẫn sẽ được tính trong thời gian làm bài của thí sinh và tự động nộp bài khi hết thời gian.</p>
                     <p style={{ marginBottom: '10px !important' }}>Kết quả thi sẽ không được hiển thị sau khi thí sinh nộp bài, sau khi kết thúc mỗi ca thi kết quả thi sẽ được tự động cập nhật lên “BẢNG XẾP HẠNG” theo bảng thi và khu vực. Các bạn thí sinh nhớ quay lại theo dõi kết quả của mình nhé.</p>
                     <p style={{ marginBottom: '10px !important' }}><strong style={{ fontWeight: 700 }}><em>Nhắc lại các ca thi:</em></strong></p>
-                    <ul>
+                    <ul style={{ paddingLeft: '40px' }}>
                         <li style={{ lineHeight: 2 }}>Ca 1: 6:00 – 11:00</li>
                         <li style={{ lineHeight: 2 }}>Ca 2: 14:00 – 18:00</li>
                         <li style={{ lineHeight: 2 }}>Ca 3: 19:00 – 23:59</li>
@@ -48,7 +48,7 @@ export default function ExamRules() {
                     <div style={{}}>
                         <p><span style={{}}><strong><em>Lỗi hệ thống thi</em></strong></span></p>
                     </div>
-                    <ul>
+                    <ul style={{ paddingLeft: '40px' }}>
                         <li style={{ marginTop: '0in', marginRight: '0in', marginBottom: '8pt', lineHeight: '107%' }}><span style={{}}>Out khỏi hệ thống thi đột ngột&nbsp;</span></li>
                         <li style={{ marginTop: '0in', marginRight: '0in', marginBottom: '8pt', lineHeight: '107%' }}><span style={{}}>Đã nộp bài nhưng hệ thống ghi nhận là “chưa nộp”</span></li>
                         <li style={{ marginTop: '0in', marginRight: '0in', marginBottom: '8pt', lineHeight: '107%' }}><span style={{}}>Lỗi hiển thi câu hỏi hay đáp án</span></li>
@@ -58,7 +58,7 @@ export default function ExamRules() {
                     <div style={{}}>
                         <p><span style={{}}><strong><em>Lỗi bất khả thi</em></strong></span></p>
                     </div>
-                    <ul>
+                    <ul style={{ paddingLeft: '40px' }}>
                         <li style={{ marginTop: '0in', marginRight: '0in', marginBottom: '8pt', lineHeight: '107%' }}><span style={{}}>Thí sinh đang làm bài thi nhưng gặp phải tình trạng rớt mạng hoặc cúp điện</span></li>
                         <li style={{ marginTop: '0in', marginRight: '0in', marginBottom: '8pt', lineHeight: '107%' }}><span style={{}}>Trường hợp này chúng mình cũng sẽ xem xét xử lí, &nbsp;nhưng biện pháp tốt nhất là các bạn lưu lại bằng chứng nhé, chúng minh sẽ căn cứ dựa trên đó và quyết định.</span></li>
                     </ul>
