@@ -132,12 +132,12 @@ export default function CustomPaginationActionsTable() {
                 <TableHead>
                     <TableRow>
                         <TableCell style={{ width: '5%' }} align="center" ></TableCell>
-                        <TableCell style={{ width: '20%' }} align="center">Mã dự thi</TableCell>
-                        <TableCell style={{ width: '30%' }} align="center">Tên thí sinh (tên đội)</TableCell>
-                        <TableCell style={{ width: '10%' }} align="center">
+                        <TableCell style={{ width: '10%' }} align="center">Mã dự thi</TableCell>
+                        <TableCell style={{ width: '25%' }} align="center">Tên thí sinh (tên đội)</TableCell>
+                        <TableCell style={{ width: '15%' }} align="center">
                             Ca thi
                         </TableCell>
-                        <TableCell style={{ width: '10%' }} align="center">
+                        <TableCell style={{ width: '20%' }} align="center">
                             Đơn vị thi
                         </TableCell>
 
