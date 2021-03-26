@@ -51,7 +51,7 @@ export default function LandingpageView({ handleEnterUserPage }) {
                             <Link to={CONTACT} className="menu-item contact">Liên hệ</Link>
                         </li>
                         <li>
-                            <Link to={USER} className="menu-item signin">Cá nhân</Link>
+                            <Link to={USER} className="menu-item signin">Vào thi</Link>
                         </li>
                     </ul>
 

@@ -5,7 +5,7 @@ import "./ExamRules.scss";
 
 export default function ExamRules() {
     return (
-        <div className="exam-rules-container" style={{ maxWidth: '700px', margin: 'auto' }}>
+        <div className="exam-rules-container" style={{ maxWidth: '700px', margin: 'auto', fontSize: "0.8rem" }}>
             <Card style={{ marginBottom: '10px' }}>
                 <Card.Header>
                     CÁCH ĐĂNG NHẬP LÀM BÀI THI

@@ -21,7 +21,7 @@ export default function Contact() {
                             <h5 className="greeting">Fanpage</h5>
                             <p><a target='_blank' href="https://www.facebook.com/hoasinhcps/"><span style={{}}>Hóa Sinh Championship</span></a></p>
                             <h5 className="greeting">Email</h5>
-                            <p><a href="mailto:hoasinhchampionship.ump@gmail.com"><span style={{}}>hoasinhchampionship.ump@gmail.com</span></a></p>
+                            <p><a href="mailto:hoasinhchampionship.ump@gmail.com"><span style={{ overflowWrap: 'break-word' }}>hoasinhchampionship.ump@gmail.com</span></a></p>
                         </div>
                     </div>
                 </div>
