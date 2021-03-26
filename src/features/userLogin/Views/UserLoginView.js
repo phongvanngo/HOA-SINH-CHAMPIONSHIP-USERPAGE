@@ -1,6 +1,7 @@
 import React, { useRef, useEffect } from 'react'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import ExamRules from './../../../containers/User/ExamRules/ExamRules';
 
 import './UserLoginView.scss';
 export default function UserLoginView({ handleLogin }) {
@@ -37,7 +38,7 @@ export default function UserLoginView({ handleLogin }) {
                         Đăng nhập
   </Button>
                 </div>
-
+                <ExamRules />
 
             </div>
         </div>
