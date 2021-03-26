@@ -37,7 +37,6 @@ export const fetchQuestionRequest = createAsyncThunk(
             dispatch(startLoading());
             let response = await questionApi.getQuestionData(examId);
             dispatch(stopLoading());
-            console.log(response);
             switch (response.status) {
                 case 200:
                     dispatch(notify({ message: "Lấy dữ liệu thành công", options: { variant: 'success' } }));

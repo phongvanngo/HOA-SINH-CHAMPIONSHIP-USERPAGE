@@ -12,7 +12,7 @@ import { deleteUserRequest, updateUser } from './../UserSlice';
 const ITEM_HEIGHT = 48;
 
 export default function UserItem({ detailedUser, index }) {
-    const { id, code, name, score, time, historyQues } = detailedUser;
+    const { id, code, name, score, time, historyQues, sessionName, universityName } = detailedUser;
 
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
@@ -49,9 +49,12 @@ export default function UserItem({ detailedUser, index }) {
                 <TableCell align="center">
                     {name}
                 </TableCell>
-                {/* <TableCell align="center">
+                <TableCell align="center">
                     {sessionName}
-                </TableCell> */}
+                </TableCell>
+                <TableCell align="center">
+                    {universityName}
+                </TableCell>
                 <TableCell align="center">
                     {
                         score === null && historyQues ? (<span style={{ color: 'green' }}>chưa nộp bài</span>) :

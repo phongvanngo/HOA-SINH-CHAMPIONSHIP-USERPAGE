@@ -1,7 +1,13 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { notify } from './../../common/component/Notifier/notifierSlice';
 import { userApi } from './UserApi';
+import { universityApi } from './../universityManagement/UniversityApi';
+import { contestSessionApi } from './../ContestSessionManagement/ContestSessionApi';
+
 import { startLoading, stopLoading } from './../../common/component/PageLoader/loadingSlice';
+
+let list_universities = null;
+let list_constest_sessions = null;
 
 export const fetchUserRequest = createAsyncThunk(
     'user/fetchUserStatus',
@@ -10,12 +16,20 @@ export const fetchUserRequest = createAsyncThunk(
         const { dispatch } = thunkApi;
         try {
             dispatch(startLoading());
+            if (list_universities === null) {
+                const universities_data = await universityApi.getUniversityData();
+                list_universities = universities_data.data.rows;
+            }
+            if (list_constest_sessions === null) {
+                const contest_session = await contestSessionApi.getContestSessionData();
+                list_constest_sessions = contest_session.data.rows;
+            }
             let response = await userApi.getUserData({ page, pageSize, sessionID });
             dispatch(stopLoading());
             switch (response.status) {
                 case 200:
                     dispatch(notify({ message: "Lấy dữ liệu thành công", options: { variant: 'success' } }));
-                    return response.data;
+                    return { ...response.data };
                 case 404:
                     throw new Error("Unauthorized");
                 default:
@@ -223,7 +237,9 @@ export const userSlice = createSlice({
             if (response_data === null) return;
             let { rows, count } = response_data;
             let users = rows.map(element => {
-                const { code, fullName, id, score, time, historyQues } = element;
+                const { code, fullName, id, score, time, historyQues, universityId, sessionId } = element;
+                let userUniversity = list_universities.find(element => element.id === universityId);
+                let userSessions = list_constest_sessions.find(element => element.id === sessionId);
                 return {
                     id: id,
                     code: code,
@@ -231,8 +247,11 @@ export const userSlice = createSlice({
                     score: score,
                     time: time,
                     historyQues,
+                    universityName: userUniversity ? userUniversity.name : null,
+                    sessionName: userSessions ? userSessions.name : null,
                 }
             })
+
 
             state.totalUsers = count;
             state.listUsers = [...users];
@@ -287,7 +306,9 @@ export const userSlice = createSlice({
 
 
             const newListUsers = data.map((user) => {
-                const { id, code, fullName } = user;
+                const { id, code, fullName, universityId, sessionId } = user;
+                let userUniversity = list_universities.find(element => element.id === universityId);
+                let userSessions = list_constest_sessions.find(element => element.id === sessionId);
                 return {
                     id: id,
                     code: code,
@@ -295,6 +316,8 @@ export const userSlice = createSlice({
                     historyAns: "",
                     time: null,
                     score: null,
+                    universityName: userUniversity ? userUniversity.name : null,
+                    sessionName: userSessions ? userSessions.name : null,
                 }
             });
 
