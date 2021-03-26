@@ -1,6 +1,6 @@
 import React, { lazy } from 'react';
 import { Redirect, Route, Switch, useRouteMatch } from 'react-router-dom';
-import { DashboardRoutes } from "./../../../../routes.const";
+import { PublicRoutes, DashboardRoutes } from "./../../../../routes.const";
 
 const ExamManagement = lazy(() => import('./../../../../features/examManagement/ExamManagement'));
 const QuestionManagement = lazy(() => import('./../../../../features/questionManagement/QuestionManagement'));
@@ -18,6 +18,7 @@ export default function MainArea() {
         <React.Fragment>
             <Switch>
                 <Redirect exact from={match.url} to={COMPETITION_MANAGEMENT} />
+                <Redirect exact from={PublicRoutes.ADMIN_DASHBOARD} to={COMPETITION_MANAGEMENT} />
                 <Route path={COMPETITION_MANAGEMENT} component={ContestSessionManagement} />
                 <Route path={EXAM_MANAGEMENT} component={ExamManagement} />
                 <Route path={`${QUESTION_MANAGEMENT}/:exam_id`} component={QuestionManagement} />

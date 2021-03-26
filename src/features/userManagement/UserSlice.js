@@ -260,16 +260,19 @@ export const userSlice = createSlice({
             const response_data = action.payload;
             if (response_data === null) return;
             let { rows, count, searchingUserCode } = response_data;
-
             let users = rows.map(element => {
-                const { code, fullName, id, score, time, historyQues } = element;
+                const { code, fullName, id, score, time, historyQues, sessionId, universityId } = element;
+                let userUniversity = list_universities.find(element => element.id === universityId);
+                let userSessions = list_constest_sessions.find(element => element.id === sessionId);
                 return {
                     id: id,
                     code: code,
                     name: fullName,
                     score: score,
                     time: time,
-                    historyQues
+                    historyQues,
+                    universityName: userUniversity ? userUniversity.name : null,
+                    sessionName: userSessions ? userSessions.name : null,
                 }
             })
 

@@ -81,13 +81,13 @@ export default function SingleRank() {
                             <div className="title">Bảng cá nhân</div>
                             {/* <li className="active" data-li="month">Month</li>
                                 <li data-li="year">Year</li> */}
-                            <div className="input-search">
+                            {/* <div className="input-search">
                                 <input
                                     onChange={(e) => {
                                         handleSearch(e)
                                     }}
                                     placeholder="Tìm kiếm theo mã dự thi" />
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </div>

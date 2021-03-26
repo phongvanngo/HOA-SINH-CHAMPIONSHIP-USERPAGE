@@ -129,9 +129,9 @@ export default function TeamRank() {
                                 </div>
                                 {/* <li className="active" data-li="month">Month</li>
                                 <li data-li="year">Year</li> */}
-                                <div className="input-search">
+                                {/* <div className="input-search">
                                     <input onChange={handleSearch} placeholder="Tìm kiếm" />
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                     </div>
