@@ -9,6 +9,7 @@ const AdminSignIn = lazy(() => import('./containers/Pages/AdminSignIn/AdminSignI
 const NotFound = lazy(() => import('./containers/Pages/NotFound/NotFound'));
 const LandingPage = lazy(() => import('./containers/Pages/LandingPage/LandingPage'));
 const UserExam = lazy(() => import('./features/userExam/UserExam'));
+const RunningStation = lazy(() => import('./features/RunningStation/RunningStation'));
 
 const { HOMEPAGE, LEADERBOARD, USER_LOGIN, CONTACT, USER } = LandingPageRoutes;
 
@@ -36,6 +37,7 @@ export default function AppRoutes() {
                     </PrivateRoute>
                     <Route path={PublicRoutes.ADMIN_SIGNIN} component={AdminSignIn} exact={true} />
                     <Route path={PublicRoutes.TEST} component={UserExam} />
+                    <Route path={PublicRoutes.RUNNING_STATION} component={RunningStation} />
                     <Route path={HOMEPAGE} component={LandingPage} />
                     <Route path={USER_LOGIN} component={LandingPage} />
                     <Route path={USER} component={LandingPage} />

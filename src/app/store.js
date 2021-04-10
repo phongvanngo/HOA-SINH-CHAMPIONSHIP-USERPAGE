@@ -12,6 +12,7 @@ import userLoginReducer from './../features/userLogin/userLoginSlice';
 import userExamReducer from '../features/userExam/UserExamSlice';
 import competitionTypeReducer from './../features/CompetitionType/CompetitionTypeSlice';
 import rankReducer from './../features/Rank/RankSlice';
+import runningStationReducer from './../features/RunningStation/RunningStationSlice';
 export default configureStore({
   reducer: {
     counter: counterReducer,
@@ -27,5 +28,6 @@ export default configureStore({
     userExam: userExamReducer,
     competitionType: competitionTypeReducer,
     rank: rankReducer,
+    runningStation: runningStationReducer,
   },
 });
