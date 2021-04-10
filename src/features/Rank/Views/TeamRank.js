@@ -25,12 +25,12 @@ const TeamRankItem = ({ detailedUser }) => {
             </div>
             <div className="points">
                 {
-                    score === null && historyQues ? (<span style={{ color: 'green' }}>chưa nộp bài</span>) :
+                    score === null && historyQues ? (<span style={{ color: 'green' }}>0</span>) :
                         score === null && time === null ? (<span style={{ color: 'red' }}>chưa thi</span>) : score
                 }
             </div>
             <div className="time">
-                {time === null && historyQues ? (<span style={{ color: 'green' }}>chưa nộp bài</span>) :
+                {time === null && historyQues ? (<span style={{ color: 'green' }}>0</span>) :
                     time === null && time === null ? (<span style={{ color: 'red' }}>chưa thi</span>) : millisToMinutesAndSeconds(time)
                 }
             </div>
