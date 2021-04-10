@@ -5,7 +5,7 @@ import { startLoading, stopLoading } from './../../common/component/PageLoader/l
 import { StarRateSharp } from "@material-ui/icons";
 import { closeUniversityFormDialog } from "../universityManagement/UniversitySlice";
 
-const rowsPerPageRank = 10;
+const rowsPerPageRank = 30;
 
 export const fetchRankSingleRequest = createAsyncThunk(
     'rank/fetchRankSingleStatus',
