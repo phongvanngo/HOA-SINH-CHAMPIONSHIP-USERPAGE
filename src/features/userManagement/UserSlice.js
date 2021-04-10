@@ -141,8 +141,8 @@ export const updateUserRequest = createAsyncThunk(
             dispatch(startLoading());
 
             //transfer schema
-            const { id, name } = userInfo;
-            const newUser = { fullName: name };
+            const { id, name, sessionId } = userInfo;
+            const newUser = { fullName: name, sessionId: sessionId };
 
 
             const response = await userApi.patchUserInfo(newUser, id);
@@ -249,6 +249,7 @@ export const userSlice = createSlice({
                     historyQues,
                     universityName: userUniversity ? userUniversity.name : null,
                     sessionName: userSessions ? userSessions.name : null,
+                    sessionId: sessionId,
                 }
             })
 
@@ -273,6 +274,7 @@ export const userSlice = createSlice({
                     historyQues,
                     universityName: userUniversity ? userUniversity.name : null,
                     sessionName: userSessions ? userSessions.name : null,
+                    sessionId: sessionId,
                 }
             })
 
@@ -286,6 +288,7 @@ export const userSlice = createSlice({
             if (response_data === null) return;
 
             const { data, userInfo } = response_data;
+            console.log(userInfo);
             const { id } = data;
             const newListUsers = [
                 {
@@ -321,6 +324,7 @@ export const userSlice = createSlice({
                     score: null,
                     universityName: userUniversity ? userUniversity.name : null,
                     sessionName: userSessions ? userSessions.name : null,
+                    sessionId: sessionId,
                 }
             });
 
@@ -343,11 +347,13 @@ export const userSlice = createSlice({
             if (response_data === null) return;
 
             const { userInfo } = response_data;
+            let userSessions = list_constest_sessions.find(element => element.id === userInfo.sessionId);
             const newListUsers = state.listUsers.map((user) => {
                 if (user.id === userInfo.id)
                     return {
                         ...user,
-                        ...userInfo
+                        ...userInfo,
+                        sessionName: userSessions ? userSessions.name : null,
                     }
                 else
                     return { ...user };

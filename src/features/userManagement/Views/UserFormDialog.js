@@ -5,6 +5,8 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
 import React, { useEffect, useRef, useState } from 'react';
+import FormControl from '@material-ui/core/FormControl';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 import { useDispatch, useSelector } from 'react-redux';
 import { closeUserFormDialog, updateUserRequest } from '../UserSlice';
 export default function UserFormDialog() {
@@ -13,8 +15,12 @@ export default function UserFormDialog() {
     let user = useSelector(state => state.user.userEditing);
     const dispatch = useDispatch();
 
-    const { id, name } = user || {};
+    let listContestSessions = useSelector(state => state.contestSession.listContestSessions) || [];
 
+
+    const { id, name, sessionId } = user || {};
+
+    let newSessionId = sessionId;
 
     const userNameInputRef = useRef(null);
 
@@ -46,16 +52,17 @@ export default function UserFormDialog() {
 
     }, [flag])
 
+
     const CheckValidInput = (dataSubmit) => {
         let valid = true;
         let validInputDetail = inititalValidInput;
         const { name } = dataSubmit;
 
 
-        if (name.trim() === "") {
-            valid = false;
-            validInputDetail.userName = false;
-        }
+        // if (name.trim() === "") {
+        //     valid = false;
+        //     validInputDetail.userName = false;
+        // }
 
 
         if (valid === false) {
@@ -74,6 +81,7 @@ export default function UserFormDialog() {
         const dataSubmit = {
             id: id,
             name: userNameInputRef.current.value,
+            sessionId: newSessionId
         }
 
         if (CheckValidInput(dataSubmit) === true) {
@@ -83,8 +91,11 @@ export default function UserFormDialog() {
         }
     }
 
-    if (isOpen === false) return null;
+    const handleChangeSession = (event, newValue) => {
+        newSessionId = newValue.id;
+    }
 
+    if (isOpen === false) return null;
 
     return (
         <div>
@@ -105,6 +116,17 @@ export default function UserFormDialog() {
                         error={!validInput.userName}
                         helperText={!validInput.userName ? "Dữ liệu không được để trống" : ""}
                     />
+                    <FormControl component="fieldset" style={{ marginTop: '10px', width: "100%" }}>
+                        <Autocomplete
+                            defaultValue={listContestSessions.find(session => session.id === sessionId)}
+                            id="combo-box-demo"
+                            options={listContestSessions}
+                            onChange={handleChangeSession}
+                            getOptionLabel={(option) => option.name}
+                            style={{ width: '100%', marginTop: '10px' }}
+                            renderInput={(params) => <TextField size="small" {...params} variant="outlined" label="Ca thi" />}
+                        />
+                    </FormControl>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose} color="primary">
