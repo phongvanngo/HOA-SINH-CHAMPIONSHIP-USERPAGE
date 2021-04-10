@@ -58,13 +58,6 @@ export default function UserFormDialog() {
         let validInputDetail = inititalValidInput;
         const { name } = dataSubmit;
 
-
-        // if (name.trim() === "") {
-        //     valid = false;
-        //     validInputDetail.userName = false;
-        // }
-
-
         if (valid === false) {
             setValidInput(validInputDetail);
             return false;
