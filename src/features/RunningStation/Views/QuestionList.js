@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import QuestionItem from './QuestionItem';
 import { shuffleArray } from '../../../app/utilities';
+import QuestionItem from './QuestionItem';
 
 
 export default function QuestionList() {

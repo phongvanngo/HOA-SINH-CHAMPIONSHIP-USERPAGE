@@ -12,7 +12,7 @@ export default function ListTitleQuestion() {
         <div className="list-title-question">
             {listQuestions.map((question, index) => {
                 return (
-                    <TitleQuestionItem key={index} detailedQuestion={{ ...question, index: index + 1 }} />
+                    <TitleQuestionItem key={question.id} detailedQuestion={{ ...question, index: index + 1 }} />
                 )
             })
             }

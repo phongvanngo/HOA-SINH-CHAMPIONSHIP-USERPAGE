@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, current } from "@reduxjs/toolkit";
 import { notify } from '../../common/component/Notifier/notifierSlice';
 import { runningStationApi } from './RunningStationApi';
 import { startLoading, stopLoading } from '../../common/component/PageLoader/loadingSlice';
@@ -140,8 +140,8 @@ export const runningStationSlice = createSlice({
 
         //running station
         listQuestions: fakeListQuestions,
-        currentQuestionId: 33,
-
+        timeRemaining: fakeListQuestions.map(question => ({ id: question.id, time: question.time })),
+        currentQuestion: { ...fakeListQuestions[0], index: 1, timeRemaining: fakeListQuestions[0].time },
 
     },
 
@@ -173,8 +173,8 @@ export const runningStationSlice = createSlice({
         //use
         changeQuestion: (state, action) => {
             const question = action.payload;
-            state.currentQuestionId = question?.id;
-            state.currentQuestion = question || {};
+            state.currentQuestion = { ...question, timeRemaining: state.timeRemaining.find(element => element.id === question.id) };
+            console.log(action.payload);
         }
     },
 

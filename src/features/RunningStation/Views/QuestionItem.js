@@ -7,6 +7,8 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { choseAnswer, openImageDialog } from '../RunningStationSlice';
 import './QuestionItem.scss';
+import { useSelector } from 'react-redux'
+import { shuffleArray } from '../../../app/utilities';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -21,8 +23,14 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function QuestionItem({ detailedQuestion }) {
-    const { questionId, content, index, image, listAnswers } = detailedQuestion;
+export default function QuestionItem() {
+    const currentQuestion = useSelector(state => state.runningStation.currentQuestion)
+    const { id, content, answerA, answerB, answerC, answerD, answerE, image, index } = currentQuestion;
+    let listAnswers = [{ ans: 'A', content: answerA }, { ans: 'B', content: answerB }];
+    if (answerC !== null && answerC !== "") listAnswers = [...listAnswers, { ans: 'C', content: answerC }];
+    if (answerD !== null && answerD !== "") listAnswers = [...listAnswers, { ans: 'D', content: answerD }];
+    if (answerE !== null && answerE !== "" && answerE !== undefined) listAnswers = [...listAnswers, { ans: 'E', content: answerE }];
+    listAnswers = shuffleArray(listAnswers);
     const dispatch = useDispatch();
     const classes = useStyles();
 
@@ -30,7 +38,7 @@ export default function QuestionItem({ detailedQuestion }) {
 
     const handleChange = (event) => {
         setUserAnswer(event.target.value);
-        dispatch(choseAnswer({ id: questionId, ans: event.target.value }));
+        dispatch(choseAnswer({ id: id, ans: event.target.value }));
     };
 
     return (

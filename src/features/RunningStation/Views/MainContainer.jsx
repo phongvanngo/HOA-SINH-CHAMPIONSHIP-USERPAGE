@@ -7,6 +7,7 @@ import { submitUserAnswers } from '../RunningStationSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import Countdown from './Countdown';
 import ListTitleQuestion from './ListTitleQuestion';
+import QuestionItem from './QuestionItem';
 
 
 export default function MainContainer() {
@@ -58,10 +59,11 @@ export default function MainContainer() {
 
                 <div className="main-content">
                     <div className="question-area">
-                        <QuestionList />
+                        {/* <QuestionList /> */}
+                        <QuestionItem />
                     </div>
                     <div className="footer-exam">
-                        <Button
+                        {/* <Button
                             onClick={() => {
                                 if (window.confirm('Bạn có chắc chắn nộp và kết thúc bài làm ?')) {
                                     dispatch(submitUserAnswers({}))
@@ -70,7 +72,7 @@ export default function MainContainer() {
                             }
                             variant="contained" color="secondary">
                             Nộp bài
-</Button>
+</Button> */}
                     </div>
                 </div>
             </div>
