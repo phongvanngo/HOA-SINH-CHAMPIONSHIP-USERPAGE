@@ -1,19 +1,20 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { notify } from '../../common/component/Notifier/notifierSlice';
-import { userExamApi } from './UserExamApi';
+import { runningStationApi } from './RunningStationApi';
 import { startLoading, stopLoading } from '../../common/component/PageLoader/loadingSlice';
-import { deactiveUser } from './../userLogin/userLoginSlice';
+import { deactiveUser } from '../userLogin/userLoginSlice';
+
+import { fakeListQuestions } from './fakedata';
 
 
-
-export const fetchUserExamRequest = createAsyncThunk(
-    'userExam/fetchUserExamStatus',
+export const fetchRunningStationRequest = createAsyncThunk(
+    'runningStation/fetchRunningStationStatus',
     async (params, thunkApi) => {
         //nếu không có tham số thứ nhất thì ko dispatch được ?????
         const { dispatch } = thunkApi;
         try {
             dispatch(startLoading());
-            let response = await userExamApi.getUserExam();
+            let response = await runningStationApi.getRunningStation();
 
             dispatch(stopLoading());
             switch (response.status) {
@@ -33,14 +34,14 @@ export const fetchUserExamRequest = createAsyncThunk(
         }
     }
 );
-export const fetchUserExamRequestAgain = createAsyncThunk(
-    'userExam/fetchUserExamStatusAgain',
+export const fetchRunningStationRequestAgain = createAsyncThunk(
+    'runningStation/fetchRunningStationStatusAgain',
     async (params, thunkApi) => {
         //nếu không có tham số thứ nhất thì ko dispatch được ?????
         const { dispatch } = thunkApi;
         try {
             dispatch(startLoading());
-            let response = await userExamApi.getUserExam();
+            let response = await runningStationApi.getRunningStation();
 
             dispatch(stopLoading());
             switch (response.status) {
@@ -60,14 +61,14 @@ export const fetchUserExamRequestAgain = createAsyncThunk(
         }
     }
 );
-export const checkUserExamStatus = createAsyncThunk(
-    'userExam/checkUserExamStatus',
+export const checkRunningStationStatus = createAsyncThunk(
+    'runningStation/checkRunningStationStatus',
     async (params, thunkApi) => {
         //nếu không có tham số thứ nhất thì ko dispatch được ?????
         const { dispatch } = thunkApi;
         try {
             dispatch(startLoading());
-            let response = await userExamApi.getUserExamStatus();
+            let response = await runningStationApi.getRunningStationStatus();
 
             dispatch(stopLoading());
             switch (response.status) {
@@ -91,17 +92,17 @@ export const checkUserExamStatus = createAsyncThunk(
 
 
 export const submitUserAnswers = createAsyncThunk(
-    'userExam/createUserExamStatus',
+    'runningStation/createRunningStationStatus',
     async (params, thunkApi) => {
         const { dispatch, getState } = thunkApi;
 
         try {
             dispatch(startLoading());
-            const userAnswers = getState().userExam.userAnswers;
+            const userAnswers = getState().runningStation.userAnswers;
             //transfer schema
-            const response = await userExamApi.putUserAnswer(userAnswers);
+            const response = await runningStationApi.putUserAnswer(userAnswers);
             dispatch(stopLoading());
-            switch (response.status) {
+            switch (response?.status) {
                 case 200:
                     dispatch(notify({ message: "Nộp bài thi thành công", options: { variant: 'success', autoHideDuration: 3000, } }));
                     dispatch(deactiveUser());
@@ -118,25 +119,29 @@ export const submitUserAnswers = createAsyncThunk(
         }
     });
 
-export const userExamSlice = createSlice({
-    name: 'userExam',
+export const runningStationSlice = createSlice({
+    name: 'runningStation',
     initialState: {
         // listQuestions:null,
         // listAnswers:null,
         // timeStart:null,
         // timeToDo: null,
-        // detailedUserExam: fakeDetailedExam,
+        // detailedRunningStation: fakeDetailedExam,
         // listQuestions: fakeListQuestions,
 
-        detailedUserExam: null,
-        listQuestions: null,
+        detailedRunningStation: {},
         userAnswers: null,
         time: null,
         timeStart: null,
         openingImage: null,
         isTimeOutDialogOpen: false,
-        userExamStatus: null,
+        runningStationStatus: null,
         timeToDo: null,
+
+        //running station
+        listQuestions: fakeListQuestions,
+        currentQuestionId: 33,
+
 
     },
 
@@ -163,20 +168,25 @@ export const userExamSlice = createSlice({
         },
 
         closeTimeOutDialog: (state) => {
-            // state.isTimeOutDialogOpen = false;
+            state.isTimeOutDialogOpen = false;
+        },
+        //use
+        changeQuestion: (state, action) => {
+            const question = action.payload;
+            state.currentQuestionId = question?.id;
+            state.currentQuestion = question || {};
         }
-
     },
 
     extraReducers: {
-        [fetchUserExamRequest.fulfilled]: (state, action) => {
+        [fetchRunningStationRequest.fulfilled]: (state, action) => {
             const response_data = action.payload;
             if (response_data === null) return;
 
             const { questions, timeServerStart, time } = response_data;
             const listAnswers = questions.map((element) => { return { id: element.id, ans: null } });
 
-            state.detailedUserExam = response_data;
+            state.detailedRunningStation = response_data;
             state.listQuestions = questions;
             state.timeStart = timeServerStart;
             state.time = time * 60;
@@ -184,7 +194,7 @@ export const userExamSlice = createSlice({
             state.userAnswers = listAnswers;
         },
 
-        [fetchUserExamRequestAgain.fulfilled]: (state, action) => {
+        [fetchRunningStationRequestAgain.fulfilled]: (state, action) => {
             const response_data = action.payload;
             if (response_data === null) return;
 
@@ -196,7 +206,7 @@ export const userExamSlice = createSlice({
 
 
 
-            state.detailedUserExam = response_data;
+            state.detailedRunningStation = response_data;
             state.listQuestions = questions;
             state.timeStart = timeServerStart;
             state.timeToDo = time;
@@ -205,32 +215,31 @@ export const userExamSlice = createSlice({
         },
         [submitUserAnswers.fulfilled]: (state, action) => {
             if (action.payload === null) return;
-            state.isTimeOutDialogOpen = false;
-            state.detailedUserExam = null;
+            state.detailedRunningStation = null;
         },
-        [checkUserExamStatus.fulfilled]: (state, action) => {
+        [checkRunningStationStatus.fulfilled]: (state, action) => {
             const { message } = action.payload;
 
             switch (message) {
                 case "User had submited this exam":
-                    state.userExamStatus = 2;
+                    state.runningStationStatus = 2;
                     break;
 
                 case "You are doing exam":
-                    state.userExamStatus = 1;
+                    state.runningStationStatus = 1;
                     break
 
                 case "you already to start exam":
-                    state.userExamStatus = 0;
+                    state.runningStationStatus = 0;
                     break;
 
 
                 case "This exam is current not available":
-                    state.userExamStatus = 3;
+                    state.runningStationStatus = 3;
                     break;
 
                 case "It's over time":
-                    state.userExamStatus = 2;
+                    state.runningStationStatus = 2;
                     break;
 
                 default:
@@ -243,6 +252,6 @@ export const userExamSlice = createSlice({
     }
 })
 
-export const { closeTimeOutDialog, timeOut, openImageDialog, closeImageDialog, choseAnswer } = userExamSlice.actions;
+export const { changeQuestion, closeTimeOutDialog, timeOut, openImageDialog, closeImageDialog, choseAnswer } = runningStationSlice.actions;
 
-export default userExamSlice.reducer;
+export default runningStationSlice.reducer;
