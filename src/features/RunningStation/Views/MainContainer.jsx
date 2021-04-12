@@ -6,6 +6,7 @@ import Button from '@material-ui/core/Button';
 import { submitUserAnswers } from '../RunningStationSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import Countdown from './Countdown';
+import ListTitleQuestion from './ListTitleQuestion';
 
 
 export default function MainContainer() {
@@ -35,9 +36,19 @@ export default function MainContainer() {
             <HeaderBar />
             <div style={{ height: '20vh' }}></div>
             <div className="MainArea">
-                <div className="greeting-area">
-                    <h2>Bài thi HÓA SINH CHAMPIONISHIP 2021</h2>
-                    <p>Thời gian làm bài: <span>{`${timeToDo} phút`}</span></p>
+                <div className="right-area">
+                    <div className="title-area">
+                        <div className="title">
+                            <p>Bài thi vòng 2</p>
+                            <p>HÓA SINH CHAMPIONSHIP</p>
+                        </div>
+                        <div className="question-divider">
+                            <div className="divider-text">Danh sách câu hỏi </div>
+                        </div>
+                    </div>
+                    <div className="list-title-question-area">
+                        <ListTitleQuestion />
+                    </div>
                 </div>
                 <div className="time-container">
                     <div id="timeArea">

@@ -7,7 +7,6 @@ import { deactiveUser } from '../userLogin/userLoginSlice';
 import { fakeListQuestions } from './fakedata';
 
 
-
 export const fetchRunningStationRequest = createAsyncThunk(
     'runningStation/fetchRunningStationStatus',
     async (params, thunkApi) => {
@@ -131,7 +130,6 @@ export const runningStationSlice = createSlice({
         // listQuestions: fakeListQuestions,
 
         detailedRunningStation: {},
-        listQuestions: fakeListQuestions,
         userAnswers: null,
         time: null,
         timeStart: null,
@@ -139,6 +137,11 @@ export const runningStationSlice = createSlice({
         isTimeOutDialogOpen: false,
         runningStationStatus: null,
         timeToDo: null,
+
+        //running station
+        listQuestions: fakeListQuestions,
+        currentQuestionId: 33,
+
 
     },
 
@@ -166,8 +169,13 @@ export const runningStationSlice = createSlice({
 
         closeTimeOutDialog: (state) => {
             state.isTimeOutDialogOpen = false;
+        },
+        //use
+        changeQuestion: (state, action) => {
+            const question = action.payload;
+            state.currentQuestionId = question?.id;
+            state.currentQuestion = question || {};
         }
-
     },
 
     extraReducers: {
@@ -244,6 +252,6 @@ export const runningStationSlice = createSlice({
     }
 })
 
-export const { closeTimeOutDialog, timeOut, openImageDialog, closeImageDialog, choseAnswer } = runningStationSlice.actions;
+export const { changeQuestion, closeTimeOutDialog, timeOut, openImageDialog, closeImageDialog, choseAnswer } = runningStationSlice.actions;
 
 export default runningStationSlice.reducer;
