@@ -29,7 +29,7 @@ const SingleRankItem = ({ detailedUser }) => {
             <div className="time">{
 
 
-                time === null && historyQues ? (<span style={{ color: 'green' }}>0</span>) :
+                time === null && historyQues ? (<span style={{ color: 'green' }}>20:00</span>) :
                     time === null && time === null ? (<span style={{ color: 'red' }}>chưa thi</span>) : millisToMinutesAndSeconds(time)
 
             }</div>
