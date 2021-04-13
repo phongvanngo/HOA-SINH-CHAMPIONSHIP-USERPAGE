@@ -173,7 +173,8 @@ export const runningStationSlice = createSlice({
         //use
         changeQuestion: (state, action) => {
             const question = action.payload;
-            state.currentQuestion = { ...question, timeRemaining: state.timeRemaining.find(element => element.id === question.id) };
+            let timeRemaining = state.timeRemaining.find(element => element.id === question.id);
+            state.currentQuestion = { ...question, timeRemaining: timeRemaining?.time };
             console.log(action.payload);
         }
     },
