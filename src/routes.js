@@ -36,7 +36,7 @@ export default function AppRoutes() {
                         <Dashboard />
                     </PrivateRoute>
                     <Route path={PublicRoutes.ADMIN_SIGNIN} component={AdminSignIn} exact={true} />
-                    <Route path={PublicRoutes.TEST} component={UserExam} />
+                    <Route path={PublicRoutes.TEST} component={RunningStation} />
                     <Route path={PublicRoutes.RUNNING_STATION} component={RunningStation} />
                     <Route path={HOMEPAGE} component={LandingPage} />
                     <Route path={USER_LOGIN} component={LandingPage} />

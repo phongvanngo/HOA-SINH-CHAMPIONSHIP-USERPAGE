@@ -9,14 +9,14 @@ import TimeOutDialog from './Views/TimeOutDialog';
 
 
 export default function RunningStation() {
-    const detailedRunningStation = useSelector(state => state.runningStation.detailedRunningStation)
+    const listQuestions = useSelector(state => state.runningStation.listQuestions)
 
 
     useEffect(() => {
         // if (detailedRunningStation === null) setIsHaveExam(false);
     }, [])
 
-    if (detailedRunningStation === null) return <Redirect to={LandingPageRoutes.USER} />
+    if (!listQuestions) return <Redirect to={LandingPageRoutes.USER} />
 
     return (
         <div>

@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function QuestionItem() {
     const currentQuestion = useSelector(state => state.runningStation.currentQuestion)
-    const { id, content, answerA, answerB, answerC, answerD, answerE, image, index } = currentQuestion;
+    const { id, content, answerA, answerB, answerC, answerD, answerE, image, index } = currentQuestion || {};
     let listAnswers = [{ ans: 'A', content: answerA }, { ans: 'B', content: answerB }];
     if (answerC !== null && answerC !== "") listAnswers = [...listAnswers, { ans: 'C', content: answerC }];
     if (answerD !== null && answerD !== "") listAnswers = [...listAnswers, { ans: 'D', content: answerD }];
@@ -33,6 +33,7 @@ export default function QuestionItem() {
     listAnswers = shuffleArray(listAnswers);
     const dispatch = useDispatch();
     const classes = useStyles();
+
 
     const [userAnswer, setUserAnswer] = React.useState(null);
 

@@ -5,6 +5,7 @@ import { startLoading, stopLoading } from '../../common/component/PageLoader/loa
 import { deactiveUser } from '../userLogin/userLoginSlice';
 
 import { fakeListQuestions } from './fakedata';
+import { ConstUserExamStatus } from "../../app/const.app";
 
 const findNextValidQuestion = (listQuestions, currentQuestionIndex) => {
     console.log(listQuestions);
@@ -145,8 +146,6 @@ export const runningStationSlice = createSlice({
         // detailedRunningStation: fakeDetailedExam,
         // listQuestions: fakeListQuestions,
 
-        detailedRunningStation: {},
-        userAnswers: null,
         time: null,
         timeStart: null,
         openingImage: null,
@@ -155,9 +154,11 @@ export const runningStationSlice = createSlice({
         timeToDo: null,
 
         //running station
-        listQuestions: fakeListQuestions,
-        timeRemaining: fakeListQuestions.map(question => ({ id: question.id, time: question.time })),
-        currentQuestion: { ...fakeListQuestions[0], index: 0 },
+        examStatus: {},
+        userAnswers: [],
+        listQuestions: null,
+        timeRemaining: [],
+        currentQuestion: null,
 
     },
 
@@ -213,7 +214,9 @@ export const runningStationSlice = createSlice({
             state.currentQuestion = { ...state.listQuestions[nextQuestionIndex], index: nextQuestionIndex };
             console.log(id, 'time out');
         },
+        enterExamRoomAgain: (state) => {
 
+        }
     },
 
     extraReducers: {
@@ -221,15 +224,13 @@ export const runningStationSlice = createSlice({
             const response_data = action.payload;
             if (response_data === null) return;
 
-            const { questions, timeServerStart, time } = response_data;
-            const listAnswers = questions.map((element) => { return { id: element.id, ans: null } });
+            const { questions, timeServerStart, time, rows } = response_data;
+            console.log(response_data);
+            state.userAnswers = rows.map((element) => { return { id: element.id, ans: null } });
+            state.timeRemaining = rows.map(question => ({ id: question.id, time: question.time }));
+            state.listQuestions = rows;
+            state.currentQuestion = { ...rows[0], index: 0 };
 
-            state.detailedRunningStation = response_data;
-            state.listQuestions = questions;
-            state.timeStart = timeServerStart;
-            state.time = time * 60;
-            state.timeToDo = time;
-            state.userAnswers = listAnswers;
         },
 
         [fetchRunningStationRequestAgain.fulfilled]: (state, action) => {
@@ -256,40 +257,15 @@ export const runningStationSlice = createSlice({
             state.detailedRunningStation = null;
         },
         [checkRunningStationStatus.fulfilled]: (state, action) => {
-            const { message } = action.payload;
-
-            switch (message) {
-                case "User had submited this exam":
-                    state.runningStationStatus = 2;
-                    break;
-
-                case "You are doing exam":
-                    state.runningStationStatus = 1;
-                    break
-
-                case "you already to start exam":
-                    state.runningStationStatus = 0;
-                    break;
-
-
-                case "This exam is current not available":
-                    state.runningStationStatus = 3;
-                    break;
-
-                case "It's over time":
-                    state.runningStationStatus = 2;
-                    break;
-
-                default:
-                    break;
-            }
-
+            const { userStatus, sessionStatus } = action.payload;
+            console.log(action.payload);
+            state.examStatus = { userExamStatus: userStatus, sessionStatus };
 
         },
 
     }
 })
 
-export const { changeQuestion, closeTimeOutDialog, questionTimeOut, openImageDialog, closeImageDialog, choseAnswer } = runningStationSlice.actions;
+export const { enterExamRoomAgain, changeQuestion, closeTimeOutDialog, questionTimeOut, openImageDialog, closeImageDialog, choseAnswer } = runningStationSlice.actions;
 
 export default runningStationSlice.reducer;
