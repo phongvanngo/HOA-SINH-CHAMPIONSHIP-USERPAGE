@@ -31,6 +31,7 @@ export default function CenteredGrid() {
     const dispatch = useDispatch();
     const { exam_id } = useParams();
     const content_ref = useRef(null);
+    const time_ref = useRef(null);
     const image_ref = useRef(null);
     const answerA_ref = useRef(null);
     const answerB_ref = useRef(null);
@@ -41,7 +42,7 @@ export default function CenteredGrid() {
     const hasEditRequest = useSelector(state => state.question.hasEditRequest);
 
 
-    const { id, content, image, answerA, answerB, answerC, answerD, answerE, correctAnswer } = editingQuestion || {};
+    const { id, content, image, answerA, answerB, answerC, answerD, answerE, correctAnswer, time } = editingQuestion || {};
 
     const [questionImage, setQuestionImage] = useState(image);
     const [currentCorrectAnswer, setCurrentCorrectAnswer] = useState(correctAnswer || 'A');
@@ -69,6 +70,7 @@ export default function CenteredGrid() {
             answerC_ref.current.value = answerC;
             answerD_ref.current.value = answerD;
             answerE_ref.current.value = answerE;
+            time_ref.current.value = time;
             setCurrentCorrectAnswer(correctAnswer);
             setQuestionImage(image);
 
@@ -87,6 +89,7 @@ export default function CenteredGrid() {
                 answerC: answerC_ref.current.value,
                 answerD: answerD_ref.current.value,
                 answerE: answerE_ref.current.value,
+                time: time_ref.current.value,
                 correctAnswer: currentCorrectAnswer,
             };
             return questionInfo;
@@ -175,6 +178,15 @@ export default function CenteredGrid() {
                                             inputRef={image_ref}
                                         />
                                     </Grid>
+                                    <Grid item xs={3}>
+                                        <TextField
+
+                                            label="Thời gian (phút)"
+                                            style={{ width: "100%" }}
+                                            inputRef={time_ref}
+                                        />
+                                    </Grid>
+
                                 </Grid>
                             </Paper>
                         </Grid>

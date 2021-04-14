@@ -51,33 +51,7 @@ export const fetchRunningStationRequest = createAsyncThunk(
         }
     }
 );
-export const fetchRunningStationRequestAgain = createAsyncThunk(
-    'runningStation/fetchRunningStationStatusAgain',
-    async (params, thunkApi) => {
-        //nếu không có tham số thứ nhất thì ko dispatch được ?????
-        const { dispatch } = thunkApi;
-        try {
-            dispatch(startLoading());
-            let response = await runningStationApi.getRunningStation();
 
-            dispatch(stopLoading());
-            switch (response.status) {
-                case 200:
-                    dispatch(notify({ message: "Lấy dữ liệu thành công", options: { variant: 'success' } }));
-                    return response.data;
-                case 401:
-                    throw new Error("Unauthorized");
-                default:
-                    throw new Error("Unsuccessfully");
-            }
-        }
-        catch (error) {
-            dispatch(notify({ message: `${error}`, options: { variant: 'error' } }));
-            dispatch(stopLoading());
-            return null;
-        }
-    }
-);
 export const checkRunningStationStatus = createAsyncThunk(
     'runningStation/checkRunningStationStatus',
     async (params, thunkApi) => {
@@ -139,12 +113,6 @@ export const submitUserAnswers = createAsyncThunk(
 export const runningStationSlice = createSlice({
     name: 'runningStation',
     initialState: {
-        // listQuestions:null,
-        // listAnswers:null,
-        // timeStart:null,
-        // timeToDo: null,
-        // detailedRunningStation: fakeDetailedExam,
-        // listQuestions: fakeListQuestions,
 
         time: null,
         timeStart: null,
@@ -193,7 +161,7 @@ export const runningStationSlice = createSlice({
             console.log(action.payload);
         },
         questionTimeOut: (state, action) => {
-            // state.isTimeOutDialogOpen = true;
+
             const { id } = action.payload;
             let newTimeRemaining = [...state.timeRemaining];
 
@@ -208,9 +176,12 @@ export const runningStationSlice = createSlice({
             }
 
             state.timeRemaining = newTimeRemaining;
-            //find next 
+            //find next question
             let nextQuestionIndex = findNextValidQuestion(newTimeRemaining, index);
-            if (nextQuestionIndex === null) return;
+            if (nextQuestionIndex === null) {
+                state.isTimeOutDialogOpen = true;
+                // return;
+            }
             state.currentQuestion = { ...state.listQuestions[nextQuestionIndex], index: nextQuestionIndex };
             console.log(id, 'time out');
         },
@@ -232,26 +203,6 @@ export const runningStationSlice = createSlice({
             state.currentQuestion = { ...rows[0], index: 0 };
 
         },
-
-        [fetchRunningStationRequestAgain.fulfilled]: (state, action) => {
-            const response_data = action.payload;
-            if (response_data === null) return;
-
-            const { questions, timeServerStart, time } = response_data;
-            const listAnswers = questions ? questions.map((element) => { return { id: element.id, ans: null } }) : [];
-
-            let usedTime = Date.now() - Date.parse(timeServerStart);
-            let timeRemaining = time * 60 * 1000 - usedTime;
-
-
-
-            state.detailedRunningStation = response_data;
-            state.listQuestions = questions;
-            state.timeStart = timeServerStart;
-            state.timeToDo = time;
-            state.time = isNaN(timeRemaining) ? 0 : Math.floor(timeRemaining / 1000);
-            state.userAnswers = listAnswers;
-        },
         [submitUserAnswers.fulfilled]: (state, action) => {
             if (action.payload === null) return;
             state.detailedRunningStation = null;
@@ -260,7 +211,6 @@ export const runningStationSlice = createSlice({
             const { userStatus, sessionStatus } = action.payload;
             console.log(action.payload);
             state.examStatus = { userExamStatus: userStatus, sessionStatus };
-
         },
 
     }

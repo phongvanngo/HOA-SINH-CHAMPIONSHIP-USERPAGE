@@ -11,6 +11,7 @@ const shouldSaveData = (prevQuestion, currQuestion) => {
     if (prevQuestion.answerB !== currQuestion.answerB) return true;
     if (prevQuestion.answerC !== currQuestion.answerC) return true;
     if (prevQuestion.answerD !== currQuestion.answerD) return true;
+    if (prevQuestion.time !== currQuestion.time) return true;
     if (prevQuestion.correctAnswer !== currQuestion.correctAnswer) return true;
     return false;
 }
@@ -25,6 +26,7 @@ const initialQuestion = {
     answerC: "",
     answerD: "",
     answerE: "",
+    time: "",
     correctAnswer: "A",
 }
 
@@ -68,7 +70,7 @@ export const createQuestionRequest = createAsyncThunk(
             dispatch(startLoading());
 
             //transfer schema
-            const { exam_id, content, image, answerA, answerB, answerC, answerD, answerE, correctAnswer } = questionInfo;
+            const { exam_id, content, image, answerA, answerB, answerC, answerD, answerE, correctAnswer, time } = questionInfo;
             const newQuestion = {
                 examId: exam_id,
                 content: content,
@@ -78,6 +80,7 @@ export const createQuestionRequest = createAsyncThunk(
                 answerC: answerC,
                 answerD: answerD,
                 answerE: answerE,
+                time: time,
                 result: correctAnswer
             }
 
@@ -112,7 +115,7 @@ export const updateQuestionRequest = createAsyncThunk(
             dispatch(startLoading());
 
             //transfer schema
-            const { id, exam_id, content, image, answerA, answerB, answerC, answerD, answerE, correctAnswer } = questionInfo;
+            const { time, id, exam_id, content, image, answerA, answerB, answerC, answerD, answerE, correctAnswer } = questionInfo;
             const newQuestion = {
                 examId: exam_id,
                 content: content,
@@ -122,7 +125,8 @@ export const updateQuestionRequest = createAsyncThunk(
                 answerC: answerC,
                 answerD: answerD,
                 answerE: answerE,
-                result: correctAnswer
+                result: correctAnswer,
+                time: time
             }
 
             const response = await questionApi.patchQuestionInfo(newQuestion, id);
@@ -265,7 +269,7 @@ export const questionSlice = createSlice({
             if (response_data === null) return;
             let questions = [];
             questions = response_data.rows.map(element => {
-                const { id, examId, content, answerA, answerB, answerC, answerD, answerE, result, image } = element;
+                const { id, examId, content, answerA, answerB, answerC, answerD, answerE, result, image, time } = element;
                 return {
                     id: id,
                     exam_id: examId,
@@ -275,6 +279,7 @@ export const questionSlice = createSlice({
                     answerC: answerC,
                     answerD: answerD,
                     answerE: answerE,
+                    time: time,
                     correctAnswer: result,
                     image: image
                 }
