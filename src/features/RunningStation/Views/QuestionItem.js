@@ -45,7 +45,7 @@ export default function QuestionItem() {
         <div className='question-item-container'>
             <Paper className={classes.paper}>
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <span><i className="far fa-dot-circle"></i>{` Câu hỏi ${index}`}</span>
+                    <span><i className="far fa-dot-circle"></i>{` Câu hỏi ${index + 1}`}</span>
                 </div>
                 <div style={{ marginTop: '10px' }}>
                     <span>Q. </span>

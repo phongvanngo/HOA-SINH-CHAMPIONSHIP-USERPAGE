@@ -6,6 +6,22 @@ import { deactiveUser } from '../userLogin/userLoginSlice';
 
 import { fakeListQuestions } from './fakedata';
 
+const findNextValidQuestion = (listQuestions, currentQuestionIndex) => {
+    console.log(listQuestions);
+    let count = 0;
+    let index = currentQuestionIndex;
+    while (count < listQuestions.length - 1) {
+        count++;
+        console.log(count, listQuestions.length)
+        index++;
+        if (index >= listQuestions.length) index = 0;
+        console.log(listQuestions[index]);
+        if (listQuestions[index].time !== 0) return index;
+    };
+
+    return null;
+}
+
 
 export const fetchRunningStationRequest = createAsyncThunk(
     'runningStation/fetchRunningStationStatus',
@@ -141,7 +157,7 @@ export const runningStationSlice = createSlice({
         //running station
         listQuestions: fakeListQuestions,
         timeRemaining: fakeListQuestions.map(question => ({ id: question.id, time: question.time })),
-        currentQuestion: { ...fakeListQuestions[0], index: 1, timeRemaining: fakeListQuestions[0].time },
+        currentQuestion: { ...fakeListQuestions[0], index: 0 },
 
     },
 
@@ -163,9 +179,7 @@ export const runningStationSlice = createSlice({
             state.openingImage = null;
         },
 
-        timeOut: (state) => {
-            state.isTimeOutDialogOpen = true;
-        },
+
 
         closeTimeOutDialog: (state) => {
             state.isTimeOutDialogOpen = false;
@@ -173,10 +187,33 @@ export const runningStationSlice = createSlice({
         //use
         changeQuestion: (state, action) => {
             const question = action.payload;
-            let timeRemaining = state.timeRemaining.find(element => element.id === question.id);
-            state.currentQuestion = { ...question, timeRemaining: timeRemaining?.time };
+            if (question?.id === state.currentQuestion.id) return;
+            state.currentQuestion = { ...question };
             console.log(action.payload);
-        }
+        },
+        questionTimeOut: (state, action) => {
+            // state.isTimeOutDialogOpen = true;
+            const { id } = action.payload;
+            let newTimeRemaining = [...state.timeRemaining];
+
+            let index = 0;
+
+            for (let i = 0; i < newTimeRemaining.length; i++) {
+                if (newTimeRemaining[i].id === id) {
+                    newTimeRemaining[i].time = 0;
+                    index = i;
+                    break;
+                }
+            }
+
+            state.timeRemaining = newTimeRemaining;
+            //find next 
+            let nextQuestionIndex = findNextValidQuestion(newTimeRemaining, index);
+            if (nextQuestionIndex === null) return;
+            state.currentQuestion = { ...state.listQuestions[nextQuestionIndex], index: nextQuestionIndex };
+            console.log(id, 'time out');
+        },
+
     },
 
     extraReducers: {
@@ -253,6 +290,6 @@ export const runningStationSlice = createSlice({
     }
 })
 
-export const { changeQuestion, closeTimeOutDialog, timeOut, openImageDialog, closeImageDialog, choseAnswer } = runningStationSlice.actions;
+export const { changeQuestion, closeTimeOutDialog, questionTimeOut, openImageDialog, closeImageDialog, choseAnswer } = runningStationSlice.actions;
 
 export default runningStationSlice.reducer;
