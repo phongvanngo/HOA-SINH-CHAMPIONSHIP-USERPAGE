@@ -4,6 +4,7 @@ import './RankMainStyle.scss';
 
 import SingleRank from './SingleRank';
 import TeamRank from './TeamRank';
+import RunStationRank from './RunStationRank';
 
 export default function MainContainer() {
     return (
@@ -11,12 +12,15 @@ export default function MainContainer() {
             <div className="space-top"></div>
             <div className="leaderboard-area">
 
-                <div className='single-leaderboard'>
+                <div className='runStation-leaderboard'>
+                    <RunStationRank />
+                </div>
+                {/* <div className='single-leaderboard'>
                     <SingleRank />
                 </div>
                 <div className='team-leaderboard'>
                     <TeamRank />
-                </div>
+                </div>  */}
             </div>
         </div>
     )

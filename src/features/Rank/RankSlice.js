@@ -58,6 +58,58 @@ export const fetchRankSingleRequest = createAsyncThunk(
 
     }
 );
+
+export const fetchRankRunStationRequest = createAsyncThunk(
+    'rank/fetchRankRunStationStatus',
+    async ({ reloadAll, searchValue }, thunkApi) => {
+        //nếu không có tham số thứ nhất thì ko dispatch được ?????
+        const { dispatch, getState } = thunkApi;
+        try {
+            dispatch(startLoading());
+            const { currentPage } = getState().rank.singleRank;
+            let requestParams;
+            if (reloadAll === true) {
+                requestParams = {
+                    page: 0,
+                    pageSize: rowsPerPageRank,
+                    typeId: 3,
+                }
+            }
+            else {
+                requestParams = {
+                    page: currentPage + 1,
+                    pageSize: rowsPerPageRank,
+                    typeId: 3,
+                }
+            }
+            let response = null;
+            if (searchValue.trim() === "") {
+                response = await rankApi.getRankData(requestParams);
+            }
+            else {
+                //sercbh
+                response = await rankApi.getRankByUserCode({ ...requestParams, userCode: searchValue });
+            }
+
+            dispatch(stopLoading());
+            switch (response.status) {
+                case 200:
+                    // dispatch(notify({ message: "Lấy dữ liệu thành công", options: { variant: 'success' } }));
+                    return { ...response.data, reloadAll: reloadAll };
+                case 401:
+                    throw new Error("Unauthorized");
+                default:
+                    throw new Error("Unsuccessfully");
+            }
+        }
+        catch (error) {
+            dispatch(notify({ message: `${error}`, options: { variant: 'error' } }));
+            dispatch(stopLoading());
+            return null;
+        }
+
+    }
+);
 export const fetchRankTeamRequest = createAsyncThunk(
     'rank/fetchRankTeamStatus',
     async ({ reloadAll, searchValue, universityId }, thunkApi) => {
@@ -124,6 +176,12 @@ export const rankSlice = createSlice({
             currentPage: -1,
             rowsPerPage: rowsPerPageRank,
         },
+        runStationRank: {
+            rows: [],
+            count: 0,
+            currentPage: -1,
+            rowsPerPage: rowsPerPageRank,
+        },
         teamRank: {
             rows: [],
             count: 0,
@@ -173,6 +231,39 @@ export const rankSlice = createSlice({
             } else {
                 //load lại toàn bộ
                 state.singleRank = {
+                    rowsPerPage: rowsPerPageRank,
+                    count: response_data.count,
+                    currentPage: 0,
+                    rows: [...ranks]
+                };
+            }
+        },
+        [fetchRankRunStationRequest.fulfilled]: (state, action) => {
+            const response_data = action.payload;
+            if (response_data === null) return;
+
+            //chuyển đổi schema
+            let ranks = response_data.rows.map((element) => {
+                const { id, fullName, time, score, historyQues } = element;
+                return {
+                    id: id, fullName: fullName, time: time, score: score, historyQues
+                }
+            }
+            )
+
+            // ranks = ranks.filter(element => element.time !== null);
+
+            if (response_data.reloadAll === false) {
+                state.runStationRank = {
+                    rowsPerPage: rowsPerPageRank,
+                    count: response_data.count,
+                    currentPage: state.runStationRank.currentPage + 1,
+                    rows: [...state.runStationRank.rows, ...ranks]
+                };
+
+            } else {
+                //load lại toàn bộ
+                state.runStationRank = {
                     rowsPerPage: rowsPerPageRank,
                     count: response_data.count,
                     currentPage: 0,

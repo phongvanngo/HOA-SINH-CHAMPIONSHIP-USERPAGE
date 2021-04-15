@@ -298,6 +298,8 @@ export const runningStationSlice = createSlice({
             localStorage.removeItem("timeRemaining");
             localStorage.removeItem("currentQuestionId");
 
+            state.listQuestions = null;
+
         },
         [checkRunningStationStatus.fulfilled]: (state, action) => {
             const { code } = action.payload;

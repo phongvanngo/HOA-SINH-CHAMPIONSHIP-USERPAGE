@@ -68,10 +68,10 @@ export default function CenteredGrid() {
             validInputDetail.userName = false;
         }
 
-        if (universityId === null) {
-            valid = false;
-            validInputDetail.universityId = false;
-        }
+        // if (universityId === null) {
+        //     valid = false;
+        //     validInputDetail.universityId = false;
+        // }
 
 
         if (valid === false) {
@@ -170,7 +170,7 @@ export default function CenteredGrid() {
                                 helperText={!validInput.sessionID ? "Phải chọn ca thi" : ""}
                             />}
                     /> */}
-                    <Autocomplete
+                    {/* <Autocomplete
                         options={listUniversities}
                         onChange={handleChangeUniversity}
                         getOptionLabel={(option) => option.university_name}
@@ -184,7 +184,7 @@ export default function CenteredGrid() {
                                 error={!validInput.universityId}
                                 helperText={!validInput.universityId ? "Phải chọn đơn vị thi" : ""}
                             />}
-                    />
+                    /> */}
                 </FormControl>
             </Paper>
         </div >

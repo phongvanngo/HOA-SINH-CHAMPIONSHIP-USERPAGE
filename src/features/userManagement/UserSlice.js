@@ -84,7 +84,7 @@ export const createUserRequest = createAsyncThunk(
 
             //transfer schema
             const { sessionID, code, name, universityId } = userInfo;
-            const newUser = { sessionId: sessionID, fullName: name, code: code, universityId: universityId };
+            const newUser = { sessionId: sessionID, fullName: name, code: code, universityId: 1 };
 
             const response = await userApi.pushNewUser(newUser);
             dispatch(stopLoading());
@@ -114,7 +114,7 @@ export const createListUserRequest = createAsyncThunk(
 
             //transfer schema
             const { sessionID, listUser, universityId } = userInfo;
-            const newUser = { sessionId: sessionID, listUser: JSON.stringify(listUser), universityId: universityId };
+            const newUser = { sessionId: sessionID, listUser: JSON.stringify(listUser), universityId: 1 };
             const response = await userApi.pushNewListUser(newUser);
             dispatch(stopLoading());
             switch (response.status) {

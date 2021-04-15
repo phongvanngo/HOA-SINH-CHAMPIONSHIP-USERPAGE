@@ -28,7 +28,7 @@ export default function Homepage() {
 
             <section className="left">
                 <div className="title">
-                    <p> VÒNG SƠ LOẠI</p>
+                    <p> VÒNG 2</p>
                     <p> HÓA SINH CHAMPIONSHIP</p>
                 </div>
 
