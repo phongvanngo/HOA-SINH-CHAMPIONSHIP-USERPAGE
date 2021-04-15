@@ -63,7 +63,7 @@ export default function MainContainer() {
                         <QuestionItem />
                     </div>
                     <div className="footer-exam">
-                        {/* <Button
+                        <Button
                             onClick={() => {
                                 if (window.confirm('Bạn có chắc chắn nộp và kết thúc bài làm ?')) {
                                     dispatch(submitUserAnswers({}))
@@ -72,7 +72,7 @@ export default function MainContainer() {
                             }
                             variant="contained" color="secondary">
                             Nộp bài
-</Button> */}
+</Button>
                     </div>
                 </div>
             </div>

@@ -189,14 +189,52 @@ export const runningStationSlice = createSlice({
             console.log(id, 'time out');
         },
         enterExamRoomAgain: (state) => {
-            console.log();
+
+            // lấy lại dữ liệu bài thi ở local storage
             let newUserAnswers = JSON.parse(localStorage.getItem("userAnswers"));
             let timeRemaining = JSON.parse(localStorage.getItem("timeRemaining"));
-
             let questions = JSON.parse(localStorage.getItem("listQuestions"));
             let currentQuestionId = parseInt(localStorage.getItem("currentQuestionId"));
+            let timeStart = parseInt(localStorage.getItem("timeStart"));
             let currentQuestionIndex = questions.findIndex(question => question.id === currentQuestionId);
-            console.log(currentQuestionId, currentQuestionIndex);
+
+            // tính toán thời gian còn lại cho các câu
+            let usedTime = Date.now() - Date.parse(timeStart);
+            // let timeRemaining = time * 60 * 1000 - usedTime;
+
+            let wasteTime = 0;
+            let timeDoExam = 0;
+            for (let i = 0; i < questions.length; i++) {
+                timeDoExam += questions[i].time - timeRemaining[i];
+                questions[i].time = timeRemaining[i].time;
+            }
+
+
+
+            wasteTime = usedTime - timeDoExam;
+            let count = 0;
+            let index = currentQuestionIndex;
+            while (count < questions.length && wasteTime > 0) {
+
+                if (timeRemaining[index].time <= wasteTime) {
+                    wasteTime -= timeRemaining[index].time;
+                    timeRemaining[index].time = 0;
+
+                } else {
+                    timeRemaining[index].time -= wasteTime;
+                    wasteTime = 0;
+                }
+
+                questions[index].time = timeRemaining[index].time;
+
+                count++;
+                index++;
+
+            }
+
+            console.log(questions);
+
+
             state.userAnswers = newUserAnswers;
             state.timeRemaining = timeRemaining;
             state.listQuestions = questions;
@@ -237,6 +275,7 @@ export const runningStationSlice = createSlice({
 
             localStorage.setItem("userAnswers", JSON.stringify(newUserAnswers));
             localStorage.setItem("listQuestions", JSON.stringify(questions));
+            localStorage.setItem("timeStart", JSON.stringify(timeServerStart));
             localStorage.setItem("timeRemaining", JSON.stringify(timeRemaining));
             localStorage.setItem("currentQuestionId", questions[0].id);
 
@@ -249,6 +288,13 @@ export const runningStationSlice = createSlice({
         [submitUserAnswers.fulfilled]: (state, action) => {
             if (action.payload === null) return;
             state.detailedRunningStation = null;
+
+            localStorage.removeItem("userAnswers");
+            localStorage.removeItem("listQuestions");
+            localStorage.removeItem("timeStart");
+            localStorage.removeItem("timeRemaining");
+            localStorage.removeItem("currentQuestionId");
+
         },
         [checkRunningStationStatus.fulfilled]: (state, action) => {
             const { code } = action.payload;

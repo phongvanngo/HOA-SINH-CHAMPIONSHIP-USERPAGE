@@ -54,6 +54,12 @@ export default function Userpage() {
 
     const ExamStatusComponent = () => {
         switch (userExamStatus) {
+            case ConstUserExamStatus.SUBMITTED:
+                return (
+                    <div style={{ margin: "auto" }}>
+                        <p style={{ color: 'green' }}>Bạn đã hoàn thành bài thi, hãy đón chờ xem kết quả trên bảng xếp hạng nhé !</p>
+                    </div>
+                )
             case ConstUserExamStatus.OVERTIME:
                 return (
                     <div style={{ margin: "auto" }}>

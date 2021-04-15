@@ -22,7 +22,7 @@ export const runningStationApi = {
 
 
     putUserAnswer: async (userAnswer) => {
-        const url = "/test";
+        const url = "/test/v2";
         let response = await axiosClient.post(url, { arrayAns: JSON.stringify(userAnswer) });
         return response;
     },
