@@ -20,8 +20,8 @@ export default function Countdown({ timeRemaining, active, questionId }) {
             }, 1000);
         }
         return () => {
-            dispatch(setTimeRemaining({ questionId: questionId, timeRemaining: time }));
             clearTimeout(timer);
+            dispatch(setTimeRemaining({ questionId: questionId, timeRemaining: time }));
         }
     }, [time, dispatch, run]);
 

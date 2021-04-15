@@ -176,7 +176,7 @@ export const runningStationSlice = createSlice({
             let nextQuestionIndex = findNextValidQuestion(newTimeRemaining, index);
             if (nextQuestionIndex === null) {
                 state.isTimeOutDialogOpen = true;
-                // return;
+                return;
             }
 
             let userAnswerId = state.listQuestions[nextQuestionIndex].id;
@@ -199,19 +199,21 @@ export const runningStationSlice = createSlice({
             let currentQuestionIndex = questions.findIndex(question => question.id === currentQuestionId);
 
             // tính toán thời gian còn lại cho các câu
-            let usedTime = Date.now() - Date.parse(timeStart);
             // let timeRemaining = time * 60 * 1000 - usedTime;
 
             let wasteTime = 0;
             let timeDoExam = 0;
             for (let i = 0; i < questions.length; i++) {
-                timeDoExam += questions[i].time - timeRemaining[i];
+                timeDoExam += questions[i].time - timeRemaining[i].time;
                 questions[i].time = timeRemaining[i].time;
             }
 
 
 
-            wasteTime = usedTime - timeDoExam;
+            let usedTime = Date.now() - new Date(timeStart);
+
+            wasteTime = parseInt(usedTime) - timeDoExam;
+            console.log(timeStart, timeDoExam, usedTime, wasteTime);
             let count = 0;
             let index = currentQuestionIndex;
             while (count < questions.length && wasteTime > 0) {
@@ -229,6 +231,7 @@ export const runningStationSlice = createSlice({
 
                 count++;
                 index++;
+                if (index === questions.length) index = 0;
 
             }
 

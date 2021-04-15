@@ -7,7 +7,7 @@ import { closeTimeOutDialog, submitUserAnswers } from '../RunningStationSlice';
 export default function UserFormDialog() {
 
     const dispatch = useDispatch();
-    const isTimeOutDialogOpen = useSelector(state => state.userExam.isTimeOutDialogOpen);
+    const isTimeOutDialogOpen = useSelector(state => state.runningStation.isTimeOutDialogOpen);
 
     const handleSubmit = () => {
         dispatch(closeTimeOutDialog());
