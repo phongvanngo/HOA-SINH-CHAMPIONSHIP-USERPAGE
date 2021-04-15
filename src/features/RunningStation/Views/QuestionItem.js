@@ -3,7 +3,7 @@ import Paper from '@material-ui/core/Paper';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import { makeStyles } from '@material-ui/core/styles';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { choseAnswer, openImageDialog } from '../RunningStationSlice';
 import './QuestionItem.scss';
@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function QuestionItem() {
     const currentQuestion = useSelector(state => state.runningStation.currentQuestion)
-    const { id, content, answerA, answerB, answerC, answerD, answerE, image, index } = currentQuestion || {};
+    const { id, content, answerA, answerB, answerC, answerD, answerE, image, index, answer } = currentQuestion || {};
     let listAnswers = [{ ans: 'A', content: answerA }, { ans: 'B', content: answerB }];
     if (answerC !== null && answerC !== "") listAnswers = [...listAnswers, { ans: 'C', content: answerC }];
     if (answerD !== null && answerD !== "") listAnswers = [...listAnswers, { ans: 'D', content: answerD }];
@@ -35,7 +35,11 @@ export default function QuestionItem() {
     const classes = useStyles();
 
 
-    const [userAnswer, setUserAnswer] = React.useState(null);
+    const [userAnswer, setUserAnswer] = React.useState(answer);
+
+    useEffect(() => {
+        setUserAnswer(answer);
+    }, [answer])
 
     const handleChange = (event) => {
         setUserAnswer(event.target.value);

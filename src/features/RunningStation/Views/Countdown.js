@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux';
-import { questionTimeOut } from '../RunningStationSlice';
+import { questionTimeOut, setTimeRemaining } from '../RunningStationSlice';
 
 export default function Countdown({ timeRemaining, active, questionId }) {
     const [time, setTime] = useState(timeRemaining);
@@ -19,7 +19,10 @@ export default function Countdown({ timeRemaining, active, questionId }) {
                 setTime(time - 1000);
             }, 1000);
         }
-        return () => clearTimeout(timer);
+        return () => {
+            dispatch(setTimeRemaining({ questionId: questionId, timeRemaining: time }));
+            clearTimeout(timer);
+        }
     }, [time, dispatch, run]);
 
     useEffect(() => {

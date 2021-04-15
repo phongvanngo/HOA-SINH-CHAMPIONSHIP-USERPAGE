@@ -6,6 +6,7 @@ import { deactiveUser } from '../userLogin/userLoginSlice';
 
 import { fakeListQuestions } from './fakedata';
 import { ConstUserExamStatus } from "../../app/const.app";
+import { LocationSearchingTwoTone } from "@material-ui/icons";
 
 const findNextValidQuestion = (listQuestions, currentQuestionIndex) => {
     console.log(listQuestions);
@@ -149,7 +150,10 @@ export const runningStationSlice = createSlice({
         changeQuestion: (state, action) => {
             const question = action.payload;
             if (question?.id === state.currentQuestion.id) return;
-            state.currentQuestion = { ...question };
+            let userAnswerIndex = state.userAnswers.findIndex(e => e.id === question.id);
+            state.currentQuestion = { ...question, answer: state.userAnswers[userAnswerIndex].ans };
+            localStorage.setItem("currentQuestionId", question.id);
+
             console.log(action.payload);
         },
         questionTimeOut: (state, action) => {
@@ -174,10 +178,36 @@ export const runningStationSlice = createSlice({
                 state.isTimeOutDialogOpen = true;
                 // return;
             }
-            state.currentQuestion = { ...state.listQuestions[nextQuestionIndex], index: nextQuestionIndex };
+
+            let userAnswerId = state.listQuestions[nextQuestionIndex].id;
+            let userAnswerIndex = state.userAnswers.findIndex(e => e.id === userAnswerId);
+
+            state.currentQuestion = { ...state.listQuestions[nextQuestionIndex], index: nextQuestionIndex, answer: state.userAnswers[userAnswerIndex].ans };
+
+            localStorage.setItem("currentQuestionId", state.listQuestions[nextQuestionIndex].id);
+
             console.log(id, 'time out');
         },
         enterExamRoomAgain: (state) => {
+            console.log();
+            let newUserAnswers = JSON.parse(localStorage.getItem("userAnswers"));
+            let timeRemaining = JSON.parse(localStorage.getItem("timeRemaining"));
+
+            let questions = JSON.parse(localStorage.getItem("listQuestions"));
+            let currentQuestionId = parseInt(localStorage.getItem("currentQuestionId"));
+            let currentQuestionIndex = questions.findIndex(question => question.id === currentQuestionId);
+            console.log(currentQuestionId, currentQuestionIndex);
+            state.userAnswers = newUserAnswers;
+            state.timeRemaining = timeRemaining;
+            state.listQuestions = questions;
+            state.currentQuestion = { ...questions[parseInt(currentQuestionIndex)], index: currentQuestionIndex, answer: null };
+        },
+        setTimeRemaining: (state, action) => {
+            const { questionId, timeRemaining } = action.payload;
+            let newTimeRemaining = [...state.timeRemaining];
+            let index = newTimeRemaining.findIndex(element => element.id === questionId);
+            newTimeRemaining[index].time = timeRemaining;
+            localStorage.setItem("timeRemaining", JSON.stringify(newTimeRemaining));
 
         },
         choseAnswer: (state, action) => {
@@ -185,7 +215,7 @@ export const runningStationSlice = createSlice({
             const newListAnswers = state.userAnswers.map((element) => {
                 if (element.id === id) return { id: id, ans: ans }; else return element;
             })
-
+            localStorage.setItem("userAnswers", JSON.stringify(newListAnswers));
             state.userAnswers = newListAnswers;
         },
     },
@@ -202,13 +232,18 @@ export const runningStationSlice = createSlice({
 
             questions.forEach(question => {
                 newUserAnswers.push({ id: question.id, ans: null });
-                timeRemaining.push({ id: question.id, time: question.time / 1000 });
+                timeRemaining.push({ id: question.id, time: question.time });
             });
+
+            localStorage.setItem("userAnswers", JSON.stringify(newUserAnswers));
+            localStorage.setItem("listQuestions", JSON.stringify(questions));
+            localStorage.setItem("timeRemaining", JSON.stringify(timeRemaining));
+            localStorage.setItem("currentQuestionId", questions[0].id);
 
             state.userAnswers = newUserAnswers;
             state.timeRemaining = timeRemaining;
             state.listQuestions = questions;
-            state.currentQuestion = { ...questions[0], index: 0 };
+            state.currentQuestion = { ...questions[0], index: 0, answer: null };
 
         },
         [submitUserAnswers.fulfilled]: (state, action) => {
@@ -230,7 +265,13 @@ export const runningStationSlice = createSlice({
                     break;
                 case 3:
                     //đang làm bài
-                    userStatus = DOING
+                    const userAnswers = localStorage.getItem("userAnswers");
+                    if (userAnswers) {
+                        userStatus = DOING
+                    }
+                    else {
+                        userStatus = SUBMITTED
+                    }
                     break;
                 case 4:
                     //hết giờ
@@ -248,6 +289,6 @@ export const runningStationSlice = createSlice({
     }
 })
 
-export const { enterExamRoomAgain, changeQuestion, closeTimeOutDialog, questionTimeOut, openImageDialog, closeImageDialog, choseAnswer } = runningStationSlice.actions;
+export const { setTimeRemaining, enterExamRoomAgain, changeQuestion, closeTimeOutDialog, questionTimeOut, openImageDialog, closeImageDialog, choseAnswer } = runningStationSlice.actions;
 
 export default runningStationSlice.reducer;

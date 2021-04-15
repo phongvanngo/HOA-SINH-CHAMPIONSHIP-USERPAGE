@@ -45,12 +45,12 @@ export default function Userpage() {
             });
         } else
             if (userExamStatus === ConstUserExamStatus.DOING) {
-                dispatch(enterExamRoomAgain()).then(() => {
-                    history.push(PublicRoutes.TEST);
-                });
+                dispatch(enterExamRoomAgain());
+                history.push(PublicRoutes.TEST);
             };
+    };
 
-    }
+
 
     const ExamStatusComponent = () => {
         switch (userExamStatus) {
@@ -65,12 +65,12 @@ export default function Userpage() {
                     <div style={{ margin: "auto" }}>
                         <p style={{ color: '#FFCC00' }}>Bạn chưa hoàn thành bài thi</p>
                         <Button
-                            // onClick={handleGoToLeaderboard}
+                            onClick={() => { handleGoToExam() }}
                             variant="primary"
                             style={{ marginRight: '5px' }}>
                             Tiếp tục làm bài
                                     </Button>
-                    </div>
+                    </div >
                 )
             case ConstUserExamStatus.READY:
                 return (
