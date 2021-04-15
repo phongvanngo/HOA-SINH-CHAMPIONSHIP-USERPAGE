@@ -89,6 +89,22 @@ export default function InteractiveList() {
                     </Typography>
 
                     <Paper className={classes.paper}>
+                        <h3>Bảng chạy trạm</h3>
+                        <div className={classes.demo}>
+                            {contestSessions.map((contestSession, index) =>
+                            (contestSession.type === 3 ?
+                                <ContestSessionItem
+                                    key={index}
+                                    detailedContestSession={contestSession}
+                                    handleDeleteContestSession={handleDeleteContestSession}
+                                    handleEditContestSession={handleEditContestSession}
+                                    handleOpenContestSession={handleOpenContestSession}
+                                    handleToggleContestSession={handleToggleContestSession}
+                                /> : ""))
+                            }
+                        </div>
+                    </Paper>
+                    <Paper className={classes.paper}>
                         <h3>Bảng cá nhân</h3>
                         <div className={classes.demo}>
                             {contestSessions.map((contestSession, index) =>

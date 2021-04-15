@@ -84,7 +84,7 @@ export default function RecipeReviewCard(props) {
                     {`Tên đề: ${exam_name}`}
                 </Typography>
                 <Typography variant="body2" color="textSecondary" component="p">
-                    {`${type === 1 ? "Bảng cá nhân" : "Bảng đội"}`}
+                    {`${type === 1 ? "Bảng cá nhân" : type === 2 ? "Bảng đội" : "Bảng chạy trạm"}`}
                 </Typography>
             </CardContent>
             <CardActions disableSpacing>

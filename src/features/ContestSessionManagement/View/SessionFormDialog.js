@@ -28,6 +28,10 @@ export default function ContestSessionFormDialog() {
         {
             id: 2,
             name: "Bảng đội"
+        },
+        {
+            id: 3,
+            name: "Bảng chạy trạm"
         }
     ]
 
@@ -156,7 +160,7 @@ export default function ContestSessionFormDialog() {
                         helperText={!validInput.contestSessionName ? "Dữ liệu không được để trống" : ""}
                     />
                     <Autocomplete
-                        // defaultValue={listExams.find(exam => exam.id === exam_id)}
+                        //defaultValue={listExams.find(exam => exam.id === exam_id)}
                         options={listExams}
                         getOptionLabel={(option) => option.exam_name}
                         onChange={(event, newValue) => {

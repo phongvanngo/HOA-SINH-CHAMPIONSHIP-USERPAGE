@@ -30,7 +30,7 @@ export default function QuestionItem() {
     if (answerC !== null && answerC !== "") listAnswers = [...listAnswers, { ans: 'C', content: answerC }];
     if (answerD !== null && answerD !== "") listAnswers = [...listAnswers, { ans: 'D', content: answerD }];
     if (answerE !== null && answerE !== "" && answerE !== undefined) listAnswers = [...listAnswers, { ans: 'E', content: answerE }];
-    listAnswers = shuffleArray(listAnswers);
+    // listAnswers = shuffleArray(listAnswers);
     const dispatch = useDispatch();
     const classes = useStyles();
 

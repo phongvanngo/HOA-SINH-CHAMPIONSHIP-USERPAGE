@@ -131,14 +131,6 @@ export const runningStationSlice = createSlice({
     },
 
     reducers: {
-        choseAnswer: (state, action) => {
-            const { id, ans } = action.payload;
-            const newListAnswers = state.userAnswers.map((element) => {
-                if (element.id === id) return { id: id, ans: ans }; else return element;
-            })
-
-            state.userAnswers = newListAnswers;
-        },
 
         openImageDialog: (state, action) => {
             state.openingImage = action.payload;
@@ -187,7 +179,15 @@ export const runningStationSlice = createSlice({
         },
         enterExamRoomAgain: (state) => {
 
-        }
+        },
+        choseAnswer: (state, action) => {
+            const { id, ans } = action.payload;
+            const newListAnswers = state.userAnswers.map((element) => {
+                if (element.id === id) return { id: id, ans: ans }; else return element;
+            })
+
+            state.userAnswers = newListAnswers;
+        },
     },
 
     extraReducers: {
