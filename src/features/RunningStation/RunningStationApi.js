@@ -8,14 +8,15 @@ import { fakeListQuestions } from './fakedata';
 export const runningStationApi = {
     getRunningStation: async () => {
         const url = "/test";
-        let response = await fakeApi({ request: null, response: { data: { rows: fakeListQuestions }, status: 200 }, timeOut: 2000 })
+        let response = await axiosClient.get(url);
+        // let response = await fakeApi({ request: null, response: { data: { rows: fakeListQuestions }, status: 200 }, timeOut: 2000 })
         return response;
 
     },
 
     getRunningStationStatus: async () => {
         const url = "/test/check";
-        let response = await fakeApi({ request: null, response: { data: { userStatus: ConstUserExamStatus.READY, sessionStatus: true }, status: 200 }, timeOut: 1000 })
+        let response = await axiosClient.get(url);
         return response;
     },
 

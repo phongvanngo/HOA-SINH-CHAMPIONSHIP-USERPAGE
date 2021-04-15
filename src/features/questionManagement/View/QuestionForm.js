@@ -70,7 +70,7 @@ export default function CenteredGrid() {
             answerC_ref.current.value = answerC;
             answerD_ref.current.value = answerD;
             answerE_ref.current.value = answerE;
-            time_ref.current.value = time;
+            time_ref.current.value = time / 1000;
             setCurrentCorrectAnswer(correctAnswer);
             setQuestionImage(image);
 
@@ -80,6 +80,11 @@ export default function CenteredGrid() {
 
 
     const getInputData = () => {
+        let time = parseInt(time_ref.current.value);
+        if (isNaN(time)) {
+            window.alert("Dữ liệu không hợp lệ");
+            return null;
+        }
         try {
             const questionInfo = {
                 content: content_ref.current.value,
@@ -89,9 +94,10 @@ export default function CenteredGrid() {
                 answerC: answerC_ref.current.value,
                 answerD: answerD_ref.current.value,
                 answerE: answerE_ref.current.value,
-                time: time_ref.current.value,
+                time: time * 1000,
                 correctAnswer: currentCorrectAnswer,
             };
+
             return questionInfo;
         } catch (error) {
             return null;
@@ -181,7 +187,7 @@ export default function CenteredGrid() {
                                     <Grid item xs={3}>
                                         <TextField
 
-                                            label="Thời gian (phút)"
+                                            label="Thời gian (giây)"
                                             style={{ width: "100%" }}
                                             inputRef={time_ref}
                                         />

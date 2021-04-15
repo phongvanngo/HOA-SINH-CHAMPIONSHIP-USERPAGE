@@ -195,12 +195,20 @@ export const runningStationSlice = createSlice({
             const response_data = action.payload;
             if (response_data === null) return;
 
-            const { questions, timeServerStart, time, rows } = response_data;
-            console.log(response_data);
-            state.userAnswers = rows.map((element) => { return { id: element.id, ans: null } });
-            state.timeRemaining = rows.map(question => ({ id: question.id, time: question.time }));
-            state.listQuestions = rows;
-            state.currentQuestion = { ...rows[0], index: 0 };
+            const { questions, timeServerStart, time, } = response_data;
+
+            let newUserAnswers = [];
+            let timeRemaining = [];
+
+            questions.forEach(question => {
+                newUserAnswers.push({ id: question.id, ans: null });
+                timeRemaining.push({ id: question.id, time: question.time / 1000 });
+            });
+
+            state.userAnswers = newUserAnswers;
+            state.timeRemaining = timeRemaining;
+            state.listQuestions = questions;
+            state.currentQuestion = { ...questions[0], index: 0 };
 
         },
         [submitUserAnswers.fulfilled]: (state, action) => {
@@ -208,9 +216,33 @@ export const runningStationSlice = createSlice({
             state.detailedRunningStation = null;
         },
         [checkRunningStationStatus.fulfilled]: (state, action) => {
-            const { userStatus, sessionStatus } = action.payload;
+            const { code } = action.payload;
+            const { NOT_READY, READY, OVERTIME, SUBMITTED, DOING } = ConstUserExamStatus;
+            let userStatus;
+            switch (code) {
+                case 1:
+                    //chưa thi và exam chưa kích hoạt
+                    userStatus = NOT_READY
+                    break;
+                case 2:
+                    //chưa thi và exam đã kích hoạt
+                    userStatus = READY
+                    break;
+                case 3:
+                    //đang làm bài
+                    userStatus = DOING
+                    break;
+                case 4:
+                    //hết giờ
+                    userStatus = OVERTIME
+                    break;
+
+                default:
+                    break;
+            }
             console.log(action.payload);
-            state.examStatus = { userExamStatus: userStatus, sessionStatus };
+
+            state.examStatus = { userExamStatus: userStatus };
         },
 
     }

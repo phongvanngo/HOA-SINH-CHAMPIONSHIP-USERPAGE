@@ -56,14 +56,13 @@ export default function Userpage() {
         switch (userExamStatus) {
             case ConstUserExamStatus.OVERTIME:
                 return (
-                    <div>
+                    <div style={{ margin: "auto" }}>
                         <p style={{ color: 'green' }}>Bạn đã hoàn thành bài thi, hãy đón chờ xem kết quả trên bảng xếp hạng nhé !</p>
                     </div>
                 )
-                break;
             case ConstUserExamStatus.DOING:
                 return (
-                    <div>
+                    <div style={{ margin: "auto" }}>
                         <p style={{ color: '#FFCC00' }}>Bạn chưa hoàn thành bài thi</p>
                         <Button
                             // onClick={handleGoToLeaderboard}
@@ -73,11 +72,10 @@ export default function Userpage() {
                                     </Button>
                     </div>
                 )
-                break;
             case ConstUserExamStatus.READY:
                 return (
-                    <div>
-                        <p style={{ color: 'green' }}>Bài thi của bạn đã sẵn sàng, chọn bắt đầu để làm bài ngay nào !</p>
+                    <div style={{ margin: "auto" }}>
+                        <p style={{ color: 'green' }}>Ca thi của bạn đã sẵn sàng, chọn bắt đầu để làm bài ngay nào !</p>
                         <Button
                             onClick={() => { handleGoToExam() }}
                             variant="primary"
@@ -86,7 +84,18 @@ export default function Userpage() {
                                     </Button>
                     </div>
                 )
-                break;
+            case ConstUserExamStatus.NOT_READY:
+                return (
+                    <div style={{ margin: "auto" }}>
+                        <p style={{ color: 'red' }}>Ca thi của bạn hiện tại chưa bắt đầu !</p>
+                        <Button
+                            onClick={() => { handleGoToExam() }}
+                            variant="primary"
+                            style={{ marginRight: '5px' }}>
+                            Bắt đầu
+                                    </Button>
+                    </div>
+                )
 
             default:
                 return <div></div>
@@ -101,7 +110,16 @@ export default function Userpage() {
                 <div className="card-body">
                     <h2 className="greeting">{`Xin chào ${fullName}`}</h2>
                     <p>Ca thi của bạn: {sessionName}</p>
-                    <ExamStatusComponent />
+                    <div>
+
+                        <ExamStatusComponent />
+                        <Button
+                            onClick={() => { handleLogut() }}
+                            variant="secondary"
+                            style={{ marginRight: '5px' }}>
+                            Thoát
+                                    </Button>
+                    </div>
                 </div>
             </div>
             <ExamRules />

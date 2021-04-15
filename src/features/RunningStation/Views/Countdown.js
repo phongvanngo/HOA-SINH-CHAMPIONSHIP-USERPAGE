@@ -6,7 +6,7 @@ export default function Countdown({ timeRemaining, active, questionId }) {
     const [time, setTime] = useState(timeRemaining);
     const [run, setRun] = useState(false);
     const dispatch = useDispatch();
-    const formatTime = new Date(time * 1000).toISOString().substr(14, 5);
+    const formatTime = new Date(time).toISOString().substr(14, 5);
     let timer;
 
     useEffect(() => {
@@ -16,7 +16,7 @@ export default function Countdown({ timeRemaining, active, questionId }) {
             return;
         } else {
             timer = setTimeout(() => {
-                setTime(time - 1);
+                setTime(time - 1000);
             }, 1000);
         }
         return () => clearTimeout(timer);
@@ -25,7 +25,7 @@ export default function Countdown({ timeRemaining, active, questionId }) {
     useEffect(() => {
         if (active === true) {
             if (time > 0)
-                setTime(time - 1);
+                setTime(time - 1000);
             setRun(true);
         }
         else {
