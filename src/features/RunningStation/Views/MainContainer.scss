@@ -21,55 +21,59 @@ $common-min-width: 200px;
       background-color: white;
 
       box-shadow: 0px 3px 2px 2px gainsboro;
-      .title-area {
-        position: fixed;
-        z-index: 2;
-        background-color: white;
-        .title {
-          position: relative;
-          top: 5px;
-          padding: 5px;
-          padding-top: 10px;
-          padding-bottom: 10px;
-          background-color: #66d9b8;
-          width: 200px;
-          margin-left: 10px;
-          margin-right: 20px;
-          box-shadow: 0px 3px 2px 2px gainsboro;
-          text-align: center;
-          border-radius: 5px 5px;
-          color: white;
-          p {
-            margin: 2px;
-          }
-        }
-
-        .question-divider {
-          margin: 24px 5px 24px 5px;
-          position: relative;
-          margin-bottom: 24px;
-          padding-top: 12px;
-          clear: both;
-          border-bottom: 1px solid #d8d8d8;
-          z-index: 1000;
-          .divider-text {
-            position: absolute;
-            color: #6b7c93;
-            left: 30%;
-            top: 1px;
-            background-color: #fff;
-            padding: 2px 4px;
-            font-size: 11px;
-          }
-        }
-      }
-
-      .list-title-question-area {
-        overflow-y: scroll;
-        z-index: 1;
+      .full-container {
         position: relative;
-        top: 150px;
-        max-height: 80vh;
+        top: 5px;
+        .title-area {
+          position: fixed;
+          z-index: 2;
+          background-color: white;
+          width: 100%;
+          .title {
+            padding: 5px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            background-color: #66d9b8;
+            width: 220px;
+            margin-left: 10px;
+            margin-right: 10px;
+            // margin: auto;
+            box-shadow: 0px 3px 2px 2px gainsboro;
+            text-align: center;
+            border-radius: 5px 5px;
+            color: white;
+            p {
+              margin: 2px;
+            }
+          }
+
+          .question-divider {
+            margin: 24px 5px 24px 5px;
+            position: relative;
+            margin-bottom: 24px;
+            padding-top: 12px;
+            clear: both;
+            border-bottom: 1px solid #d8d8d8;
+            z-index: 1000;
+            .divider-text {
+              position: absolute;
+              color: #6b7c93;
+              left: 4%;
+              top: 1px;
+              background-color: #fff;
+              padding: 2px 4px;
+              font-size: 11px;
+            }
+          }
+        }
+
+        .list-title-question-area {
+          overflow-y: scroll;
+          z-index: 1;
+          position: relative;
+          top: 170px;
+          max-height: 80vh;
+        }
       }
     }
 
@@ -118,6 +122,7 @@ $common-min-width: 200px;
         margin: auto;
         max-width: $common-max-width;
         min-width: $common-min-width;
+        min-height: 72vh;
       }
       .footer-exam {
         margin: auto;

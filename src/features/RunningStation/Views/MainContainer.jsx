@@ -38,17 +38,22 @@ export default function MainContainer() {
             <div style={{ height: '20vh' }}></div>
             <div className="MainArea">
                 <div className="right-area">
-                    <div className="title-area">
-                        <div className="title">
-                            <p>Bài thi vòng 2</p>
-                            <p>HÓA SINH CHAMPIONSHIP</p>
+                    <div className="full-container">
+                        <div className="title-area">
+                            <div className="title">
+                                <p>Bài thi vòng 2</p>
+                                <p>HÓA SINH CHAMPIONSHIP</p>
+                            </div>
+                            <div>
+
+                            </div>
+                            <div className="question-divider">
+                                <div className="divider-text">Danh sách câu hỏi </div>
+                            </div>
                         </div>
-                        <div className="question-divider">
-                            <div className="divider-text">Danh sách câu hỏi </div>
+                        <div className="list-title-question-area">
+                            <ListTitleQuestion />
                         </div>
-                    </div>
-                    <div className="list-title-question-area">
-                        <ListTitleQuestion />
                     </div>
                 </div>
                 <div className="time-container">
@@ -66,9 +71,9 @@ export default function MainContainer() {
                         <Button
                             onClick={() => {
                                 if (window.confirm('Bạn có chắc chắn nộp và kết thúc bài làm ?')) {
-                                    dispatch(submitUserAnswers({}).then(()=>{
-                                        
-                                    }))
+                                    dispatch(submitUserAnswers({})).then(() => {
+
+                                    })
                                 }
                             }
                             }
