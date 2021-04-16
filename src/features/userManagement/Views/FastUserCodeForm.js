@@ -100,7 +100,7 @@ export default function CenteredGrid() {
         const listNames = inputData.split('\n');
 
         const listUserCode = listNames.map((element) => {
-            const shortid = Math.random().toString(36).substr(2, 9);
+            const shortid = Math.random().toString(36).substr(2, 6).toUpperCase();
             return {
                 fullName: element,
                 code: `${prefixInputRef.current.value}${shortid}`,

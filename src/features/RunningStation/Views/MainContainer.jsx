@@ -66,7 +66,9 @@ export default function MainContainer() {
                         <Button
                             onClick={() => {
                                 if (window.confirm('Bạn có chắc chắn nộp và kết thúc bài làm ?')) {
-                                    dispatch(submitUserAnswers({}))
+                                    dispatch(submitUserAnswers({}).then(()=>{
+                                        
+                                    }))
                                 }
                             }
                             }

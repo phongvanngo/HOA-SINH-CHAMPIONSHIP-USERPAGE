@@ -94,12 +94,6 @@ export default function Userpage() {
                 return (
                     <div style={{ margin: "auto" }}>
                         <p style={{ color: 'red' }}>Ca thi của bạn hiện tại chưa bắt đầu !</p>
-                        <Button
-                            onClick={() => { handleGoToExam() }}
-                            variant="primary"
-                            style={{ marginRight: '5px' }}>
-                            Bắt đầu
-                                    </Button>
                     </div>
                 )
 

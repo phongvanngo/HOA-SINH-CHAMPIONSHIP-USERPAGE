@@ -208,8 +208,6 @@ export const runningStationSlice = createSlice({
                 questions[i].time = timeRemaining[i].time;
             }
 
-
-
             let usedTime = Date.now() - new Date(timeStart);
 
             wasteTime = parseInt(usedTime) - timeDoExam;
@@ -234,9 +232,6 @@ export const runningStationSlice = createSlice({
                 if (index === questions.length) index = 0;
 
             }
-
-            console.log(questions);
-
 
             state.userAnswers = newUserAnswers;
             state.timeRemaining = timeRemaining;
@@ -302,6 +297,7 @@ export const runningStationSlice = createSlice({
 
         },
         [checkRunningStationStatus.fulfilled]: (state, action) => {
+            if (action.payload === null) return;
             const { code } = action.payload;
             const { NOT_READY, READY, OVERTIME, SUBMITTED, DOING } = ConstUserExamStatus;
             let userStatus;
