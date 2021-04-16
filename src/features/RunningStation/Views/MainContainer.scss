@@ -1,5 +1,6 @@
 $common-max-width: 800px;
 $common-min-width: 200px;
+$right-area-width: 250px;
 
 .user-exam-container {
   // background-image: linear-gradient(to right, #ffffff, #e4f2ff, #b4eaff, #7de3e9, #66d9b8);
@@ -12,7 +13,7 @@ $common-min-width: 200px;
 
     .right-area {
       position: fixed;
-      width: 250px;
+      width: $right-area-width;
       height: 100vh;
       z-index: 2000;
 
@@ -118,10 +119,11 @@ $common-min-width: 200px;
     }
 
     .main-content {
+      width: calc(100% - 250px);
       .question-area {
         margin: auto;
-        max-width: $common-max-width;
-        min-width: $common-min-width;
+        // max-width: $common-max-width;
+        // min-width: $common-min-width;
         min-height: 72vh;
       }
       .footer-exam {
