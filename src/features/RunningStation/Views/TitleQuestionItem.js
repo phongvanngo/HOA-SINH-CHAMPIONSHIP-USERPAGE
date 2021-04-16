@@ -10,10 +10,15 @@ export default function TitleQuestionItem({ detailedQuestion }) {
     const { index, id, time } = detailedQuestion;
 
     const [myState, setMyState] = useState({ isActive: 'false' });
+    const [hasTime, setHasTime] = useState(time > 0 ? true : false);
 
     const currentQuestion = useSelector(state => state.runningStation.currentQuestion?.id === id ? state.runningStation.currentQuestion : null);
 
     let isActive;
+
+    const handleTimeOut = () => {
+        setHasTime(false);
+    }
 
     useEffect(() => {
         if (currentQuestion !== null) {
@@ -29,14 +34,16 @@ export default function TitleQuestionItem({ detailedQuestion }) {
     }, [currentQuestion])
 
     const handleClickQuestion = () => {
-        dispatch(changeQuestion(detailedQuestion));
+        if (hasTime) {
+            dispatch(changeQuestion(detailedQuestion));
+        }
     }
 
     return (
-        <div className={`title-question-item ${myState.isActive ? 'active' : ''}`} onClick={() => { handleClickQuestion() }}>
+        <div className={`title-question-item ${hasTime ? myState.isActive ? 'active' : '' : 'time-out'}`} onClick={() => { handleClickQuestion() }}>
             <p><span>Câu </span>&nbsp;{index + 1}</p>
             <p> <i className="fas fa-stopwatch" />&nbsp;{
-                <Countdown questionId={id} timeRemaining={time} active={myState.isActive} />
+                <Countdown handleTimeOut={handleTimeOut} questionId={id} timeRemaining={time} active={myState.isActive} />
             }</p>
         </div >
     )
