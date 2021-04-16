@@ -288,7 +288,6 @@ export const userSlice = createSlice({
             if (response_data === null) return;
 
             const { data, userInfo } = response_data;
-            console.log(userInfo);
             const { id } = data;
             const newListUsers = [
                 {

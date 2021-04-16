@@ -9,15 +9,12 @@ import { ConstUserExamStatus } from "../../app/const.app";
 import { LocationSearchingTwoTone } from "@material-ui/icons";
 
 const findNextValidQuestion = (listQuestions, currentQuestionIndex) => {
-    console.log(listQuestions);
     let count = 0;
     let index = currentQuestionIndex;
     while (count < listQuestions.length - 1) {
         count++;
-        console.log(count, listQuestions.length)
         index++;
         if (index >= listQuestions.length) index = 0;
-        console.log(listQuestions[index]);
         if (listQuestions[index].time !== 0) return index;
     };
 
@@ -154,7 +151,6 @@ export const runningStationSlice = createSlice({
             state.currentQuestion = { ...question, answer: state.userAnswers[userAnswerIndex].ans };
             localStorage.setItem("currentQuestionId", question.id);
 
-            console.log(action.payload);
         },
         questionTimeOut: (state, action) => {
 
@@ -186,7 +182,6 @@ export const runningStationSlice = createSlice({
 
             localStorage.setItem("currentQuestionId", state.listQuestions[nextQuestionIndex].id);
 
-            console.log(id, 'time out');
         },
         enterExamRoomAgain: (state) => {
 
@@ -211,7 +206,7 @@ export const runningStationSlice = createSlice({
             let usedTime = Date.now() - new Date(timeStart);
 
             wasteTime = parseInt(usedTime) - timeDoExam;
-            console.log(timeStart, timeDoExam, usedTime, wasteTime);
+            wasteTime = parseInt(wasteTime / 1000) * 1000;
             let count = 0;
             let index = currentQuestionIndex;
             while (count < questions.length && wasteTime > 0) {
@@ -277,6 +272,10 @@ export const runningStationSlice = createSlice({
             localStorage.setItem("timeRemaining", JSON.stringify(timeRemaining));
             localStorage.setItem("currentQuestionId", questions[0].id);
 
+            //lưu usercode của user đã lấy đề thi
+            const currentUser = JSON.parse(localStorage.getItem('user'));
+            localStorage.setItem("userCode", currentUser?.code);
+
             state.userAnswers = newUserAnswers;
             state.timeRemaining = timeRemaining;
             state.listQuestions = questions;
@@ -313,13 +312,20 @@ export const runningStationSlice = createSlice({
                 case 3:
                     //đang làm bài
                     const userAnswers = localStorage.getItem("userAnswers");
-                    if (userAnswers) {
+
+                    const previousUserCode = localStorage.getItem("userCode");
+                    const currentUser = (JSON.parse(localStorage.getItem('user')))?.code;
+
+                    if (userAnswers && (previousUserCode === currentUser)) {
                         userStatus = DOING
                     }
                     else {
                         userStatus = SUBMITTED
                     }
                     break;
+
+
+                //trường hợp thí sinh thoát ra lúc đang làm bài và vào lại bằng tài khoản khác cũng đang làm luôn thì ko hợp lệ
                 case 4:
                     //hết giờ
                     userStatus = OVERTIME
@@ -328,7 +334,6 @@ export const runningStationSlice = createSlice({
                 default:
                     break;
             }
-            console.log(action.payload);
 
             state.examStatus = { userExamStatus: userStatus };
         },

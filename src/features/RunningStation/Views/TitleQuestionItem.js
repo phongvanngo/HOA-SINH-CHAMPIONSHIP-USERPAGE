@@ -32,8 +32,6 @@ export default function TitleQuestionItem({ detailedQuestion }) {
         dispatch(changeQuestion(detailedQuestion));
     }
 
-    console.log('render', id, time);
-
     return (
         <div className={`title-question-item ${myState.isActive ? 'active' : ''}`} onClick={() => { handleClickQuestion() }}>
             <p><span>Câu </span>&nbsp;{index + 1}</p>

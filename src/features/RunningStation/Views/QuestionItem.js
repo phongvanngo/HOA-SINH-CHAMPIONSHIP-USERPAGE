@@ -38,7 +38,6 @@ export default function QuestionItem() {
     const [userAnswer, setUserAnswer] = React.useState(answer);
 
     useEffect(() => {
-        console.log(answer);
         setUserAnswer(answer);
     }, [currentQuestion])
 
