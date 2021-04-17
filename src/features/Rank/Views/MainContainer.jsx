@@ -20,7 +20,7 @@ export default function MainContainer() {
                 </div>
                 <div className='team-leaderboard'>
                     <TeamRank />
-                </div>  */}
+                </div> */}
             </div>
         </div>
     )
