@@ -16,11 +16,14 @@ export default function UserFormDialog() {
     const dispatch = useDispatch();
 
     let listContestSessions = useSelector(state => state.contestSession.listContestSessions) || [];
+    let listUniversities = useSelector(state => state.university.listUniversitys);
 
+    console.log(listUniversities);
 
-    const { id, name, sessionId } = user || {};
+    const { id, name, sessionId, universityName } = user || {};
 
     let newSessionId = sessionId;
+    let newUniversityId = (listUniversities.find(university => university.university_name === universityName))?.id;
 
     const userNameInputRef = useRef(null);
 
@@ -74,7 +77,9 @@ export default function UserFormDialog() {
         const dataSubmit = {
             id: id,
             name: userNameInputRef.current.value,
-            sessionId: newSessionId
+            sessionId: newSessionId,
+            universityId: newUniversityId,
+            universityName: (listUniversities.find(university => university.id === newUniversityId))?.name
         }
 
         if (CheckValidInput(dataSubmit) === true) {
@@ -86,6 +91,9 @@ export default function UserFormDialog() {
 
     const handleChangeSession = (event, newValue) => {
         newSessionId = newValue.id;
+    }
+    const handleChangeUniversity = (event, newValue) => {
+        newUniversityId = newValue.id;
     }
 
     if (isOpen === false) return null;
@@ -116,6 +124,18 @@ export default function UserFormDialog() {
                             options={listContestSessions}
                             onChange={handleChangeSession}
                             getOptionLabel={(option) => option.name}
+                            style={{ width: '100%', marginTop: '10px' }}
+                            renderInput={(params) => <TextField size="small" {...params} variant="outlined" label="Ca thi" />}
+                        />
+                    </FormControl>
+                    <FormControl component="fieldset" style={{ marginTop: '10px', width: "100%" }}>
+                        <Autocomplete
+                            defaultValue={listUniversities.find(university => university.university_name === universityName)}
+
+                            id="combo-box-demo"
+                            options={listUniversities}
+                            onChange={handleChangeUniversity}
+                            getOptionLabel={(option) => option.university_name}
                             style={{ width: '100%', marginTop: '10px' }}
                             renderInput={(params) => <TextField size="small" {...params} variant="outlined" label="Ca thi" />}
                         />

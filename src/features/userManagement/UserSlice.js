@@ -141,8 +141,8 @@ export const updateUserRequest = createAsyncThunk(
             dispatch(startLoading());
 
             //transfer schema
-            const { id, name, sessionId } = userInfo;
-            const newUser = { fullName: name, sessionId: sessionId };
+            const { id, name, sessionId, universityId } = userInfo;
+            const newUser = { fullName: name, sessionId: sessionId, universityId };
 
 
             const response = await userApi.patchUserInfo(newUser, id);
@@ -346,13 +346,16 @@ export const userSlice = createSlice({
             if (response_data === null) return;
 
             const { userInfo } = response_data;
+            console.log(userInfo);
             let userSessions = list_constest_sessions.find(element => element.id === userInfo.sessionId);
+            let userUniversity = list_universities.find(element => element.id === userInfo.universityId);
             const newListUsers = state.listUsers.map((user) => {
                 if (user.id === userInfo.id)
                     return {
                         ...user,
                         ...userInfo,
                         sessionName: userSessions ? userSessions.name : null,
+                        universityName: userUniversity ? userUniversity.name : null,
                     }
                 else
                     return { ...user };

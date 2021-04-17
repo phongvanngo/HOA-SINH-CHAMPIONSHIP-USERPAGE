@@ -16,7 +16,7 @@ export default function ListTitleQuestion() {
                 )
             })
             }
-            <div style={{ height: "10vh" }}></div>
+            <div style={{ heights: "10vh" }}></div>
         </div>
     )
 }
