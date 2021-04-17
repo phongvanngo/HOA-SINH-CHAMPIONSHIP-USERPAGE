@@ -66,7 +66,7 @@ export const fetchRankRunStationRequest = createAsyncThunk(
         const { dispatch, getState } = thunkApi;
         try {
             dispatch(startLoading());
-            const { currentPage } = getState().rank.singleRank;
+            const { currentPage } = getState().rank.runStationRank;
             let requestParams;
             if (reloadAll === true) {
                 requestParams = {
@@ -241,7 +241,6 @@ export const rankSlice = createSlice({
         [fetchRankRunStationRequest.fulfilled]: (state, action) => {
             const response_data = action.payload;
             if (response_data === null) return;
-
             //chuyển đổi schema
             let ranks = response_data.rows.map((element) => {
                 const { id, fullName, time, score, historyQues } = element;

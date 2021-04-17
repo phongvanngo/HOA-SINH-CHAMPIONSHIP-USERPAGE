@@ -79,7 +79,6 @@ export default function UserFormDialog() {
             name: userNameInputRef.current.value,
             sessionId: newSessionId,
             universityId: newUniversityId,
-            universityName: (listUniversities.find(university => university.id === newUniversityId))?.name
         }
 
         if (CheckValidInput(dataSubmit) === true) {
